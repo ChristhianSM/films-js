@@ -1,0 +1,85 @@
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    font-family: $fuentePrincipal;
+    background-color: $bg-azul;
+}
+
+p{
+    font-size: 1.6rem;
+    
+}
+
+h1,h2,h3,p{
+    margin: 0;
+    color: $blanco;
+}
+
+.contenedor{
+    // max-width: 120rem;
+    width: 90%;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        width: 95%;
+    }
+}
+
+a{
+    text-decoration: none;
+    color: $blanco;
+    font-size: 2rem;
+}
+
+img{
+    width: 100%;
+}
+
+
+.card-pelicula{
+    border: 2px solid $negro;
+    border-radius: 5px;
+    background-color: #0b151b;
+    box-shadow: 10px 10px 5px;
+    height: 420px;
+    overflow: hidden;
+
+    img{
+        height: 300px;
+    }
+
+    .informacion-pelicula {
+
+        .puntuacion{
+            margin: $separacion/4 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span{
+                font-size: 18px;
+                color: #eec719;
+            }
+        }
+        
+        .titulo-pelicula{
+            margin: $separacion/4 0;
+            text-align: center;
+            font-size: 2rem;
+        }
+    
+        .year-pelicula{
+            margin: $separacion/4 0;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    }
+    
+}

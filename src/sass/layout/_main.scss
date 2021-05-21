@@ -1,0 +1,25 @@
+.main{
+    background-color: $bg-azul;
+    height: 100%;
+    padding-bottom: 5rem;
+
+    .contenedor-principal{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: $separacion/2;
+    }
+
+    .resultadoFiltro{
+
+        h2{
+            font-size: 2.5rem;
+            margin: $separacion 0;
+        }
+
+        .contenedor-filtros{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: $separacion/2;
+        }
+    }
+}

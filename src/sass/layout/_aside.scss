@@ -1,0 +1,32 @@
+.aside {
+    padding-top: $separacion;
+    border-right: 1px solid $blanco;
+
+    .generos{
+
+
+        h2{
+            font-size: 2rem;
+            margin-bottom: $separacion /2;
+        }
+        
+        ul{
+            list-style: none;
+            padding: 0 10px;
+
+            li {
+                
+                font-weight: 100;
+                padding: 1.5rem 1rem 5px 0;
+                border-bottom: 2px solid $blanco;
+
+                a{
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+    }
+}

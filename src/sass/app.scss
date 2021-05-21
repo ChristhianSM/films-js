@@ -1,0 +1,13 @@
+@import './bases/normalize';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import './bases/variables';
+@import './bases/mixins';
+@import './bases/globales';
+@import './bases/utilidades';
+
+
+@import './layout/header';
+@import './layout/main';
+@import './layout/aside';
+@import './layout/peliculas';
+

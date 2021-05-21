@@ -1,0 +1,65 @@
+.header{
+    padding: $separacion/4 0;
+    background-color: #0b151b;
+
+    .contenedor-navegacion{
+        
+        @include tablet{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navegacion{
+
+            @include tablet{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-items: center;
+                gap:$separacion;
+            }
+
+            h1{
+                text-align: center;
+                font-size: 5rem;
+                margin-bottom: 2rem;
+                display: flex;
+                align-items: center;
+
+                span{
+                    font-size: 6rem;
+                }
+
+                @include tablet{
+                    margin-bottom: 0;
+                }
+            }
+
+            .navegacionPrincipal{
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-bottom: 2rem;
+
+                @include tablet{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .form-login{
+        text-align: center;
+        width: 40%;
+
+        input{
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 1.5rem;
+            border: none;
+            outline: none;
+            border-radius: 20px;
+        }
+    }
+}
