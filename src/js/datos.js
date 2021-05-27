@@ -19,7 +19,7 @@ class UI {
         peliculas.forEach( pelicula => {
             const {nombre, genero, year, descripcion, img,puntuacion} = pelicula
             const cardPelicula = document.createElement('DIV');
-            cardPelicula.classList.add('card-pelicula')
+            cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
             cardPelicula.innerHTML = 
             `   <a href = "#">
                     <img src = ${img} alt= ${nombre}>
@@ -45,6 +45,23 @@ class UI {
         while(localizacion.firstChild){
             localizacion.removeChild(localizacion.firstChild)
         }
+    }
+
+    mostrarMensajes(mensaje, tipo, localizacion){
+        const alertaPrevia = document.querySelector('.alerta');
+        if (alertaPrevia) {
+            alertaPrevia.remove();
+        }
+        const alerta = document.createElement('DIV');
+        alerta.classList.add(tipo, 'alerta', "animate__animated", "animate__bounceIn");
+        alerta.textContent = mensaje;
+        localizacion.appendChild(alerta);
+    }
+}
+
+class Usuarios{
+    constructor(nombre, correo, password, pais, fecha, descripcion){
+        this.nombre  =""
     }
 }
 

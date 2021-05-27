@@ -4,10 +4,14 @@
 @import './bases/mixins';
 @import './bases/globales';
 @import './bases/utilidades';
+@import './components/sweetAlert';
 
 
 @import './layout/header';
+@import './components/carrousel';
 @import './layout/main';
 @import './layout/aside';
 @import './layout/peliculas';
+@import './layout/editar-perfil';
+@import './layout/login';
 

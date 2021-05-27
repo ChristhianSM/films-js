@@ -1,65 +1,87 @@
 .header{
     padding: $separacion/4 0;
-    background-color: #0b151b;
+    background-color: #141a32;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
 
     .contenedor-navegacion{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         
-        @include tablet{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        @include tablet {
+            display: block;
         }
 
         .navegacion{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
 
             @include tablet{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                align-items: center;
-                gap:$separacion;
+                display: block;
             }
 
-            h1{
-                text-align: center;
+            h1 {
                 font-size: 5rem;
-                margin-bottom: 2rem;
                 display: flex;
                 align-items: center;
+                justify-content: center;
+
+                @include tablet {
+                    margin-bottom: 1rem;
+                }
 
                 span{
-                    font-size: 6rem;
-                }
-
-                @include tablet{
-                    margin-bottom: 0;
+                    font-size: 5rem;
                 }
             }
 
-            .navegacionPrincipal{
+            .navegacionPrincipal {
                 display: flex;
                 justify-content: center;
-                gap: 2rem;
-                margin-bottom: 2rem;
+                gap: 1rem;
 
-                @include tablet{
-                    margin-bottom: 0;
+                @include tablet {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+        .form-login{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: $separacion;
+
+            .buscarPelicula{
+                padding: 10px 20px;
+                border: 1px solid;
+                border-radius: 10px;
+                color: black;
+                font-size: 2rem;
+                outline: none;
+
+                @include tablet {
+                    width: 50%;
                 }
             }
         }
     }
+}
 
-    .form-login{
-        text-align: center;
-        width: 40%;
+// lOGIN
+.usuario{
+    border: 0.5px solid $blanco;
+    padding: 10px 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
 
-        input{
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 1.5rem;
-            border: none;
-            outline: none;
-            border-radius: 20px;
-        }
+    span{
+        font-size: 3rem;
     }
 }

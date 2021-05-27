@@ -12,6 +12,9 @@ const btnAccion = document.querySelector('.btnAccion');
 const btnAnimacion = document.querySelector('.btnAnimacion');
 const btnTerror = document.querySelector('.btnTerror');
 
+// Boton Cerrar sesion
+const btnCerrarSesion = document.querySelector('.cerrar-sesion');
+
 eventosListener();
 function eventosListener(){
     btnAccion.addEventListener('click', (e) => {
@@ -31,6 +34,9 @@ function eventosListener(){
     buscarPelicula.addEventListener('keyup', (e) => {
         filtrarPorBusqueda(e.target.value)
     })
+
+    // Evento Cerrar Sesion
+    btnCerrarSesion.addEventListener('click', cerrarSesion);
 }
 
 // Instanciamos el objeto UI
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarEstrenos();
     mostrarPeliculasActualizadas();
     mostrarCantidadPeliculas();
+    mostrarUsuarioLogueado();
 })
 
 function mostrarEstrenos(){
@@ -101,13 +108,62 @@ function filtrarPorBusqueda(termino){
     const peliculas = listaPeliculas.filter( pelicula => {
         return (pelicula.nombre.toLowerCase()).indexOf(texto) !== -1
     })
-    const resultadoFiltro = document.querySelector('.resultadoFiltro');
-    resultadoFiltro.classList.add('display-block');
-    
-    const bloquePeliculas = document.querySelector('.peliculas');
-    bloquePeliculas.classList.add('display-none')
     
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
-    ui.limpiarHTML(contenedorFiltros);
-    ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
+
+    if (peliculas.length > 0) {
+        
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        resultadoFiltro.classList.add('display-block');
+        
+        const bloquePeliculas = document.querySelector('.peliculas');
+        bloquePeliculas.classList.add('display-none')
+        
+        ui.limpiarHTML(contenedorFiltros);
+        ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
+    }else{
+        ui.limpiarHTML(contenedorFiltros);
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro)
+    }
+}
+
+
+// Funcion que muestra Si hay usuario logueado
+function mostrarUsuarioLogueado(){
+    const usuarioLogueado = JSON.parse(localStorage.getItem('UsuarioActual'));
+    console.log(usuarioLogueado);
+
+    if (usuarioLogueado !== null) {
+        const btnIngresar = document.querySelector('.btn-ingresar');
+        btnIngresar.classList.add('display-none');
+        
+        const usuario = document.querySelector('.usuario');
+        const menuSesion = document.querySelector('.menu-sesion');
+        menuSesion.classList.remove('display-none');
+        menuSesion.classList.add('display-block');
+    
+        console.log(usuario)
+        usuario.innerHTML = 
+        `
+        <span class="material-icons">
+            account_circle
+        </span>
+        ${usuarioLogueado}
+        `
+    }
+}
+
+function cerrarSesion() {
+    localStorage.removeItem('UsuarioActual');
+    const menuSesion = document.querySelector('.menu-sesion');
+    menuSesion.classList.remove('display-block');
+    menuSesion.classList.add('display-none');
+
+    const btnIngresar = document.querySelector('.btn-ingresar');
+    btnIngresar.classList.remove('display-none');
+
+    setTimeout(() => {
+        window.location = "./index.html"
+    }, 1000);
 }

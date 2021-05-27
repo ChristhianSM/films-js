@@ -1,11 +1,11 @@
-@mixin telefono {
-    @media (min-width: 480px) {
+@mixin tablet {
+    @media (max-width: 768px) {
         @content;
     }
 }
 
-@mixin tablet {
-    @media (min-width: 768px) {
+@mixin telefono {
+    @media (max-width: 488px) {
         @content;
     }
 }

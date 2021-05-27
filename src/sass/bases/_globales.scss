@@ -9,7 +9,7 @@ html{
 
 body{
     font-family: $fuentePrincipal;
-    background-color: $bg-azul;
+    background-color: #080f28;
 }
 
 p{
@@ -42,6 +42,13 @@ img{
     width: 100%;
 }
 
+.main{
+
+    @include tablet{
+        padding-top: 150px;
+    }
+}
+
 
 .card-pelicula{
     border: 2px solid $negro;
@@ -51,9 +58,15 @@ img{
     height: 420px;
     overflow: hidden;
 
+    /* Animacion de tiempo */
+    animation: fadeIn;
+    animation-duration: 3s;
+
     img{
         height: 300px;
     }
+
+    
 
     .informacion-pelicula {
 
