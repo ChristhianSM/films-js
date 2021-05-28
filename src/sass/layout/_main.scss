@@ -1,25 +1,90 @@
-.main{
-    background-color: $bg-azul;
+#main.main{
     height: 100%;
-    padding: 1rem;
+    padding-top: 50px;
 
     .contenedor-principal{
         display: grid;
-        grid-template-columns: 1fr 3fr;
-        gap: $separacion/2;
+        grid-template-columns: 4fr 1fr;
+        gap: 1rem;
+        width: 95%;
     }
 
     .resultadoFiltro{
 
         h2{
             font-size: 2.5rem;
-            margin: $separacion 0;
+            margin: 4rem 0 2rem 0;
         }
 
         .contenedor-filtros{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: $separacion/2;
+        }
+    }
+
+    .peliculas{
+        margin-top: 0;
+    
+        .contenedor-peliculas{
+    
+            .estrenos{
+                width: 100%;
+                h2{
+                    font-size: 2.5rem;
+                    margin-bottom: $separacion/2;
+                }
+    
+                .contenedor-estrenos{
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: $separacion/2;
+    
+                    @media (max-width: 768px) {
+                        grid-template-columns: repeat(2,1fr);
+                    }
+    
+                    @include telefono{
+                        grid-template-columns: 1fr;
+                    }
+                }
+    
+            }
+    
+            .peliculas-actualizadas {
+    
+                margin-top: $separacion;
+    
+                h2{
+                    font-size:2.5rem;
+                    margin-bottom: $separacion/2;
+                }
+    
+                .contenedor-peliculas-actualizadas{
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: $separacion/2;
+    
+                    @media (max-width: 768px) {
+                        grid-template-columns: repeat(2,1fr);
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    .resultadoFiltro{
+        .alerta {
+            padding: $separacion/4 0;
+            color: white;
+            font-size: 2rem;
+            font-weight: $bold;
+            text-transform: uppercase;
+    
+            .error {
+                background: rgb(194,0,0);
+            }
         }
     }
 }

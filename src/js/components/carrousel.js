@@ -14,7 +14,7 @@ var swiper = new Swiper(".mySwiper", {
     },
   });
 
-  const ui = new UI();
+  // const ui = new UI();
 
   document.addEventListener('DOMContentLoaded', () => {
     iniciarCarrouselConImagenes()

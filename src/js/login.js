@@ -1,7 +1,7 @@
 // Variables globales
 let usuarios = [];
 let usuarioActual = "";
-
+let idUser = Math.random()*100;
 
 // Variables para interactuar con el login
 const login = document.querySelector('.login-box');
@@ -48,7 +48,7 @@ function validarFormularioRegistro(e){
     }
 
     // Validar Correo Electronico
-    const correoExiste = usuarios.find( usuario =>  usuario.correoRegistro === correoRegistro.value);
+    const correoExiste = usuarios.find( usuario =>  usuario.correo === correoRegistro.value);
     if (correoExiste) {
         mostrarAlerta("Correo electronico existente, pruebe con otro correo", 'error', 'bottom-end');
         return
@@ -59,26 +59,35 @@ function validarFormularioRegistro(e){
         return
     }
 
-    const persona = {
-        correoRegistro : correoRegistro.value,
-        usernameRegistro : usernameRegistro.value,
-        passwordRegistro : passwordRegistro.value,
-        nombre: '',
-        pais: '',
-        fechaNacimiento: '',
-        descripcion : ''
-    }
+    // const persona = {
+    //     correoRegistro : correoRegistro.value,
+    //     usernameRegistro : usernameRegistro.value,
+    //     passwordRegistro : passwordRegistro.value,
+    //     nombre: '',
+    //     pais: '',
+    //     fechaNacimiento: '',
+    //     descripcion : ''
+    // }
 
-    usuarios = [...usuarios, persona]
+    /* Creamos una instancia de Usuarios */
+    const newUsuario = new Usuario(idUser, usernameRegistro.value, correoRegistro.value, passwordRegistro.value);
+    console.log(newUsuario)
+
+    // usuarios = [...usuarios, persona];
+    usuarios = [...usuarios, newUsuario];
+
+    /* Ponemos como usuario actual */
+    usuarioActual = newUsuario
 
     formularioRegistro.reset();
     guardarLocalStorage('Usuarios', usuarios);
+    guardarLocalStorage('UsuarioActual', usuarioActual);
 
     mostrarAlerta("Usuario registrado Correctamente", 'success');
-    animacionesAlerta();
 
     setTimeout(() => {
-        window.location = './login.html';
+        console.log("actualizando")
+        window.location = './index.html';
     }, 2000);
 
 }
@@ -97,15 +106,16 @@ function validarFormularioInicio(e){
     let autenticado = false;
 
     usuarios.forEach( usuario => {
-        if ((usuario.correoRegistro === correoSesion || usuario.usernameRegistro === correoSesion) && usuario.passwordRegistro === passwordSesion) {
+        console.log(usuario)
+        if ((usuario.correo === correoSesion || usuario.username === correoSesion) && usuario.password === passwordSesion) {
             autenticado = true;
-            usuarioActual = usuario.usernameRegistro;
+            usuarioActual = usuario;
             guardarLocalStorage('UsuarioActual',usuarioActual)
         }
     })
     
     if (autenticado) {
-        mostrarAlertaExito(`Bienvenido ${usuarioActual}`, 'exito');
+        mostrarAlertaExito(`Bienvenido ${usuarioActual.nombre}`, 'exito');
         setTimeout(() => {
             window.location = './index.html';
         }, 3000);

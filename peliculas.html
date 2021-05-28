@@ -47,7 +47,7 @@
                 <div class="dropdown menu-sesion display-none">
                     <button class="btn btn-secondary dropdown-toggle usuario display-none" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"></button>
                     <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="dropdownMenuButton2">
-                      <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                      <li><a class="dropdown-item " href="#">Mi perfil</a></li>
                       <li><a class="dropdown-item" href="./perfil-usuario.html">Editar Perfil</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item cerrar-sesion" href="#">Cerrar Sesion</a></li>
@@ -57,28 +57,8 @@
         </div>
     </header>
 
-    
-    
-    <main class="main contenedor-2" id="index">
-        <!-- Swiper -->
-        <div class="contenedor-carrousel" style="padding-top: 100px;">
-            <div class="swiper-container mySwiper">
-                <div class="swiper-wrapper">
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-
-        <div class="informacion">
-            <h3>Peliculas Online</h3>
-            <p class="titulo">FilmsChris</p>
-            <p>RePelis24 ofrece la posibilidad de ver 🎬 Películas Gratis en Español Latino, Castellano y Subtituladas, películas completas en calidad hd y nuevos estrenos
-                ¡Gracias por visitar RePelis24! la mejor fuente para disfrutar del cine online las 24h ✔</p>
-        </div>
-
-        <div class="contenedor contenedor-principal" >
+    <main class="main contenedor-2" id="main">
+        <div class="contenedor contenedor-principal">
             <div class="resultadoFiltro display-none">
                 <h2>Resultados : </h2>
 
@@ -89,23 +69,31 @@
 
             <div class="peliculas">
                 <div class="contenedor-peliculas">
-                    <div class="estrenos">
-                        <h2>
-                            Estrenos destacados: 
-                            <a href="./peliculas.html">Ver todo</a>
-                        </h2>
-                        <div class="contenedor-estrenos">
-
-                        </div>
-                    </div>
                     <div class="peliculas-actualizadas">
-                        <h2>
-                            Peliculas Actualizadas:
-                            <a href="./peliculas.html">Ver todo</a>
-                        </h2>
+                        <h2>Peliculas Actualizadas</h2>
                         <div class="contenedor-peliculas-actualizadas"></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="aside">
+                <section class="generos">
+                    <h2>Géneros Disponibles</h2>
+                    <ul class="menu-genero">
+                    </ul>
+                </section>
+                <section class="annos-lanzamiento">
+                    <h2>Años de lanzamiento</h2>
+                    <div class="enlace-annos">
+                        
+                    </div>
+                </section>
+                <section class="ultimas-actualizaciones">
+                    <h2>Últimas peliculas Actualizadas</h2>
+                    <div class="contenedor-ultimas">
+                        
+                    </div>
+                </section>
             </div>
         </div>
     </main>
@@ -116,11 +104,11 @@
     <!-- Scripts -->
     <script src="./src/js/datos.js"></script>
     <script src="./src/js/helpers/helpers.js"></script>
-    <script src="./src/js/app.js" type="module"></script>
+    <script src="./src/js/peliculas.js"></script>
 
     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="./src/js/components/carrousel.js"></script>
+    <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./src/js/components/carrousel.js"></script> -->
 
     <!-- Alertas -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -1,0 +1,137 @@
+.main#index {
+        height: 100%;
+    
+        .informacion{
+            text-align: center;
+            background-color: $bg-negro-claro;
+            padding: 2rem 8rem;
+    
+            h3{
+                font-size: 3rem;
+                font-weight: $grueso;
+                margin-bottom: .5rem;
+            }
+    
+            .titulo{
+                margin-bottom: 1rem;
+                font-weight: 500;
+            }
+    
+            p{
+                font-size: 1.5rem;
+                line-height: 1.4;
+            }
+        }
+    
+        .resultadoFiltro{
+    
+            h2{
+                font-size: 2.5rem;
+                margin: $separacion 0;
+            }
+    
+            .contenedor-filtros{
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: $separacion/2;
+            }
+        }
+
+        .peliculas{
+            margin-top: $separacion /2;
+        
+            .contenedor-peliculas{
+        
+                .estrenos{
+                    width: 100%;
+                    h2{
+                        font-size: 2.5rem;
+                        margin-bottom: $separacion/2;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+        
+                        a {
+                            font-weight: 100;
+                            border-radius: 5px;
+                            font-size: 1.2rem;
+                            text-transform: uppercase;
+                            background-color: rgb(194,0,0);
+                            padding: 5px 15px;
+        
+                            &:hover {
+                                color: white;
+                            }
+                        }
+                    }
+        
+                    .contenedor-estrenos{
+                        display: grid;
+                        grid-template-columns: repeat(6, 1fr);
+                        gap: $separacion/2;
+        
+                        @media (max-width: 768px) {
+                            grid-template-columns: repeat(2,1fr);
+                        }
+        
+                        @include telefono{
+                            grid-template-columns: 1fr;
+                        }
+                    }
+        
+                }
+        
+                .peliculas-actualizadas {
+        
+                    margin-top: $separacion;
+        
+                    h2{
+                        font-size:2.5rem;
+                        margin-bottom: $separacion/2;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+        
+                         a {
+                            font-weight: 100;
+                            border-radius: 5px;
+                            font-size: 1.2rem;
+                            text-transform: uppercase;
+                            background-color: rgb(194,0,0);
+                            padding: 5px 15px;
+        
+                            &:hover {
+                                color: white;
+                            }
+                        }
+                    }
+        
+                    .contenedor-peliculas-actualizadas{
+                        display: grid;
+                        grid-template-columns: repeat(6, 1fr);
+                        gap: $separacion/2;
+        
+                        @media (max-width: 768px) {
+                            grid-template-columns: repeat(2,1fr);
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        .resultadoFiltro{
+            .alerta {
+                padding: $separacion/4 0;
+                color: white;
+                font-size: 2rem;
+                font-weight: $bold;
+                text-transform: uppercase;
+        
+                .error {
+                    background: rgb(194,0,0);
+                }
+            }
+        }
+    
+}

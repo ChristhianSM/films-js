@@ -59,9 +59,16 @@ class UI {
     }
 }
 
-class Usuarios{
-    constructor(nombre, correo, password, pais, fecha, descripcion){
-        this.nombre  =""
+class Usuario{
+    constructor(idUser, username, correo, password,nombre ="", pais = "", fecha="", descripcion=""){
+        this.idUser = idUser;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.password = password;
+        this.username = username
+        this.pais = pais;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
     }
 }
 
@@ -236,6 +243,33 @@ const peliculas = [
         descripcion: "En 1872 el joven sacerdote católico Damián se ofrece para ir a una isla de Molokai, cerca de Hawai, y ayudar a una población afectada por la lepra. Cuenta la historia de una persona que sacrifica toda su vida al cuidado de los leprosos allí presentes.", 
         estreno: false,
         img: "./src/img/damian.jpg",
+        puntuacion: 5.6,
+    },
+	{ 
+        nombre: 'Batman el caballero de la noche', 
+        genero: 'Accion', 
+        year: 2019, 
+        descripcion: "Batman tiene que mantener el equilibrio entre el heroísmo y el vigilantismo para pelear contra un vil criminal conocido como el Guasón, que pretende sumir Ciudad Gótica en la anarquía.", 
+        estreno: true,
+        img: "./src/img/batman.jpg",
+        puntuacion: 5.6,
+    },
+	{ 
+        nombre: 'King Kong', 
+        genero: 'Accion', 
+        year: 2015, 
+        descripcion: "Godzilla y Kong, dos de las fuerzas más poderosas de un planeta habitado por aterradoras criaturas, se enfrentan en un espectacular combate que sacude los cimientos de la humanidad. Monarch se embarca en una misión de alto riesgo y pone rumbo hacia territorios inexplorados para descubrir los orígenes de estos dos titanes, en un último esfuerzo por tratar de salvar a dos bestias que parecen tener las horas contadas sobre la faz de la Tierra.", 
+        estreno: false,
+        img: "./src/img/king.jpg",
+        puntuacion: 5.6,
+    },
+	{ 
+        nombre: 'La liga de la justicia', 
+        genero: 'Terror', 
+        year: 2021, 
+        descripcion: "Gracias a su renovada fe en la humanidad e inspirado por el acto de altruísmo de Superman, Bruce Wayne pide ayuda a su nueva aliada, Diana Prince, para enfrentar a un enemigo aún más peligroso.", 
+        estreno: true,
+        img: "./src/img/liga.jpg",
         puntuacion: 5.6,
     }
 ];

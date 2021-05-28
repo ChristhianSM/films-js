@@ -314,6 +314,7 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
+  background: url("/src/img/fondo.png");
   background-color: #080f28; }
 
 p {
@@ -321,13 +322,23 @@ p {
 
 h1, h2, h3, p {
   margin: 0;
-  color: #ffffff; }
+  color: #ffffff;
+  font-size: 1.4rem; }
 
 .contenedor {
+  max-width: 150rem;
   width: 90%;
   margin: 0 auto; }
   @media (max-width: 768px) {
     .contenedor {
+      width: 95%; } }
+
+.contenedor-2 {
+  max-width: 140rem;
+  width: 90%;
+  margin: 0 auto; }
+  @media (max-width: 768px) {
+    .contenedor-2 {
       width: 95%; } }
 
 a {
@@ -338,22 +349,23 @@ a {
 img {
   width: 100%; }
 
-@media (max-width: 768px) {
-  .main {
-    padding-top: 150px; } }
+.main {
+  background-color: #121212; }
+  @media (max-width: 768px) {
+    .main {
+      padding-top: 150px; } }
 
 .card-pelicula {
   border: 2px solid #000;
   border-radius: 5px;
   background-color: #0b151b;
-  box-shadow: 10px 10px 5px;
-  height: 420px;
+  box-shadow: 5px 5px 3px;
   overflow: hidden;
   /* Animacion de tiempo */
   animation: fadeIn;
   animation-duration: 3s; }
   .card-pelicula img {
-    height: 300px; }
+    height: 280px; }
   .card-pelicula .informacion-pelicula .puntuacion {
     margin: 1.25rem 0;
     display: flex;
@@ -393,8 +405,7 @@ img {
   padding: 1.2rem 2rem !important; }
 
 .header {
-  padding: 1.25rem 0;
-  background-color: #141a32;
+  background-color: #0f0f0f;
   position: fixed;
   z-index: 5;
   width: 100%; }
@@ -413,7 +424,10 @@ img {
         .header .contenedor-navegacion .navegacion {
           display: block; } }
       .header .contenedor-navegacion .navegacion h1 {
-        font-size: 5rem;
+        background-color: #191919;
+        padding: 10px 5px;
+        margin: 0;
+        font-size: 3rem;
         display: flex;
         align-items: center;
         justify-content: center; }
@@ -433,33 +447,42 @@ img {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5rem; }
+      gap: 2.5rem; }
       .header .contenedor-navegacion .form-login .buscarPelicula {
-        padding: 10px 20px;
-        border: 1px solid;
+        padding: 1.2rem 1rem;
+        border: none;
+        border: 1px solid inherit;
         border-radius: 10px;
         color: black;
-        font-size: 2rem;
-        outline: none; }
+        font-size: 1.5rem;
+        outline: none;
+        width: 300px;
+        background-color: #885a5a1a;
+        color: #ffffff; }
         @media (max-width: 768px) {
           .header .contenedor-navegacion .form-login .buscarPelicula {
             width: 50%; } }
 
 .usuario {
   border: 0.5px solid #ffffff;
-  padding: 10px 30px;
+  padding: 0.2rem 1rem;
   border-radius: 5px;
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 2rem; }
+  font-size: 1.5rem; }
   .usuario span {
     font-size: 3rem; }
 
+.dropdown-item {
+  font-size: 1.5rem !important; }
+
 .contenedor-carrousel {
-  height: 500px;
+  height: 400px;
+  padding: 0 2.5rem;
   padding-top: 100px;
-  padding: 0 2.5rem; }
+  padding-bottom: 50px;
+  background: #121212; }
   @media (max-width: 768px) {
     .contenedor-carrousel {
       padding-top: 200px; } }
@@ -472,6 +495,7 @@ img {
   height: 500px; }
 
 .swiper-slide {
+  height: 300px;
   text-align: center;
   font-size: 18px;
   background: #fff;
@@ -493,92 +517,266 @@ img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; }
+  object-fit: fill; }
 
-.main {
-  background-color: #08212f;
-  height: 100%;
-  padding: 1rem; }
-  .main .contenedor-principal {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 2.5rem; }
-  .main .resultadoFiltro h2 {
+.main#index {
+  height: 100%; }
+  .main#index .informacion {
+    text-align: center;
+    background-color: #191919;
+    padding: 2rem 8rem; }
+    .main#index .informacion h3 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: .5rem; }
+    .main#index .informacion .titulo {
+      margin-bottom: 1rem;
+      font-weight: 500; }
+    .main#index .informacion p {
+      font-size: 1.5rem;
+      line-height: 1.4; }
+  .main#index .resultadoFiltro h2 {
     font-size: 2.5rem;
     margin: 5rem 0; }
-  .main .resultadoFiltro .contenedor-filtros {
+  .main#index .resultadoFiltro .contenedor-filtros {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem; }
+  .main#index .peliculas {
+    margin-top: 2.5rem; }
+    .main#index .peliculas .contenedor-peliculas .estrenos {
+      width: 100%; }
+      .main#index .peliculas .contenedor-peliculas .estrenos h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .main#index .peliculas .contenedor-peliculas .estrenos h2 a {
+          font-weight: 100;
+          border-radius: 5px;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+          background-color: #c20000;
+          padding: 5px 15px; }
+          .main#index .peliculas .contenedor-peliculas .estrenos h2 a:hover {
+            color: white; }
+      .main#index .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2.5rem; }
+        @media (max-width: 768px) {
+          .main#index .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+            grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 488px) {
+          .main#index .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+            grid-template-columns: 1fr; } }
+    .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas {
+      margin-top: 5rem; }
+      .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas h2 a {
+          font-weight: 100;
+          border-radius: 5px;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+          background-color: #c20000;
+          padding: 5px 15px; }
+          .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas h2 a:hover {
+            color: white; }
+      .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2.5rem; }
+        @media (max-width: 768px) {
+          .main#index .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+            grid-template-columns: repeat(2, 1fr); } }
+  .main#index .resultadoFiltro .alerta {
+    padding: 1.25rem 0;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase; }
+    .main#index .resultadoFiltro .alerta .error {
+      background: #c20000; }
+
+#main.main {
+  height: 100%;
+  padding-top: 50px; }
+  #main.main .contenedor-principal {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 1rem;
+    width: 95%; }
+  #main.main .resultadoFiltro h2 {
+    font-size: 2.5rem;
+    margin: 4rem 0 2rem 0; }
+  #main.main .resultadoFiltro .contenedor-filtros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem; }
+  #main.main .peliculas {
+    margin-top: 0; }
+    #main.main .peliculas .contenedor-peliculas .estrenos {
+      width: 100%; }
+      #main.main .peliculas .contenedor-peliculas .estrenos h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem; }
+      #main.main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2.5rem; }
+        @media (max-width: 768px) {
+          #main.main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+            grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 488px) {
+          #main.main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+            grid-template-columns: 1fr; } }
+    #main.main .peliculas .contenedor-peliculas .peliculas-actualizadas {
+      margin-top: 5rem; }
+      #main.main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem; }
+      #main.main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2.5rem; }
+        @media (max-width: 768px) {
+          #main.main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+            grid-template-columns: repeat(2, 1fr); } }
+  #main.main .resultadoFiltro .alerta {
+    padding: 1.25rem 0;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase; }
+    #main.main .resultadoFiltro .alerta .error {
+      background: #c20000; }
 
 .aside {
   padding-top: 5rem;
-  border-right: 1px solid #ffffff; }
+  padding-left: 10px;
+  border-left: 1px solid #ffffff14; }
   .aside .generos h2 {
-    font-size: 2rem;
-    margin-bottom: 2.5rem; }
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+    letter-spacing: 1px; }
   .aside .generos ul {
     list-style: none;
-    padding: 0 10px; }
+    padding: 0 4px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; }
     .aside .generos ul li {
       font-weight: 100;
-      padding: 1.5rem 1rem 5px 0;
-      border-bottom: 2px solid #ffffff; }
+      padding-bottom: 5px;
+      border-bottom: 0.5px solid #ffffff; }
       .aside .generos ul li a {
         font-size: 15px;
         display: flex;
         justify-content: space-between; }
+        .aside .generos ul li a:hover {
+          color: red;
+          cursor: pointer; }
+  .aside .annos-lanzamiento,
+  .aside .ultimas-actualizaciones {
+    margin-top: 3.5rem; }
+    .aside .annos-lanzamiento h2,
+    .aside .ultimas-actualizaciones h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+      letter-spacing: 1px; }
+    .aside .annos-lanzamiento .enlace-annos,
+    .aside .ultimas-actualizaciones .enlace-annos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; }
+      .aside .annos-lanzamiento .enlace-annos a,
+      .aside .ultimas-actualizaciones .enlace-annos a {
+        background-color: #0d0d0d;
+        display: inline-block;
+        color: #ffffff;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 5px 10px; }
+        .aside .annos-lanzamiento .enlace-annos a:hover,
+        .aside .ultimas-actualizaciones .enlace-annos a:hover {
+          background-color: red;
+          cursor: pointer; }
+    .aside .annos-lanzamiento .contenedor-ultimas,
+    .aside .ultimas-actualizaciones .contenedor-ultimas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; }
+      .aside .annos-lanzamiento .contenedor-ultimas .imagen,
+      .aside .ultimas-actualizaciones .contenedor-ultimas .imagen {
+        height: 120px;
+        object-fit: cover; }
 
-.peliculas {
+#main .peliculas {
   margin-top: 5rem; }
-  .peliculas .informacion {
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    background-color: #53646e; }
-    .peliculas .informacion h2 {
-      font-size: 2rem;
-      margin-bottom: 10px; }
-    .peliculas .informacion p {
-      line-height: 1.8;
-      font-size: 1.5rem; }
-  .peliculas .contenedor-peliculas {
+  #main .peliculas .contenedor-peliculas .estrenos {
+    width: 100%; }
+    #main .peliculas .contenedor-peliculas .estrenos h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      #main .peliculas .contenedor-peliculas .estrenos h2 a {
+        font-weight: 100;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-color: #c20000;
+        padding: 5px 15px; }
+        #main .peliculas .contenedor-peliculas .estrenos h2 a:hover {
+          color: white; }
+    #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2.5rem; }
+      @media (max-width: 768px) {
+        #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+          grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 488px) {
+        #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
+          grid-template-columns: 1fr; } }
+  #main .peliculas .contenedor-peliculas .peliculas-actualizadas {
     margin-top: 5rem; }
-    .peliculas .contenedor-peliculas .estrenos {
-      width: 100%; }
-      .peliculas .contenedor-peliculas .estrenos h2 {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem; }
-      .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2.5rem; }
-        @media (max-width: 768px) {
-          .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-            grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 488px) {
-          .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-            grid-template-columns: 1fr; } }
-    .peliculas .contenedor-peliculas .peliculas-actualizadas {
-      margin-top: 5rem; }
-      .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem; }
-      .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2.5rem; }
-        @media (max-width: 768px) {
-          .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
-            grid-template-columns: repeat(2, 1fr); } }
+    #main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem; }
+      #main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 a {
+        font-weight: 100;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-color: #c20000;
+        padding: 5px 15px; }
+        #main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 a:hover {
+          color: white; }
+    #main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2.5rem; }
+      @media (max-width: 768px) {
+        #main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+          grid-template-columns: repeat(2, 1fr); } }
 
-.resultadoFiltro .alerta {
+#main .resultadoFiltro .alerta {
   padding: 1.25rem 0;
   color: white;
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase; }
-  .resultadoFiltro .alerta .error {
+  #main .resultadoFiltro .alerta .error {
     background: #c20000; }
 
 .perfil {
@@ -589,7 +787,8 @@ img {
   margin-bottom: 10px; }
   @media (max-width: 768px) {
     .perfil {
-      padding-top: 200px; } }
+      padding: 200px 0 50px 0;
+      width: 90%; } }
 
 .contenedor-form .titulo-perfil {
   font-size: 4rem; }
@@ -620,7 +819,8 @@ img {
   border: none;
   outline: none; }
   .contenedor-form input:focus-visible, .contenedor-form select:focus-visible, .contenedor-form textarea:focus-visible {
-    background-color: #233160; }
+    background-color: #233160;
+    color: white; }
 
 .contenedor-form textarea {
   resize: none;
@@ -639,7 +839,8 @@ img {
   margin-bottom: 10px; }
   @media (max-width: 768px) {
     .cambio-contrasenna {
-      padding-top: 200px; } }
+      padding: 50px 0 50px 0;
+      width: 90%; } }
   .cambio-contrasenna h2 {
     font-size: 4rem;
     margin-bottom: 5rem; }

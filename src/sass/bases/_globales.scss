@@ -9,6 +9,7 @@ html{
 
 body{
     font-family: $fuentePrincipal;
+    background: url("/src/img/fondo.png");
     background-color: #080f28;
 }
 
@@ -20,10 +21,21 @@ p{
 h1,h2,h3,p{
     margin: 0;
     color: $blanco;
+    font-size: 1.4rem;
 }
 
 .contenedor{
-    // max-width: 120rem;
+    max-width: 150rem;
+    width: 90%;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        width: 95%;
+    }
+}
+
+.contenedor-2{
+    max-width: 140rem;
     width: 90%;
     margin: 0 auto;
 
@@ -43,7 +55,7 @@ img{
 }
 
 .main{
-
+    background-color: $bg-negro-oscuro ;
     @include tablet{
         padding-top: 150px;
     }
@@ -54,8 +66,7 @@ img{
     border: 2px solid $negro;
     border-radius: 5px;
     background-color: #0b151b;
-    box-shadow: 10px 10px 5px;
-    height: 420px;
+    box-shadow: 5px 5px 3px;
     overflow: hidden;
 
     /* Animacion de tiempo */
@@ -63,7 +74,7 @@ img{
     animation-duration: 3s;
 
     img{
-        height: 300px;
+        height: 280px;
     }
 
     

@@ -1,6 +1,5 @@
 .header{
-    padding: $separacion/4 0;
-    background-color: #141a32;
+    background-color: rgba(15,15,15, 99%);
     position: fixed;
     z-index: 5;
     width: 100%;
@@ -24,7 +23,10 @@
             }
 
             h1 {
-                font-size: 5rem;
+                background-color: $bg-negro-claro;
+                padding: 10px 5px;
+                margin: 0;
+                font-size: 3rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -53,19 +55,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: $separacion;
+            gap: $separacion/2;
 
             .buscarPelicula{
-                padding: 10px 20px;
-                border: 1px solid;
+                padding: 1.2rem 1rem;
+                border: none;
+                border: 1px solid inherit;
                 border-radius: 10px;
                 color: black;
-                font-size: 2rem;
+                font-size: 1.5rem;
                 outline: none;
-
+                width: 300px;
+                background-color: #885a5a1a;
+                color: $blanco;
+                
                 @include tablet {
                     width: 50%;
                 }
+                
+                // &:focus-visible{
+                    
+                // }
+                
             }
         }
     }
@@ -74,14 +85,19 @@
 // lOGIN
 .usuario{
     border: 0.5px solid $blanco;
-    padding: 10px 30px;
+    padding: 0.2rem 1rem;
     border-radius: 5px;
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    
 
     span{
         font-size: 3rem;
     }
+}
+
+.dropdown-item {
+    font-size: 1.5rem!important;
 }

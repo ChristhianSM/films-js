@@ -1,5 +1,4 @@
 function mostrarAlerta (mensaje, tipo, posicion) {
-    console.log(mensaje)
     const Toast = Swal.mixin({
         toast: true,
         position: posicion,

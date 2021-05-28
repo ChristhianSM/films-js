@@ -6,7 +6,8 @@
     margin-bottom: 10px;
 
     @include tablet{
-        padding-top: 200px;
+        padding: 200px 0 50px 0;
+        width: 90%;
     }
 }
 
@@ -49,6 +50,7 @@
 
         &:focus-visible{
             background-color: #233160;
+            color: white;
         }
     }
 
@@ -75,7 +77,8 @@
     margin-bottom: 10px;
 
     @include tablet{
-        padding-top: 200px;
+        padding: 50px 0 50px 0;
+        width: 90%;
     }
 
     h2 {
