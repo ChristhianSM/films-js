@@ -7,21 +7,25 @@
     <title>PelisPlus</title>
 
     <!-- Animaciones -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <!-- Swipper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <!-- or the reference on CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/> -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
+
+    <!-- Estilos css -->
     <link rel="stylesheet" href="./build/css/app.css">
 </head>
 <body>
@@ -57,24 +61,24 @@
         </div>
     </header>
 
-    
-    
     <main class="main contenedor-2" id="index">
         <!-- Swiper -->
-        <div class="contenedor-carrousel" style="padding-top: 100px;">
-            <div class="swiper-container mySwiper">
-                <div class="swiper-wrapper">
+        <div class="splide" id="secondary-slider">
+            <div class="splide__track">
+                <ul class="splide__list">
+                </ul>
+            </div>
+            
+            <div class="splide__progress">
+                <div class="splide__progress__bar">
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
             </div>
         </div>
 
         <div class="informacion">
             <h3>Peliculas Online</h3>
             <p class="titulo">FilmsChris</p>
-            <p>RePelis24 ofrece la posibilidad de ver 🎬 Películas Gratis en Español Latino, Castellano y Subtituladas, películas completas en calidad hd y nuevos estrenos
+            <p>FilmsChris ofrece la posibilidad de ver 🎬 Películas Gratis en Español Latino, Castellano y Subtituladas, películas completas en calidad hd y nuevos estrenos
                 ¡Gracias por visitar RePelis24! la mejor fuente para disfrutar del cine online las 24h ✔</p>
         </div>
 
@@ -110,9 +114,48 @@
         </div>
     </main>
 
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="generos">
+                <h2>Generos Disponibles</h2>
+                <ul class="contenedor-generos">
+                </ul>
+            </div>
+            <div class="redes">
+                <h3>Mantente conectado</h3>
+                <p>síganos en los sitios de redes sociales para obtener las últimas actualizaciones de películas, series de televisión y noticias</p>
+                <div class="contenedor-redes">
+                    <a href="#">
+                        <i class='bx bxl-facebook facebook'></i>
+                    </a>
+                    <a href="">
+                        <i class='bx bxl-twitter twitter' ></i>
+                    </a>
+                    <a href="">
+                        <i class='bx bxl-instagram instagram' ></i>
+                    </a>
+                    <a href="">
+                        <i class='bx bxl-youtube youtube' ></i>
+                    </a>
+                    <a href="">
+                        <i class='bx bxl-google-plus-circle google'></i>
+                    </a>
+                </div>
+            </div>
+            <div class="logo">
+                <a><span class="material-icons">
+                    theaters
+                    </span>FilmsChris
+                </a>
+            </div>
+        </div>
+    </footer>
+
+  
     <!-- Boostrapt -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
+    
     <!-- Scripts -->
     <script src="./src/js/datos.js"></script>
     <script src="./src/js/helpers/helpers.js"></script>
@@ -121,7 +164,7 @@
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./src/js/components/carrousel.js"></script>
-
+    
     <!-- Alertas -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./src/js/components/sweetAlert.js"></script>

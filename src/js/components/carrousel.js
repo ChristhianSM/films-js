@@ -1,39 +1,52 @@
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 5,
-    spaceBetween: 20,
-    slidesPerGroup: 4,
-    loop: true,
-    loopFillGroupWithBlank: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
 
-  // const ui = new UI();
+  document.addEventListener( 'DOMContentLoaded', function () {
+    iniciarCarrouselConImagenes();
+    new Splide( '#secondary-slider', {
+      fixedWidth : 230,
+      height     : 250,
+	    perPage: 3,
+      gap        : 10,
+      rewind     : true,
+      cover      : false,
+      pagination : false,
+      type    : 'loop',
+	    autoplay: true,
+      breakpoints : {
+        '768': {
+          fixedWidth: 235,
+          height    : 250,
+        },
+        '600': {
+          fixedWidth: 66,
+          height    : 40,
+        },
+        '480': {
+          fixedWidth: 200,
+          perPage: 1,
+          gap    : '1rem',
+        },
+      }
+    }).mount();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    iniciarCarrouselConImagenes()
-  })
+    
+  } );
 
   function iniciarCarrouselConImagenes() {
-     
-      // Seleccionar el contenedor de estreno
-      const swiperWrapper = document.querySelector('.swiper-wrapper');
-      listaPeliculas.forEach(peli => {
-        const {img}  = peli;
-  
-        const swiperSlide = document.createElement('DIV');
-        swiperSlide.classList.add('swiper-slide');
-        
-        const imagen = document.createElement('IMG');
-        imagen.src = img
 
-        swiperSlide.appendChild(imagen)
-        swiperWrapper.appendChild(swiperSlide)
+      const splideList = document.querySelector('.splide__list');
+      listaPeliculas.forEach(peli => {
+          const {img}  = peli;
+
+          const li = document.createElement('li');
+          li.classList.add('splide__slide')
+
+          const imagen = document.createElement('img');
+          imagen.style.height = "100%"
+          imagen.src = img
+
+          li.appendChild(imagen);
+          console.log(li)
+
+          splideList.appendChild(li);
       })
   } 

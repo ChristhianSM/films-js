@@ -10,6 +10,7 @@ html{
 body{
     font-family: $fuentePrincipal;
     background: url("https://github.com/ChristhianSM/films-js/blob/main/src/img/fondo.png");
+    background: url("/src/img/fondo.png");
     background-color: #080f28;
 }
 
@@ -56,6 +57,7 @@ img{
 
 .main{
     background-color: $bg-negro-oscuro ;
+    padding-bottom: 50px;
     @include tablet{
         padding-top: 150px;
     }
@@ -63,46 +65,57 @@ img{
 
 
 .card-pelicula{
-    border: 2px solid $negro;
     border-radius: 5px;
     background-color: #0b151b;
     box-shadow: 5px 5px 3px;
     overflow: hidden;
+    position: relative;
 
     /* Animacion de tiempo */
     animation: fadeIn;
     animation-duration: 3s;
-
+    
     img{
         height: 280px;
     }
+    .puntuacion{
+        position: absolute;
+        right: 0;
+        top: 250px;
+        background-color: #06080a;
+        padding: 3px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+
+        span {
+            color: #ffd600;
+        }
+    }
+
 
     
 
     .informacion-pelicula {
-
-        .puntuacion{
-            margin: $separacion/4 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            span{
-                font-size: 18px;
-                color: #eec719;
-            }
-        }
         
         .titulo-pelicula{
-            margin: $separacion/4 0;
-            text-align: center;
-            font-size: 2rem;
+            font-size: 1.6rem;
+            padding: 0 8px;
+            height: 2rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+
+            @include telefono {
+                overflow: scroll;
+                height: 2.5rem;
+            }
         }
     
         .year-pelicula{
-            margin: $separacion/4 0;
-            text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            padding: 0 8px;
         }
     }
     

@@ -23,9 +23,9 @@ class UI {
             cardPelicula.innerHTML = 
             `   <a href = "#">
                     <img src = ${img} alt= ${nombre}>
+                    <p class = "puntuacion"><span class="material-icons md-18">star</span>
+                    ${puntuacion}</p> 
                     <div class = "informacion-pelicula">
-                        <p class = "puntuacion"><span class="material-icons md-18">star</span>
-                        ${puntuacion}</p> 
                         <p class = "titulo-pelicula">${nombre}</p>
                         <p class = "year-pelicula">${year} </p>
                     </div>
@@ -78,7 +78,7 @@ const peliculas = [
 		genero: 'Animacion',
 		year: 2020,
 		descripcion: "Joe Gardner, un profesor de música de secundaria que vive en la ciudad de Nueva York, se siente atrapado en la vida e insatisfecho en su trabajo. Sueña con una carrera en el jazz, a lo que su madre costurera, Libba, se opone, temiendo que no tenga seguridad económica.",
-        estreno: true,
+        estreno: false,
         img: "./src/img/soul.jpg",
         puntuacion: 5.3
 		

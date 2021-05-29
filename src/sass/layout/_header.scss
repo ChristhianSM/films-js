@@ -2,6 +2,7 @@
     background-color: rgba(15,15,15, 99%);
     position: fixed;
     z-index: 5;
+    top: 0;
     width: 100%;
 
     .contenedor-navegacion{
@@ -47,6 +48,17 @@
 
                 @include tablet {
                     margin-bottom: 1rem;
+                    gap: 2rem;
+                    a{
+                        font-size: 2rem;
+                    }
+                }
+
+                @include telefono {
+
+                    a{
+                        font-size: 1.5rem;
+                    }
                 }
             }
         }
@@ -57,6 +69,10 @@
             justify-content: center;
             gap: $separacion/2;
 
+            @include tablet {
+                margin-bottom: 1rem;
+            }
+
             .buscarPelicula{
                 padding: 1.2rem 1rem;
                 border: none;
@@ -66,7 +82,7 @@
                 font-size: 1.5rem;
                 outline: none;
                 width: 300px;
-                background-color: #885a5a1a;
+                background-color: #272727;
                 color: $blanco;
                 
                 @include tablet {
@@ -77,6 +93,17 @@
                     
                 // }
                 
+            }
+
+            .btn-ingresar {
+                font-size: 1.8rem;
+                background-color: $bg-negro-claro;
+                padding: 1rem;
+
+                &:hover {
+                    background-color: blue;
+                    color: white;
+                }
             }
         }
     }

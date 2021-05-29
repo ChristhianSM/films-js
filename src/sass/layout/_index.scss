@@ -68,14 +68,20 @@
                     .contenedor-estrenos{
                         display: grid;
                         grid-template-columns: repeat(6, 1fr);
-                        gap: $separacion/2;
+                        gap: $separacion/4;
         
-                        @media (max-width: 768px) {
-                            grid-template-columns: repeat(2,1fr);
+                        @include desktop{
+                            grid-template-columns: repeat(5, 1fr);
                         }
-        
+                        
+                        @include tablet{
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 1.5rem;
+                        }
+
                         @include telefono{
-                            grid-template-columns: 1fr;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 1rem;
                         }
                     }
         
@@ -111,8 +117,18 @@
                         grid-template-columns: repeat(6, 1fr);
                         gap: $separacion/2;
         
-                        @media (max-width: 768px) {
-                            grid-template-columns: repeat(2,1fr);
+                        @include desktop{
+                            grid-template-columns: repeat(5, 1fr);
+                        }
+                        
+                        @include tablet{
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 1.5rem;
+                        }
+
+                        @include telefono{
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 1rem;
                         }
                     }
                 }

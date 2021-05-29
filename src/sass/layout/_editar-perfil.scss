@@ -1,12 +1,15 @@
 .perfil{
-    padding: 120px $separacion 50px $separacion;
-    width: 40%;
-    margin: 0 auto;
+    padding: 5rem;
+    width: 55%;
+    margin: 18rem auto 5rem auto;
     border-bottom: 2px solid;
     margin-bottom: 10px;
+    background-color: #121212;
 
+    @include desktop{
+        width: 70%;
+    }
     @include tablet{
-        padding: 200px 0 50px 0;
         width: 90%;
     }
 }
@@ -41,7 +44,7 @@
         color: $blanco;
         padding: 10px;
         border: 1px solid #1e2747;
-        background-color: #1e2747;
+        background-color: #272727;
         color: #8da0bc;
         font-size: 2rem;
         font-weight: 300;
@@ -70,12 +73,17 @@
 
 
 .cambio-contrasenna{
+    background-color: #121212;
     padding: $separacion;
-    width: 40%;
+    width: 55%;
     margin: 0 auto;
     border-bottom: 2px solid;
     margin-bottom: 10px;
 
+    @include desktop{
+        padding: 50px 0 50px 0;
+        width: 70%;
+    }
     @include tablet{
         padding: 50px 0 50px 0;
         width: 90%;

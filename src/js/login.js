@@ -10,7 +10,6 @@ const register = document.querySelector('.register-box');
 const pagRegistro = document.querySelector('.pag-registro');
 const pagIniciarSesion = document.querySelector('.pag-iniciar-sesion');
 
-
 const iniciarSesion = document.querySelector('.iniciar-sesion');
 const registrarse = document.querySelector('.registrarse');
 const formularioRegistro = document.querySelector('.formulario-registro');
@@ -22,13 +21,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
 })
 
 pagRegistro.addEventListener('click', () => {
-    register.classList.add('display-block')
+    login.classList.add('display-none');
+    register.classList.add('display-block');
 })
 
 pagIniciarSesion.addEventListener('click', () => {
     register.classList.remove('display-block')
     pagIniciarSesion.classList.remove('display-none')
-    pagIniciarSesion.classList.add('display-block')
+    pagIniciarSesion.classList.add('display-block');
+    login.classList.remove('display-none')
 })
 
 registrarse.addEventListener('click', validarFormularioRegistro );

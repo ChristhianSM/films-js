@@ -36,3 +36,20 @@ function cerrarSesion() {
         window.location = "./index.html"
     }, 1000);
 }
+
+function generarGeneros() {
+    const generos = ['Accion', 'Terror', 'Animacion', 'Aventura', 'Comedia', 'Documental', 'Familia', 'Misterio', 'Romance', 'Historia', 'Suspenso', 'C.Ficcion', 'Drama', 'Infantil', 'Crimen', 'Fantasia', 'Musica', 'Superheroes', 'Guerra', 'Crimen'];
+    const contenedorGenero = document.querySelector('.contenedor-generos');
+
+    generos.forEach( genero => {
+        const  li = document.createElement('LI');
+        const p = document.createElement('p');
+        p.classList.add(`btn${genero}`);
+        p.innerHTML = 
+            `&#9205;${genero}
+            <span class="total${genero}"></span>
+            `
+        li.appendChild(p);
+        contenedorGenero.appendChild(li)
+    })
+}

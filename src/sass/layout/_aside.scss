@@ -55,6 +55,10 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
 
+            @include tablet {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
             a{
                 background-color: #0d0d0d;
                 display: inline-block;

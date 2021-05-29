@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
     <!-- Animaciones -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Estilos css -->
     <link rel="stylesheet" href="./build/css/app.css">
+    <link rel="stylesheet" href="/build/css/app.css">
   </head>
   <body>
 
@@ -34,7 +33,7 @@
     
             <div class="form-login">
                 <input type="text" placeholder="Nombre Pelicula" class="buscarPelicula">
-                <a href="./login.html">Ingresar</a>
+                <a href="./login.html" class="btn-ingresar">Ingresar</a>
             </div>
         </div>
     </header>
@@ -50,7 +49,7 @@
             <label for="password">Contraseña</label>
             <input type="password" class="password-sesion" placeholder="Ingrese Contraseña">
             <input type="submit" class="iniciar-sesion" value="Inicia Session">
-            <a href="#" class="pag-registro">¿Aun no tienes cuenta? Registrate aqui</a><br>
+            <a href="#" class="pag-registro">¿Aun no tienes cuenta? Registrate aqui</a>
             <a href="#">¿Olvidaste tu contraseña?</a>
           </form>
         </div>
@@ -70,7 +69,7 @@
             <input type="password" placeholder="Ingrese nuevamente su Contraseña" class="password-registro-dos">
 
             <input type="submit" class="registrarse" value="Registrarse">
-            <a href="#" class="pag-iniciar-sesion">Iniciar Sesion</a><br>
+            <a href="#" class="pag-iniciar-sesion">Iniciar Sesion</a>
             <a href="#">¿Olvidaste tu contraseña?</a>
           </form>
         </div>
@@ -81,6 +80,6 @@
     <script src="./src/js/components/sweetAlert.js"></script>
 
     <script src="./src/js/datos.js"></script>
-    <script src="./src/js/login.js"></script>
+    <script src="./src/js/login.js" type="module"></script>
   </body>
 </html>
