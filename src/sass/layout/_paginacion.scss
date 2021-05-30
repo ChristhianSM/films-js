@@ -1,0 +1,23 @@
+.paginacion{
+    border-top: 1px solid;
+
+    .contenedor-paginacion{
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        a{
+            font-size: 1.5rem;
+            border: 1px solid $negro;
+            border-radius: 5px;
+            padding: 5px 15px;
+            background-color: #00000080;
+
+            &:hover {
+                color: rgb(255, 6, 6);
+                background-color: #000000;
+            }
+        }
+    }
+}

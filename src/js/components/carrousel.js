@@ -45,7 +45,6 @@
           imagen.src = img
 
           li.appendChild(imagen);
-          console.log(li)
 
           splideList.appendChild(li);
       })

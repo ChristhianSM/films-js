@@ -4,45 +4,6 @@
     
         .contenedor-peliculas{
     
-            .estrenos{
-                width: 100%;
-                h2{
-                    font-size: 2.5rem;
-                    margin-bottom: $separacion/2;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-    
-                    a {
-                        font-weight: 100;
-                        border-radius: 5px;
-                        font-size: 1.2rem;
-                        text-transform: uppercase;
-                        background-color: rgb(194,0,0);
-                        padding: 5px 15px;
-    
-                        &:hover {
-                            color: white;
-                        }
-                    }
-                }
-    
-                .contenedor-estrenos{
-                    display: grid;
-                    grid-template-columns: repeat(6, 1fr);
-                    gap: $separacion/2;
-    
-                    @media (max-width: 768px) {
-                        grid-template-columns: repeat(2,1fr);
-                    }
-    
-                    @include telefono{
-                        grid-template-columns: 1fr;
-                    }
-                }
-    
-            }
-    
             .peliculas-actualizadas {
     
                 margin-top: $separacion;
@@ -70,6 +31,9 @@
                     grid-template-columns: repeat(6, 1fr);
                     gap: $separacion/2;
     
+                    @include desktop {
+                        grid-template-columns: repeat(4,1fr);
+                    }
                     @include tablet {
                         grid-template-columns: repeat(2,1fr);
                     }
@@ -87,7 +51,7 @@
         .alerta {
             padding: $separacion/4 0;
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: $bold;
             text-transform: uppercase;
     
@@ -96,4 +60,13 @@
             }
         }
     }
+}
+
+// Mostrar activo cuando se realize la busqueda
+.activo {
+    color: red;
+}
+
+.activo-year {
+    background-color: red!important;
 }

@@ -116,7 +116,7 @@ function validarFormularioInicio(e){
     })
     
     if (autenticado) {
-        mostrarAlertaExito(`Bienvenido ${usuarioActual.nombre}`, 'exito');
+        mostrarAlertaExito(`Bienvenid@ ${usuarioActual.username}`, 'exito');
         setTimeout(() => {
             window.location = './index.html';
         }, 3000);

@@ -1,10 +1,19 @@
-// Variables
+/* Variables Globales */
+const registrosPorPagina = 10;
+let totalPaginas;
+let iterador;
+let paginaActual = 1;
+
+// Variables de html
 const resultadoEstrenos = document.querySelector('.contenedor-estrenos');
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
 const buscarPelicula = document.querySelector('.buscarPelicula');
 
 // Boton Cerrar sesion
 const btnCerrarSesion = document.querySelector('.cerrar-sesion');
+
+// selector para la paginacion
+const contenedorPaginacion = document.querySelector('.contenedor-paginacion')
 
 eventosListener();
 function eventosListener(){
@@ -25,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarPeliculasActualizadas();
     mostrarUsuarioLogueado();
 
+    /* Funcion para iniciar nuestro generador */
+    totalPaginas = calcularPaginas(listaPeliculas.length);
+    imprimirPaginador();
+    
+    /* Trae los generos */
     generarGeneros();
 })
 
@@ -40,28 +54,32 @@ function mostrarPeliculasActualizadas(){
     ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
 }
 
-function filtrarPorBusqueda(termino){
-    const texto = termino.toLowerCase();
-    const peliculas = listaPeliculas.filter( pelicula => {
-        return (pelicula.nombre.toLowerCase()).indexOf(texto) !== -1
-    })
-    
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+function calcularPaginas(total){
+    return parseInt(Math.ceil(total/registrosPorPagina));
+}
 
-    if (peliculas.length > 0) {
-        
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        resultadoFiltro.classList.add('display-block');
-        
-        const bloquePeliculas = document.querySelector('.peliculas');
-        bloquePeliculas.classList.add('display-none')
-        
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
-    }else{
-        ui.limpiarHTML(contenedorFiltros);
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro)
+function imprimirPaginador(){
+    iterador = crearPaginador(totalPaginas);
+    const paginaInicial = document.querySelector('.pagina-inicial');
+    const paginaFinal = document.querySelector('.pagina-final');
+    while(true){
+        const {value, done} = iterador.next();
+
+        if (done) return;
+
+        /* En caso de que aun no llegue a done, crea un boton por cada elemento del generador */
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = value;
+        boton.textContent = value;
+        boton.classList.add('boton-paginador');
+        boton.onclick = ()=> {
+            paginaActual = value;
+        }
+
+        paginaFinal.textContent = value;
+        contenedorPaginacion.appendChild(boton);
+
     }
 }
 

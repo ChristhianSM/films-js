@@ -76,18 +76,4 @@
         }
         
     }
-    
-    .resultadoFiltro{
-        .alerta {
-            padding: $separacion/4 0;
-            color: white;
-            font-size: 2rem;
-            font-weight: $bold;
-            text-transform: uppercase;
-    
-            .error {
-                background: rgb(194,0,0);
-            }
-        }
-    }
 }

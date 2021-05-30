@@ -23,8 +23,6 @@ function eventosListener(){
     btnCerrarSesion.addEventListener('click', cerrarSesion);
 }
 
-
-
 // Eventos
 document.addEventListener('DOMContentLoaded', () => {
     // mostrarCantidadPeliculas();
@@ -48,6 +46,34 @@ function mostrarPeliculasActualizadas(){
 
 function generarGeneros() {
     const menuGenero = document.querySelector('.menu-genero');
+    const contenedorGenero = document.querySelector('.contenedor-generos');
+
+    generos.forEach( genero => {
+        const  li = document.createElement('LI');
+        const a = document.createElement('A');
+        a.href = '#'
+        a.classList.add(`btn${genero}`);
+        a.innerHTML = 
+            `&#9205;${genero}
+            <span class="total${genero}"></span>
+            `
+        a.onclick = (e) => {
+            /* Agregar activo al link que se apreto click */
+            const claseActivo = document.querySelector('.activo');
+            const claseActivoYear = document.querySelector('.activo-year');
+            if (claseActivo ) {
+                claseActivo.classList.remove('activo');
+            }else if (claseActivoYear) {
+                claseActivoYear.classList.remove('activo-year');
+            }
+            e.target.classList.add('activo');
+            filtrarPelicula(genero)
+        };
+
+        li.appendChild(a);
+        menuGenero.appendChild(li)
+
+    })
 
     generos.forEach( genero => {
         const  li = document.createElement('LI');
@@ -59,11 +85,12 @@ function generarGeneros() {
             <span class="total${genero}"></span>
             `
         a.onclick = () => {
+            
             filtrarPelicula(genero)
         };
 
         li.appendChild(a);
-        menuGenero.appendChild(li)
+        contenedorGenero.appendChild(li)
     })
     // mostrarCantidadPeliculas();
 }
@@ -76,8 +103,17 @@ function generarAnnosLanzamiento() {
         const a = document.createElement('A');
         a.textContent = i;
         a.href = "#";
-        a.onclick = () => {
-            filtrarYear(i)
+        a.onclick = (e) => {
+             /* Agregar activo al link que se apreto click */
+             const claseActivoYear = document.querySelector('.activo-year');
+             const claseActivo = document.querySelector('.activo');
+             if (claseActivo ) {
+                claseActivo.classList.remove('activo');
+            }else if (claseActivoYear) {
+                claseActivoYear.classList.remove('activo-year');
+            }
+             e.target.classList.add('activo-year');
+            filtrarYear(i);
         };
         enlaceAnnos.appendChild(a)
     }
@@ -144,6 +180,7 @@ function mostrarCantidadPeliculas(){
 }
 
 function filtrarPelicula(filtro){
+
     const peliculas = listaPeliculas.filter( pelicula => {
         return pelicula.genero === filtro;
     })
@@ -159,29 +196,5 @@ function filtrarPelicula(filtro){
 
 }
 
-function filtrarPorBusqueda(termino){
-    const texto = termino.toLowerCase();
-    const peliculas = listaPeliculas.filter( pelicula => {
-        return (pelicula.nombre.toLowerCase()).indexOf(texto) !== -1
-    })
-    
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
-    if (peliculas.length > 0) {
-        
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        resultadoFiltro.classList.add('display-block');
-        
-        const bloquePeliculas = document.querySelector('.peliculas');
-        bloquePeliculas.classList.add('display-none')
-        
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
-    }else{
-        ui.limpiarHTML(contenedorFiltros);
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro)
-    }
-}
 
 

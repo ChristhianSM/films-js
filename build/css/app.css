@@ -527,6 +527,8 @@ img {
     .main#index .informacion p {
       font-size: 1.5rem;
       line-height: 1.4; }
+  .main#index .contenedor-principal {
+    margin-bottom: 2rem; }
   .main#index .resultadoFiltro h2 {
     font-size: 2.5rem;
     margin: 5rem 0; }
@@ -602,8 +604,9 @@ img {
             gap: 1rem; } }
   .main#index .resultadoFiltro .alerta {
     padding: 1.25rem 0;
+    margin-bottom: 6rem;
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase; }
     .main#index .resultadoFiltro .alerta .error {
@@ -657,14 +660,23 @@ img {
       #main.main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
         font-size: 2.5rem;
         margin-bottom: 2.5rem; }
-  #main.main .resultadoFiltro .alerta {
-    padding: 1.25rem 0;
-    color: white;
-    font-size: 2rem;
-    font-weight: 700;
-    text-transform: uppercase; }
-    #main.main .resultadoFiltro .alerta .error {
-      background: #c20000; }
+
+.paginacion {
+  border-top: 1px solid; }
+  .paginacion .contenedor-paginacion {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem; }
+    .paginacion .contenedor-paginacion a {
+      font-size: 1.5rem;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px 15px;
+      background-color: #00000080; }
+      .paginacion .contenedor-paginacion a:hover {
+        color: #ff0606;
+        background-color: #000000; }
 
 .aside {
   padding-top: 5rem;
@@ -734,33 +746,6 @@ img {
 
 #main .peliculas {
   margin-top: 5rem; }
-  #main .peliculas .contenedor-peliculas .estrenos {
-    width: 100%; }
-    #main .peliculas .contenedor-peliculas .estrenos h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-      #main .peliculas .contenedor-peliculas .estrenos h2 a {
-        font-weight: 100;
-        border-radius: 5px;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        background-color: #c20000;
-        padding: 5px 15px; }
-        #main .peliculas .contenedor-peliculas .estrenos h2 a:hover {
-          color: white; }
-    #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 2.5rem; }
-      @media (max-width: 768px) {
-        #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-          grid-template-columns: repeat(2, 1fr); } }
-      @media (max-width: 488px) {
-        #main .peliculas .contenedor-peliculas .estrenos .contenedor-estrenos {
-          grid-template-columns: 1fr; } }
   #main .peliculas .contenedor-peliculas .peliculas-actualizadas {
     margin-top: 5rem; }
     #main .peliculas .contenedor-peliculas .peliculas-actualizadas h2 {
@@ -779,6 +764,9 @@ img {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 2.5rem; }
+      @media (max-width: 1024px) {
+        #main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
+          grid-template-columns: repeat(4, 1fr); } }
       @media (max-width: 768px) {
         #main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
           grid-template-columns: repeat(2, 1fr); } }
@@ -789,11 +777,17 @@ img {
 #main .resultadoFiltro .alerta {
   padding: 1.25rem 0;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase; }
   #main .resultadoFiltro .alerta .error {
     background: #c20000; }
+
+.activo {
+  color: red; }
+
+.activo-year {
+  background-color: red !important; }
 
 .login-box,
 .register-box {
@@ -892,6 +886,9 @@ img {
   @media (max-width: 768px) {
     .perfil {
       width: 90%; } }
+  @media (max-width: 488px) {
+    .perfil {
+      padding: 3rem; } }
 
 .contenedor-form .titulo-perfil {
   font-size: 4rem; }
@@ -943,12 +940,14 @@ img {
   margin-bottom: 10px; }
   @media (max-width: 1024px) {
     .cambio-contrasenna {
-      padding: 50px 0 50px 0;
+      padding: 5rem;
       width: 70%; } }
   @media (max-width: 768px) {
     .cambio-contrasenna {
-      padding: 50px 0 50px 0;
       width: 90%; } }
+  @media (max-width: 488px) {
+    .cambio-contrasenna {
+      padding: 3rem; } }
   .cambio-contrasenna h2 {
     font-size: 4rem;
     margin-bottom: 5rem; }
@@ -965,6 +964,9 @@ img {
   .footer .contenedor {
     display: grid;
     grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 768px) {
+      .footer .contenedor {
+        grid-template-columns: repeat(1, 1fr); } }
   .footer .generos h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem; }
@@ -973,6 +975,17 @@ img {
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr); }
+    .footer .generos .contenedor-generos a {
+      font-size: 1.5rem; }
+  @media (max-width: 768px) {
+    .footer .generos {
+      display: none; } }
+  @media (max-width: 768px) {
+    .footer .redes {
+      display: flex; } }
+  @media (max-width: 488px) {
+    .footer .redes {
+      flex-direction: column; } }
   .footer .redes h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem; }
@@ -984,13 +997,19 @@ img {
     gap: 1rem;
     align-items: center;
     justify-content: space-between; }
+    @media (max-width: 768px) {
+      .footer .redes .contenedor-redes {
+        justify-content: center; } }
     .footer .redes .contenedor-redes a {
       padding: 5px;
       transition: all 0.7s; }
       .footer .redes .contenedor-redes a i {
         border-radius: 10px;
         text-align: center;
-        font-size: 5rem; }
+        font-size: 4rem; }
+        @media (max-width: 768px) {
+          .footer .redes .contenedor-redes a i {
+            font-size: 3rem; } }
       .footer .redes .contenedor-redes a .facebook {
         background-color: blue;
         color: white; }
@@ -1021,3 +1040,18 @@ img {
       .footer .logo a:hover {
         color: white;
         cursor: pointer; }
+
+.footer-login .contenedor {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; }
+  @media (max-width: 488px) {
+    .footer-login .contenedor {
+      display: block; } }
+  .footer-login .contenedor .redes .contenedor-redes {
+    justify-content: unset; }
+  @media (max-width: 768px) {
+    .footer-login .contenedor .redes {
+      display: block; } }
+  .footer-login .contenedor .logo {
+    margin: 0; }

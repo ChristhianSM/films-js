@@ -12,6 +12,9 @@
     @include tablet{
         width: 90%;
     }
+    @include telefono{
+        padding: 3rem;
+    }
 }
 
 .contenedor-form{
@@ -81,12 +84,14 @@
     margin-bottom: 10px;
 
     @include desktop{
-        padding: 50px 0 50px 0;
+        padding: 5rem;
         width: 70%;
     }
     @include tablet{
-        padding: 50px 0 50px 0;
         width: 90%;
+    }
+    @include telefono{
+        padding: 3rem;
     }
 
     h2 {

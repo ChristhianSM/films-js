@@ -6,6 +6,10 @@
     .contenedor {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+
+        @include tablet {
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
 
     .generos {
@@ -20,12 +24,26 @@
             padding: 0;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            
+
+            a {
+                font-size: 1.5rem;
+            }
+   
         }
+
+        @include tablet {
+            display: none;
+        }  
     }
 
     .redes {
 
+        @include tablet{
+            display: flex;
+        }
+        @include telefono{
+            flex-direction: column;
+        }
 
         h3 {
             font-size: 1.8rem;
@@ -43,6 +61,10 @@
             align-items: center;
             justify-content: space-between;
 
+            @include tablet {
+                justify-content: center;
+            }
+
             a{
                 padding: 5px;
                 transition: all 0.7s;
@@ -50,7 +72,11 @@
                 i{
                     border-radius: 10px;
                     text-align: center;
-                    font-size: 5rem;
+                    font-size: 4rem;
+
+                    @include tablet {
+                        font-size: 3rem;
+                    }
                 }
 
                 .facebook{
@@ -102,6 +128,36 @@
                 color: white;
                 cursor: pointer;
             }
+        }
+    }
+}
+
+.footer-login{
+
+    .contenedor {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+
+        @include tablet {
+            
+        }
+        @include telefono {
+            display: block;
+        }
+
+        .redes{
+            .contenedor-redes{
+                justify-content: unset;
+            }
+
+            @include tablet {
+                display: block;
+            }
+        }
+
+        .logo {
+            margin: 0;
         }
     }
 }

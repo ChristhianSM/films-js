@@ -1,6 +1,6 @@
 .main#index {
         height: 100%;
-    
+
         .informacion{
             text-align: center;
             background-color: $bg-negro-claro;
@@ -21,6 +21,10 @@
                 font-size: 1.5rem;
                 line-height: 1.4;
             }
+        }
+
+        .contenedor-principal{
+            margin-bottom: 2rem;
         }
     
         .resultadoFiltro{
@@ -139,8 +143,9 @@
         .resultadoFiltro{
             .alerta {
                 padding: $separacion/4 0;
+                margin-bottom: 6rem;
                 color: white;
-                font-size: 2rem;
+                font-size: 1.5rem;
                 font-weight: $bold;
                 text-transform: uppercase;
         
