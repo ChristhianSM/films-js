@@ -1,5 +1,5 @@
 // Funcion que muestra Si hay usuario logueado
-function mostrarUsuarioLogueado(){
+export function mostrarUsuarioLogueado(){
     const usuarioLogueado = JSON.parse(localStorage.getItem('UsuarioActual'))|| null;
 
     if (usuarioLogueado !== null) {
@@ -21,7 +21,7 @@ function mostrarUsuarioLogueado(){
     }
 }
 
-function cerrarSesion() {
+export function cerrarSesion() {
     localStorage.removeItem('UsuarioActual');
     const menuSesion = document.querySelector('.menu-sesion');
     menuSesion.classList.remove('display-block');
@@ -35,7 +35,7 @@ function cerrarSesion() {
     }, 1000);
 }
 
-function filtrarPorBusqueda(termino){
+export function filtrarPorBusqueda(termino){
     /* Inicializamos el objeto ui */
     const ui = new UI();
 
@@ -69,7 +69,7 @@ function filtrarPorBusqueda(termino){
     }
 }
 
-function generarGeneros() {
+export function generarGeneros() {
     const generos = ['Accion', 'Terror', 'Animacion', 'Aventura', 'Comedia', 'Documental', 'Familia', 'Misterio', 'Romance', 'Historia', 'Suspenso', 'C.Ficcion', 'Drama', 'Infantil', 'Crimen', 'Fantasia', 'Musica', 'Superheroes', 'Guerra', 'Crimen'];
     const contenedorGenero = document.querySelector('.contenedor-generos');
 
@@ -86,9 +86,12 @@ function generarGeneros() {
     })
 }
 
+
 /* Generador que registra la cantidad de elementos de acuerdo a las paginas */
-function *crearPaginador(total){
+export function *crearPaginador(total){
     for (let i = 1; i <= total; i++) {
         yield   i
     }
 }
+
+// export {mostrarUsuarioLogueado, cerrarSesion, filtrarPorBusqueda, generarGeneros, crearPaginador}

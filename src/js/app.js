@@ -1,3 +1,5 @@
+import {mostrarUsuarioLogueado,cerrarSesion,crearPaginador, filtrarPorBusqueda,generarGeneros} from "./helpers/helpers.js";
+
 /* Variables Globales */
 const registrosPorPagina = 10;
 let totalPaginas;
@@ -40,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     /* Trae los generos */
     generarGeneros();
+
+    /* Llamar a la api */
+    obtenerPeliculas();
 })
 
 function mostrarEstrenos(){

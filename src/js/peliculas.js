@@ -1,4 +1,4 @@
-const generos = ['Accion', 'Terror', 'Animacion', 'Aventura', 'Comedia', 'Documental', 'Familia', 'Misterio', 'Romance', 'Historia', 'Suspenso', 'C.Ficcion', 'Drama', 'Infantil', 'Crimen', 'Fantasia', 'Musica', 'Superheroes', 'Guerra', 'Crimen'];
+import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado} from "./helpers/helpers.js";
 
 // Variables
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
@@ -44,18 +44,21 @@ function mostrarPeliculasActualizadas(){
     ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
 }
 
-function generarGeneros() {
+async function generarGeneros() {
     const menuGenero = document.querySelector('.menu-genero');
     const contenedorGenero = document.querySelector('.contenedor-generos');
+    
+    const generos = await consultandoGeneros();
 
-    generos.forEach( genero => {
+    for (let i = 0; i < generos.length; i++) {
+
         const  li = document.createElement('LI');
         const a = document.createElement('A');
         a.href = '#'
-        a.classList.add(`btn${genero}`);
+        a.classList.add(`btn${generos[i].name.replace(/\s+/g, '')}`);
         a.innerHTML = 
-            `&#9205;${genero}
-            <span class="total${genero}"></span>
+            `&#9205;${generos[i].name}
+            <span class="total${generos[i].name}"></span>
             `
         a.onclick = (e) => {
             /* Agregar activo al link que se apreto click */
@@ -67,31 +70,56 @@ function generarGeneros() {
                 claseActivoYear.classList.remove('activo-year');
             }
             e.target.classList.add('activo');
-            filtrarPelicula(genero)
+            filtrarPelicula(generos[i].name)
         };
 
         li.appendChild(a);
         menuGenero.appendChild(li)
+    }
+    // generos.forEach( genero => {
+    //     const  li = document.createElement('LI');
+    //     const a = document.createElement('A');
+    //     a.href = '#'
+    //     a.classList.add(`btn${genero}`);
+    //     a.innerHTML = 
+    //         `&#9205;${genero}
+    //         <span class="total${genero}"></span>
+    //         `
+    //     a.onclick = (e) => {
+    //         /* Agregar activo al link que se apreto click */
+    //         const claseActivo = document.querySelector('.activo');
+    //         const claseActivoYear = document.querySelector('.activo-year');
+    //         if (claseActivo ) {
+    //             claseActivo.classList.remove('activo');
+    //         }else if (claseActivoYear) {
+    //             claseActivoYear.classList.remove('activo-year');
+    //         }
+    //         e.target.classList.add('activo');
+    //         filtrarPelicula(genero)
+    //     };
 
-    })
+    //     li.appendChild(a);
+    //     menuGenero.appendChild(li)
 
-    generos.forEach( genero => {
-        const  li = document.createElement('LI');
-        const a = document.createElement('A');
-        a.href = '#'
-        a.classList.add(`btn${genero}`);
-        a.innerHTML = 
-            `&#9205;${genero}
-            <span class="total${genero}"></span>
-            `
-        a.onclick = () => {
+    // })
+
+    // generos.forEach( genero => {
+    //     const  li = document.createElement('LI');
+    //     const a = document.createElement('A');
+    //     a.href = '#'
+    //     a.classList.add(`btn${genero}`);
+    //     a.innerHTML = 
+    //         `&#9205;${genero}
+    //         <span class="total${genero}"></span>
+    //         `
+    //     a.onclick = () => {
             
-            filtrarPelicula(genero)
-        };
+    //         filtrarPelicula(genero)
+    //     };
 
-        li.appendChild(a);
-        contenedorGenero.appendChild(li)
-    })
+    //     li.appendChild(a);
+    //     contenedorGenero.appendChild(li)
+    // })
     // mostrarCantidadPeliculas();
 }
 
@@ -180,7 +208,7 @@ function mostrarCantidadPeliculas(){
 }
 
 function filtrarPelicula(filtro){
-
+    console.log(listaPeliculas)
     const peliculas = listaPeliculas.filter( pelicula => {
         return pelicula.genero === filtro;
     })
