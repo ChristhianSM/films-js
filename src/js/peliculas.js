@@ -24,21 +24,13 @@ function eventosListener(){
 }
 
 // Eventos
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',  async() => {
     // mostrarCantidadPeliculas();
     mostrarUsuarioLogueado();
-    generarGeneros();
+    await generarGeneros();
     generarAnnosLanzamiento();
     ultimasPeliculasActualizadas();
 })
-
-function mostrarEstrenos(){
-    const estreno = listaPeliculas.filter( pelicula => {
-        return pelicula.estreno === true;
-    })
-
-    ui.mostrarPeliculasHTML(estreno, resultadoEstrenos);
-}
 
 function mostrarPeliculasActualizadas(){
     ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
@@ -49,6 +41,7 @@ async function generarGeneros() {
     const contenedorGenero = document.querySelector('.contenedor-generos');
     
     const generos = await consultandoGeneros();
+    console.log(generos)
 
     for (let i = 0; i < generos.length; i++) {
 
@@ -70,57 +63,40 @@ async function generarGeneros() {
                 claseActivoYear.classList.remove('activo-year');
             }
             e.target.classList.add('activo');
-            filtrarPelicula(generos[i].name)
+            filtrarPelicula(generos[i])
         };
 
         li.appendChild(a);
-        menuGenero.appendChild(li)
+        
+        menuGenero.appendChild(li);
     }
-    // generos.forEach( genero => {
-    //     const  li = document.createElement('LI');
-    //     const a = document.createElement('A');
-    //     a.href = '#'
-    //     a.classList.add(`btn${genero}`);
-    //     a.innerHTML = 
-    //         `&#9205;${genero}
-    //         <span class="total${genero}"></span>
-    //         `
-    //     a.onclick = (e) => {
-    //         /* Agregar activo al link que se apreto click */
-    //         const claseActivo = document.querySelector('.activo');
-    //         const claseActivoYear = document.querySelector('.activo-year');
-    //         if (claseActivo ) {
-    //             claseActivo.classList.remove('activo');
-    //         }else if (claseActivoYear) {
-    //             claseActivoYear.classList.remove('activo-year');
-    //         }
-    //         e.target.classList.add('activo');
-    //         filtrarPelicula(genero)
-    //     };
+    for (let i = 0; i < generos.length; i++) {
 
-    //     li.appendChild(a);
-    //     menuGenero.appendChild(li)
+        const  li = document.createElement('LI');
+        const a = document.createElement('A');
+        a.href = '#'
+        a.classList.add(`btn${generos[i].name.replace(/\s+/g, '')}`);
+        a.innerHTML = 
+            `&#9205;${generos[i].name}
+            <span class="total${generos[i].name}"></span>
+            `
+        a.onclick = (e) => {
+            /* Agregar activo al link que se apreto click */
+            const claseActivo = document.querySelector('.activo');
+            const claseActivoYear = document.querySelector('.activo-year');
+            if (claseActivo ) {
+                claseActivo.classList.remove('activo');
+            }else if (claseActivoYear) {
+                claseActivoYear.classList.remove('activo-year');
+            }
+            e.target.classList.add('activo');
+            filtrarPelicula(generos[i])
+        };
 
-    // })
-
-    // generos.forEach( genero => {
-    //     const  li = document.createElement('LI');
-    //     const a = document.createElement('A');
-    //     a.href = '#'
-    //     a.classList.add(`btn${genero}`);
-    //     a.innerHTML = 
-    //         `&#9205;${genero}
-    //         <span class="total${genero}"></span>
-    //         `
-    //     a.onclick = () => {
-            
-    //         filtrarPelicula(genero)
-    //     };
-
-    //     li.appendChild(a);
-    //     contenedorGenero.appendChild(li)
-    // })
-    // mostrarCantidadPeliculas();
+        li.appendChild(a);
+        
+        contenedorGenero.appendChild(li);
+    }
 }
 
 function generarAnnosLanzamiento() {
@@ -208,10 +184,19 @@ function mostrarCantidadPeliculas(){
 }
 
 function filtrarPelicula(filtro){
+    console.log(filtro)
     console.log(listaPeliculas)
+    let contenedorPeliculasFiltro = [];
     const peliculas = listaPeliculas.filter( pelicula => {
-        return pelicula.genero === filtro;
+        for (let i = 0; i < pelicula.genero.length; i++) {
+            if (pelicula.genero[i]=== filtro.id) {
+                contenedorPeliculasFiltro = [...contenedorPeliculasFiltro, pelicula];
+                return contenedorPeliculasFiltro
+            }
+        }
     })
+
+    console.log(peliculas)
     const resultadoFiltro = document.querySelector('.resultadoFiltro');
     resultadoFiltro.classList.add('display-block');
     

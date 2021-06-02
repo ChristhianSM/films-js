@@ -1,7 +1,7 @@
 const listaPeliculas = [];
 
 class Pelicula{
-    constructor(id, nombre,genero, year, descripcion, estreno, img, puntuacion, idioma ){
+    constructor(id, nombre,genero, year, descripcion, img, puntuacion, idioma ){
         this.id = id;
         this.nombre= nombre;
         this.genero = genero;
@@ -34,7 +34,6 @@ class Pelicula{
 }
 
 class UI {
-
     mostrarPeliculasHTML(peliculas, localizacion){
         peliculas.forEach( pelicula => {
             const {nombre, genero, year, descripcion, img,puntuacion} = pelicula
@@ -95,13 +94,31 @@ class Usuario{
 traerPeliculas();
 async function traerPeliculas() {
     const peliculas = await obtenerPeliculas();
+    // const generos = await consultandoGeneros();
+    // console.log(generos);
+    // console.log(peliculas)
+    // // console.log(peliculas[0].genre_ids[0]);
+    // let nombreGeneros = [], generoUnitario = []
+    // for (let i = 0; i < peliculas.length; i++) {
+    //     for (let j = 0; j < peliculas[i].genre_ids.length; j++) {
+    //         for (let k = 0; k < generos.length; k++) {
+    //             if (peliculas[i].genre_ids[j] === generos[k].id) {
+    //                 generoUnitario = [...generoUnitario,generos[k].name];
+    //             }
+    //         }
+    //         nombreGeneros = [...nombreGeneros, generoUnitario]
+    //     }
+    // }
+
+    // console.log(generoUnitario)
 
     peliculas.forEach(pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language } = pelicula;
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, true, poster_path,vote_average, original_language);
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
         listaPeliculas.push(newPelicula);
     })
-    console.log(listaPeliculas)
+
+    // console.log(listaPeliculas)
 }
 
     
