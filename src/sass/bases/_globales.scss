@@ -78,6 +78,31 @@ img{
     img{
         height: 280px;
     }
+
+    .tooltip {
+        display: flex;
+        background: $blanco;
+        box-shadow: 5px 5px 58px rgba(8,8,8,0.28);
+        gap:1rem ;
+        width: 20rem;
+        transition:.3s ease all ;
+
+        .thumb {
+            width: 60%;
+        }
+
+        .informacion-tooltip{
+            width: 40%;
+        }
+
+
+        &.activo {
+            opacity: 1!important;
+        }
+    }
+
+
+
     .puntuacion{
         position: absolute;
         right: 0;

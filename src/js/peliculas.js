@@ -41,7 +41,6 @@ async function generarGeneros() {
     const contenedorGenero = document.querySelector('.contenedor-generos');
     
     const generos = await consultandoGeneros();
-    console.log(generos)
 
     for (let i = 0; i < generos.length; i++) {
 
@@ -183,30 +182,28 @@ function mostrarCantidadPeliculas(){
 
 }
 
-function filtrarPelicula(filtro){
-    console.log(filtro)
-    console.log(listaPeliculas)
-    let contenedorPeliculasFiltro = [];
-    const peliculas = listaPeliculas.filter( pelicula => {
-        for (let i = 0; i < pelicula.genero.length; i++) {
-            if (pelicula.genero[i]=== filtro.id) {
-                contenedorPeliculasFiltro = [...contenedorPeliculasFiltro, pelicula];
-                return contenedorPeliculasFiltro
-            }
-        }
-    })
-
-    console.log(peliculas)
-    const resultadoFiltro = document.querySelector('.resultadoFiltro');
-    resultadoFiltro.classList.add('display-block');
-    
-    const bloquePeliculas = document.querySelector('.peliculas');
-    bloquePeliculas.classList.add('display-none')
-
+async function filtrarPelicula(filtro){
+    console.log(filtro.id)
+    const peliculasPorGenero = [];
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
-    ui.limpiarHTML(contenedorFiltros);
-    ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
 
+    const datos = await consultandoPeliculasPorGeneros(filtro.id);
+    console.log(datos)
+    datos.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        peliculasPorGenero.push(newPelicula);
+        
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        resultadoFiltro.classList.add('display-block');
+        
+        const bloquePeliculas = document.querySelector('.peliculas');
+        bloquePeliculas.classList.add('display-none')
+        
+        ui.limpiarHTML(contenedorFiltros);
+        ui.mostrarPeliculasHTML(peliculasPorGenero,contenedorFiltros);
+    })
 }
 
 

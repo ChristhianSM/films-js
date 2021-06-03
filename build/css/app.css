@@ -314,9 +314,7 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-  background: url("https://github.com/ChristhianSM/films-js/blob/main/src/img/fondo.png");
-  background: url("/src/img/fondo.png");
-  background-color: #080f28; }
+  background-color: #1f1e1e; }
 
 p {
   font-size: 1.6rem; }
@@ -368,6 +366,19 @@ img {
   animation-duration: 3s; }
   .card-pelicula img {
     height: 280px; }
+  .card-pelicula .tooltip {
+    display: flex;
+    background: #ffffff;
+    box-shadow: 5px 5px 58px rgba(8, 8, 8, 0.28);
+    gap: 1rem;
+    width: 20rem;
+    transition: .3s ease all; }
+    .card-pelicula .tooltip .thumb {
+      width: 60%; }
+    .card-pelicula .tooltip .informacion-tooltip {
+      width: 40%; }
+    .card-pelicula .tooltip.activo {
+      opacity: 1 !important; }
   .card-pelicula .puntuacion {
     position: absolute;
     right: 0;
@@ -665,9 +676,10 @@ img {
   border-top: 1px solid; }
   .paginacion .contenedor-paginacion {
     margin-top: 2rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
     align-items: center;
-    gap: 1rem; }
+    gap: 0.7rem; }
     .paginacion .contenedor-paginacion a {
       font-size: 1.5rem;
       border: 1px solid #000;

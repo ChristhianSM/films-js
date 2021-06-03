@@ -3,9 +3,11 @@
 
     .contenedor-paginacion{
         margin-top: 2rem;
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
         align-items: center;
-        gap: 1rem;
+        gap: 0.7rem;
+        // flex-wrap: wrap;
 
         a{
             font-size: 1.5rem;

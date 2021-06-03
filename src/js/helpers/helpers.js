@@ -35,37 +35,48 @@ export function cerrarSesion() {
     }, 1000);
 }
 
-export function filtrarPorBusqueda(termino){
+export async function filtrarPorBusqueda(termino){
+    /* Arreglo que contendra las peliculas filtradas */
+    const peliculasPorBusqueda = [];
+    
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+    if (termino === "") {
+        return;
+    }
     /* Inicializamos el objeto ui */
     const ui = new UI();
 
     const texto = termino.toLowerCase();
-    const peliculas = listaPeliculas.filter( pelicula => {
-        return (pelicula.nombre.toLowerCase()).indexOf(texto) !== -1
-    })
+    const datos = await consultandoBusquedaPorPalabra(texto)|| [];
     
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
-    if (peliculas.length > 0) {
+    if (datos.length > 0) {
         /* Buscamos si hay una alerta previa  */
         const alertaPrevia = document.querySelector('.alerta');
         if (alertaPrevia) {
             alertaPrevia.remove();
         }
         
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        resultadoFiltro.classList.add('display-block');
-        
-        const bloquePeliculas = document.querySelector('.peliculas');
-        bloquePeliculas.classList.add('display-none')
-        
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
+        datos.forEach( pelicula => {
+            const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+    
+            const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+            peliculasPorBusqueda.push(newPelicula);
+            
+            const resultadoFiltro = document.querySelector('.resultadoFiltro');
+            resultadoFiltro.classList.add('display-block');
+            
+            const bloquePeliculas = document.querySelector('.peliculas');
+            bloquePeliculas.classList.add('display-none')
+            
+            ui.limpiarHTML(contenedorFiltros);
+            ui.mostrarPeliculasHTML(peliculasPorBusqueda,contenedorFiltros);
+        })
 
     }else{
         ui.limpiarHTML(contenedorFiltros);
         const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro)
+        ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro);
     }
 }
 

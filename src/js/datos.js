@@ -1,3 +1,4 @@
+
 const listaPeliculas = [];
 
 class Pelicula{
@@ -41,14 +42,15 @@ class UI {
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
             cardPelicula.innerHTML = 
             `   <a href = "#">
-                    <img src = ${img} alt= ${nombre}>
+                    <figure>
+                        <img src = ${img} alt= ${nombre}>
+                    </figure>
                     <p class = "puntuacion"><span class="material-icons md-18">star</span>
                     ${puntuacion}</p> 
                     <div class = "informacion-pelicula">
                         <p class = "titulo-pelicula">${nombre}</p>
                         <p class = "year-pelicula">${year} </p>
                     </div>
-                    
                 </a>
                 
             `
@@ -94,23 +96,6 @@ class Usuario{
 traerPeliculas();
 async function traerPeliculas() {
     const peliculas = await obtenerPeliculas();
-    // const generos = await consultandoGeneros();
-    // console.log(generos);
-    // console.log(peliculas)
-    // // console.log(peliculas[0].genre_ids[0]);
-    // let nombreGeneros = [], generoUnitario = []
-    // for (let i = 0; i < peliculas.length; i++) {
-    //     for (let j = 0; j < peliculas[i].genre_ids.length; j++) {
-    //         for (let k = 0; k < generos.length; k++) {
-    //             if (peliculas[i].genre_ids[j] === generos[k].id) {
-    //                 generoUnitario = [...generoUnitario,generos[k].name];
-    //             }
-    //         }
-    //         nombreGeneros = [...nombreGeneros, generoUnitario]
-    //     }
-    // }
-
-    // console.log(generoUnitario)
 
     peliculas.forEach(pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language } = pelicula;
@@ -122,5 +107,5 @@ async function traerPeliculas() {
 }
 
     
-        
+
 

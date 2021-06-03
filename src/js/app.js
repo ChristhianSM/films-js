@@ -36,9 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarPeliculasActualizadas();
     mostrarUsuarioLogueado();
 
-    /* Funcion para iniciar nuestro generador */
-    totalPaginas = calcularPaginas(listaPeliculas.length);
-    imprimirPaginador();
+    // /* Funcion para iniciar nuestro generador */
+    // totalPaginas = calcularPaginas(listaPeliculas.length);
+    // imprimirPaginador();
+
+    crearPaginacion();
     
     /* Trae los generos */
     generarGeneros();
@@ -88,4 +90,43 @@ function imprimirPaginador(){
     }
 }
 
+
+async function crearPaginacion(){
+
+    const totalPeliculas = await obtenerPeliculas2();
+    const nPaginas = totalPeliculas.total_pages
+    console.log(nPaginas)
+
+    for (let i = 1; i <= nPaginas; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+        boton.onclick = async()=> {
+            let peliculasPorPagina = [];
+            const peliculas = await obtenerPeliculasPaginacion(i);
+            console.log(peliculas)
+
+            const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+            peliculas.forEach(pelicula => {
+                const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language } = pelicula;
+                const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+                peliculasPorPagina.push(newPelicula);
+
+                const resultadoFiltro = document.querySelector('.resultadoFiltro');
+                resultadoFiltro.classList.add('display-block');
+            
+                const bloquePeliculas = document.querySelector('.peliculas');
+                bloquePeliculas.classList.add('display-none')
+                
+                ui.limpiarHTML(contenedorFiltros);
+                ui.mostrarPeliculasHTML(peliculasPorPagina,contenedorFiltros);
+            })
+
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
 
