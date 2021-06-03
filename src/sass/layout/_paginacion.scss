@@ -7,17 +7,22 @@
         grid-template-columns: repeat(20, 1fr);
         align-items: center;
         gap: 0.7rem;
-        // flex-wrap: wrap;
+        width: 95%;
 
         a{
             font-size: 1.5rem;
             border: 1px solid $negro;
             border-radius: 5px;
             padding: 5px 15px;
-            background-color: #00000080;
+            background-color: #101010;
+            text-align: center;
 
             &:hover {
                 color: rgb(255, 6, 6);
+                background-color: #000000;
+            }
+
+            &.activo{
                 background-color: #000000;
             }
         }

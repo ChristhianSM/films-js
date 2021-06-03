@@ -1,3 +1,5 @@
+const ui = new UI();
+
 // Funcion que muestra Si hay usuario logueado
 export function mostrarUsuarioLogueado(){
     const usuarioLogueado = JSON.parse(localStorage.getItem('UsuarioActual'))|| null;
@@ -35,43 +37,92 @@ export function cerrarSesion() {
     }, 1000);
 }
 
+export async function mostrarGenerosHtml(generos, localizacion) {
+    for (let i = 0; i < generos.length; i++) {
+
+        const  li = document.createElement('LI');
+        const a = document.createElement('A');
+        a.href = '#'
+        a.classList.add(`btn${generos[i].name.replace(/\s+/g, '')}`);
+        a.innerHTML = 
+            `&#9205;${generos[i].name}
+            <span class="total${generos[i].name}"></span>
+            `
+        a.onclick = (e) => {
+            /* Agregar activo al link que se apreto click */
+            const claseActivo = document.querySelector('.activo');
+            const claseActivoYear = document.querySelector('.activo-year');
+            if (claseActivo ) {
+                claseActivo.classList.remove('activo');
+            }else if (claseActivoYear) {
+                claseActivoYear.classList.remove('activo-year');
+            }
+            e.target.classList.add('activo');
+            filtrarPelicula(generos[i])
+        };
+
+        li.appendChild(a);
+        
+        localizacion.appendChild(li);
+    }
+}
+
+async function filtrarPelicula(filtro){
+
+    const peliculasPorGenero = [];
+    // const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+    const datos = await consultandoPeliculasPorGeneros(filtro.id);
+    const {results, total_pages} = datos;
+    recorrerArreglo(results, peliculasPorGenero);
+    crearPaginacionFiltro(total_pages, filtro);
+}
+
+/* Funcion que realiza el recorrido de un arreglo de peliculas y genera un nuevo objeto */
+export function recorrerArreglo(datos, arregloNuevo){
+
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+    datos.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        arregloNuevo.push(newPelicula);
+        
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        resultadoFiltro.classList.add('display-block');
+        
+        const bloquePeliculas = document.querySelector('.peliculas');
+        bloquePeliculas.classList.add('display-none')
+        
+        ui.limpiarHTML(contenedorFiltros);
+        ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
+    })
+}
+
 export async function filtrarPorBusqueda(termino){
     /* Arreglo que contendra las peliculas filtradas */
     const peliculasPorBusqueda = [];
     
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
+    
     if (termino === "") {
         return;
     }
-    /* Inicializamos el objeto ui */
-    const ui = new UI();
-
     const texto = termino.toLowerCase();
     const datos = await consultandoBusquedaPorPalabra(texto)|| [];
+
+    const {results,total_pages } = datos /* Extraemos los resultados y el total de paginas para realizar la paginacion */
     
-    if (datos.length > 0) {
+    if (results.length > 0) {
         /* Buscamos si hay una alerta previa  */
         const alertaPrevia = document.querySelector('.alerta');
         if (alertaPrevia) {
             alertaPrevia.remove();
         }
         
-        datos.forEach( pelicula => {
-            const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
-    
-            const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-            peliculasPorBusqueda.push(newPelicula);
-            
-            const resultadoFiltro = document.querySelector('.resultadoFiltro');
-            resultadoFiltro.classList.add('display-block');
-            
-            const bloquePeliculas = document.querySelector('.peliculas');
-            bloquePeliculas.classList.add('display-none')
-            
-            ui.limpiarHTML(contenedorFiltros);
-            ui.mostrarPeliculasHTML(peliculasPorBusqueda,contenedorFiltros);
-        })
+        recorrerArreglo(results, peliculasPorBusqueda);
+        crearPaginacionBusqueda(termino, total_pages)
 
     }else{
         ui.limpiarHTML(contenedorFiltros);
@@ -80,29 +131,82 @@ export async function filtrarPorBusqueda(termino){
     }
 }
 
-export function generarGeneros() {
-    const generos = ['Accion', 'Terror', 'Animacion', 'Aventura', 'Comedia', 'Documental', 'Familia', 'Misterio', 'Romance', 'Historia', 'Suspenso', 'C.Ficcion', 'Drama', 'Infantil', 'Crimen', 'Fantasia', 'Musica', 'Superheroes', 'Guerra', 'Crimen'];
-    const contenedorGenero = document.querySelector('.contenedor-generos');
+export async function crearPaginacion(total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
 
-    generos.forEach( genero => {
-        const  li = document.createElement('LI');
-        const p = document.createElement('p');
-        p.classList.add(`btn${genero}`);
-        p.innerHTML = 
-            `&#9205;${genero}
-            <span class="total${genero}"></span>
-            `
-        li.appendChild(p);
-        contenedorGenero.appendChild(li)
-    })
-}
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
 
+        boton.onclick = async()=> {
+            /* Mostrar en que pagina esta el usuario */
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
 
-/* Generador que registra la cantidad de elementos de acuerdo a las paginas */
-export function *crearPaginador(total){
-    for (let i = 1; i <= total; i++) {
-        yield   i
+            let peliculasPorPagina = [];
+            const peliculas = await obtenerPeliculasPaginacion(i);
+            recorrerArreglo(peliculas.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
     }
 }
 
-// export {mostrarUsuarioLogueado, cerrarSesion, filtrarPorBusqueda, generarGeneros, crearPaginador}
+export async function crearPaginacionBusqueda(query, total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+        boton.onclick = async()=> {
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+            
+            let peliculasPorPagina = [];
+            const peliculas = await obtenerPeliculasPaginacionFiltro(i,query);
+            console.log(peliculas)
+            recorrerArreglo(peliculas.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
+
+export async function crearPaginacionFiltro(total_pages, filtro){
+
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+        
+        boton.onclick = async()=> {
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+
+            let peliculasPorPagina = [];
+            const peliculas = await consultandoPeliculasPorGeneros(filtro.id,i);
+            recorrerArreglo(peliculas.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}

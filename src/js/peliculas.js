@@ -1,4 +1,4 @@
-import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado} from "./helpers/helpers.js";
+import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml, crearPaginacion} from "./helpers/helpers.js";
 
 // Variables
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
@@ -6,6 +6,9 @@ const buscarPelicula = document.querySelector('.buscarPelicula');
 
 // Boton Cerrar sesion
 const btnCerrarSesion = document.querySelector('.cerrar-sesion');
+
+// selector para la paginacion
+const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
 
 // Instanciamos el objeto UI
 const ui = new UI();
@@ -24,78 +27,27 @@ function eventosListener(){
 }
 
 // Eventos
-document.addEventListener('DOMContentLoaded',  async() => {
-    // mostrarCantidadPeliculas();
+document.addEventListener('DOMContentLoaded',  () => {
     mostrarUsuarioLogueado();
-    await generarGeneros();
+    mostrarGeneros();
     generarAnnosLanzamiento();
     ultimasPeliculasActualizadas();
+    
+    paginacion();
 })
 
 function mostrarPeliculasActualizadas(){
     ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
 }
 
-async function generarGeneros() {
+async function mostrarGeneros() {
     const menuGenero = document.querySelector('.menu-genero');
     const contenedorGenero = document.querySelector('.contenedor-generos');
     
     const generos = await consultandoGeneros();
+    mostrarGenerosHtml(generos, contenedorGenero); /* Mando los generos y mando la ubicacion donde se mostraran */
 
-    for (let i = 0; i < generos.length; i++) {
-
-        const  li = document.createElement('LI');
-        const a = document.createElement('A');
-        a.href = '#'
-        a.classList.add(`btn${generos[i].name.replace(/\s+/g, '')}`);
-        a.innerHTML = 
-            `&#9205;${generos[i].name}
-            <span class="total${generos[i].name}"></span>
-            `
-        a.onclick = (e) => {
-            /* Agregar activo al link que se apreto click */
-            const claseActivo = document.querySelector('.activo');
-            const claseActivoYear = document.querySelector('.activo-year');
-            if (claseActivo ) {
-                claseActivo.classList.remove('activo');
-            }else if (claseActivoYear) {
-                claseActivoYear.classList.remove('activo-year');
-            }
-            e.target.classList.add('activo');
-            filtrarPelicula(generos[i])
-        };
-
-        li.appendChild(a);
-        
-        menuGenero.appendChild(li);
-    }
-    for (let i = 0; i < generos.length; i++) {
-
-        const  li = document.createElement('LI');
-        const a = document.createElement('A');
-        a.href = '#'
-        a.classList.add(`btn${generos[i].name.replace(/\s+/g, '')}`);
-        a.innerHTML = 
-            `&#9205;${generos[i].name}
-            <span class="total${generos[i].name}"></span>
-            `
-        a.onclick = (e) => {
-            /* Agregar activo al link que se apreto click */
-            const claseActivo = document.querySelector('.activo');
-            const claseActivoYear = document.querySelector('.activo-year');
-            if (claseActivo ) {
-                claseActivo.classList.remove('activo');
-            }else if (claseActivoYear) {
-                claseActivoYear.classList.remove('activo-year');
-            }
-            e.target.classList.add('activo');
-            filtrarPelicula(generos[i])
-        };
-
-        li.appendChild(a);
-        
-        contenedorGenero.appendChild(li);
-    }
+    mostrarGenerosHtml(generos, menuGenero); /* Mando los generos y mando la ubicacion donde se mostraran */
 }
 
 function generarAnnosLanzamiento() {
@@ -157,54 +109,11 @@ function filtrarYear(year){
     ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
 }
 
-function mostrarCantidadPeliculas(){
-    const genero = {
-        accion : "Accion",
-        terror : 'Terror',
-        animacion: 'Animacion'
-    }
-    
-    const cantidadTerror = listaPeliculas.filter( pelicula => {
-        return pelicula.genero === genero.terror;
-    }).length
+async function paginacion() {
+    const datos = await obtenerPeliculasPaginacion();
+    const {results, total_pages} = datos;
 
-    ui.mostrarCantidadPeliculasHTML(cantidadTerror,totalTerror )
-    const cantidadAnimacion = listaPeliculas.filter( pelicula => {
-        return pelicula.genero === genero.animacion;
-    }).length
-
-    ui.mostrarCantidadPeliculasHTML(cantidadAnimacion,totalAnimacion )
-    const cantidadAccion = listaPeliculas.filter( pelicula => {
-        return pelicula.genero === genero.accion;
-    }).length
-    ui.mostrarCantidadPeliculasHTML(cantidadAccion, totalAccion)
-
-
+    crearPaginacion( total_pages);
 }
-
-async function filtrarPelicula(filtro){
-    console.log(filtro.id)
-    const peliculasPorGenero = [];
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
-    const datos = await consultandoPeliculasPorGeneros(filtro.id);
-    console.log(datos)
-    datos.forEach( pelicula => {
-        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
-
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-        peliculasPorGenero.push(newPelicula);
-        
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        resultadoFiltro.classList.add('display-block');
-        
-        const bloquePeliculas = document.querySelector('.peliculas');
-        bloquePeliculas.classList.add('display-none')
-        
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(peliculasPorGenero,contenedorFiltros);
-    })
-}
-
 
 

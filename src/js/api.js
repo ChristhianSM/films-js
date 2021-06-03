@@ -8,11 +8,16 @@ async function obtenerPeliculas(){
     return datos.results
 }
 
-async function obtenerPeliculasPaginacion(pagina){
-    console.log(pagina)
+async function obtenerPeliculasPaginacion(pagina = 1){
     const respuesta = await fetch(`${URL_BASE}/movie/now_playing?api_key=${API_KEY}&page=${pagina}`);
     const datos = await respuesta.json();
-    return datos.results
+    return datos
+}
+
+async function obtenerPeliculasPaginacionFiltro(pagina, query){
+    const respuesta = await fetch(`http://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&page=${pagina}&query= ${query}`);
+    const datos = await respuesta.json();
+    return datos
 }
 
 async function consultandoGeneros(){
@@ -26,18 +31,17 @@ async function consultandoGeneros(){
 async function consultandoBusquedaPorPalabra(terminoBusqueda) {
     const respuesta = await fetch(`http://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query= ${terminoBusqueda}`);
     const datos = await respuesta.json();
-    return datos.results
+    return datos
 }
 
-async function consultandoPeliculasPorGeneros(generos){
-    const respuesta = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres= ${generos}`);
+async function consultandoPeliculasPorGeneros(generos, page = 1){
+    const respuesta = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${generos}&page=${page}`);
     const datos = await respuesta.json();
-    return datos.results
+    return datos
 }
 
 
 async function obtenerPeliculas2(){
-
     const respuesta = await fetch(`${URL_BASE}/movie/now_playing?api_key=${API_KEY}&page=2`);
     const datos = await respuesta.json();
     return datos
