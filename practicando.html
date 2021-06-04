@@ -1,33 +1,101 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Demo paginacion</title>
+    <script src="jquery-2.0.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var $first = $(".first");
+            // var $first = document.querySelector(".first")
+            var i = 0;
+            $(".prev").click(function () {
+                ++i;
+                if ($('#outer div').length / 2 < i) {
+                    i = 0;
+                    $('#outer .first').css('background', 'blue');
+                    $first = $(".first");                   
+                } else {
+                    $first = $first.prev();
+                    $("#outer div").css("background", "green");
+                    $first.css("background", "blue");
+                }
+            });
+            $(".next").click(function () {
+                ++i;
+                if ($('#outer div').length / 2 < i) {
+                    i = 0;
+                    $('#outer .first').css('background', 'blue');
+                    $first = $(".first");
+                } else {
+                    $first = $first.next();
+                    $("#outer div").css("background", "green");
+                    $first.css("background", "blue");
+                }
+            });
+        });
+    </script>
     <style>
-        a{
-            display: flex;
+        #outer div {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 1px 1px 1px #999;
+            font-style: oblique;
+            text-align: center;
+            float: left;
+            background: green;
+        }
+
+        #outer .first {
+            background: blue;
+        }
+
+        .prev, .next {
+            font-weight: bold;
+            font-size:30px;
+            padding:10px;
+            cursor:pointer;
+        }
+
+        #container {
+            text-align: center;
+            width: 50%;
+            margin-left: 25%;
         }
     </style>
 </head>
 <body>
-    
-    <a href = "#">
-        <figure id="mayButton">
-            <img src = "./src/img/alma_oscura.jpg" alt="">
-        </figure>
-
-        <div class = "informacion-pelicula">
-            <p class = "titulo-pelicula">Alma Oscura</p>
-            <p class = "year-pelicula">2020 </p>
+    <div id="container">
+        <div id="outer">
+            <div>-6</div>
+            <div>-5</div>
+            <div>-4</div>
+            <div>-3</div>
+            <div>-2</div>
+            <div>-1</div>
+            <div class="first">0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
         </div>
-    </a>
+        <div>
+            <table>
+                <tr>
+                    <td class="prev" title="Previous"><<<</td>
+                    <td class="next" title="Next">>>></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <!-- Development -->
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-
-    <script src="./practicando.js"></script>
+    
 </body>
 </html>

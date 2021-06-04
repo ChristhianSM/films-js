@@ -40,9 +40,8 @@ async function consultandoPeliculasPorGeneros(generos, page = 1){
     return datos
 }
 
-
-async function obtenerPeliculas2(){
-    const respuesta = await fetch(`${URL_BASE}/movie/now_playing?api_key=${API_KEY}&page=2`);
+async function obtenerPeliculasPorFechas(fechaInicial, fechaFinal, page = 1){
+    const respuesta = await fetch(`${URL_BASE}/discover/movie?api_key=${API_KEY}&primary_release_date.lte=${fechaFinal}&primary_release_date.gte=${fechaInicial}&page=${page}`);
     const datos = await respuesta.json();
     return datos
 }

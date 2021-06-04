@@ -1,4 +1,4 @@
-import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml, crearPaginacion} from "./helpers/helpers.js";
+import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml,recorrerArreglo, crearPaginacion, crearPaginacionFiltro, crearPaginacionFecha} from "./helpers/helpers.js";
 
 // Variables
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
@@ -10,6 +10,9 @@ const btnCerrarSesion = document.querySelector('.cerrar-sesion');
 // selector para la paginacion
 const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
 
+// Seleccionar los button de busqueda de fechas
+const btnBuscarFecha = document.querySelector('.btn-buscar-fecha');
+
 // Instanciamos el objeto UI
 const ui = new UI();
 
@@ -19,6 +22,12 @@ function eventosListener(){
     buscarPelicula.addEventListener('keyup', (e) => {
         filtrarPorBusqueda(e.target.value)
     })
+
+    btnBuscarFecha.addEventListener('click', () => {
+        const fechaInicial = document.querySelector('#fecha-inicial').value;
+        const fechaFinal = document.querySelector('#fecha-final').value;
+        filtrarPorFecha(fechaInicial, fechaFinal)
+    } )
 
     mostrarPeliculasActualizadas();
 
@@ -30,10 +39,10 @@ function eventosListener(){
 document.addEventListener('DOMContentLoaded',  () => {
     mostrarUsuarioLogueado();
     mostrarGeneros();
-    generarAnnosLanzamiento();
     ultimasPeliculasActualizadas();
-    
     paginacion();
+
+    obtenerFechasEnTiempoReal();
 })
 
 function mostrarPeliculasActualizadas(){
@@ -50,30 +59,6 @@ async function mostrarGeneros() {
     mostrarGenerosHtml(generos, menuGenero); /* Mando los generos y mando la ubicacion donde se mostraran */
 }
 
-function generarAnnosLanzamiento() {
-    const fechaActual = new Date().getFullYear();
-    const enlaceAnnos = document.querySelector('.enlace-annos');
-    
-    for (let i = fechaActual; i > 1990; i--) {
-        const a = document.createElement('A');
-        a.textContent = i;
-        a.href = "#";
-        a.onclick = (e) => {
-             /* Agregar activo al link que se apreto click */
-             const claseActivoYear = document.querySelector('.activo-year');
-             const claseActivo = document.querySelector('.activo');
-             if (claseActivo ) {
-                claseActivo.classList.remove('activo');
-            }else if (claseActivoYear) {
-                claseActivoYear.classList.remove('activo-year');
-            }
-             e.target.classList.add('activo-year');
-            filtrarYear(i);
-        };
-        enlaceAnnos.appendChild(a)
-    }
-}
-
 function ultimasPeliculasActualizadas(){
     const contenedorUltimas = document.querySelector('.contenedor-ultimas');
     listaPeliculas.forEach( pelicula => {
@@ -86,27 +71,40 @@ function ultimasPeliculasActualizadas(){
             contenedorImagen.appendChild(img);
             contenedorUltimas.appendChild(contenedorImagen);
         }
-
-        
-
     })
 }
 
-function filtrarYear(year){
-    const peliculas = listaPeliculas.filter(pelicula => {
-        return pelicula.year === year;
-    })
+async function filtrarPorFecha( fechaInicial, fechaFinal ){
+    const alertaPrevia = document.querySelector('.alerta');
+    console.log(alertaPrevia)
+    if (alertaPrevia) {
+        alertaPrevia.remove();
+    }
 
-    const resultadoFiltro = document.querySelector('.resultadoFiltro');
-    resultadoFiltro.classList.add('display-block');
+    const fechaInicialInput = document.querySelector('#fecha-inicial');
+
+    if (fechaInicial > fechaFinal) {
+        fechaInicialInput.style.background = "red";
+    }
+
+    const peliculas = await obtenerPeliculasPorFechas(fechaInicial, fechaFinal);
+    const {results, total_pages} = peliculas;
+    console.log(results.length)
     
-    const bloquePeliculas = document.querySelector('.peliculas');
-    bloquePeliculas.classList.add('display-none');
+    const resultadoFiltro = document.querySelector('.resultadoFiltro');
 
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+    if (results.length === 0) {
+        console.log(resultadoFiltro)
+        const contenedorFiltros = document.querySelector('.contenedor-filtros')
+        ui.limpiarHTML(contenedorFiltros);
+        ui.limpiarHTML(document.querySelector('.contenedor-paginacion'));
+        ui.mostrarMensajes('No existen peliculas en el rango indicado, intente con otras fechas', 'error', resultadoFiltro);
+        return;
+    }
 
-    ui.limpiarHTML(contenedorFiltros);
-    ui.mostrarPeliculasHTML(peliculas,contenedorFiltros);
+    const peliculasPorFechas = [];
+    recorrerArreglo(results, peliculasPorFechas);
+    crearPaginacionFecha(fechaInicial, fechaInicial, total_pages);
 }
 
 async function paginacion() {
@@ -114,6 +112,73 @@ async function paginacion() {
     const {results, total_pages} = datos;
 
     crearPaginacion( total_pages);
+}
+
+function obtenerFechasEnTiempoReal(){
+    const fechaInicial = document.querySelector('#fecha-inicial');
+    const fechaFinal = document.querySelector('#fecha-final');
+
+    // const fechaActual = new Date();
+    // const diaActual = fechaActual.getDate();
+    // const mesActual = fechaActual.getMonth()+1;
+    // const yearActual = fechaActual.getFullYear();
+
+    // let formatoActual;
+    // if (diaActual < 10 && mesActual < 10) {
+    //     formatoActual = `${yearActual}-0${mesActual}-0${diaActual}`
+    // }else if (day < 10) {
+    //     formatoActual = `${yearActual}-${mesActual}-0${diaActual}`
+    // }else{
+    //     formatoActual = `${yearActual}-0${mesActual}-${diaActual}`
+    // }
+
+    /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
+    // fechaFinal.value = formatoActual;
+    
+    fechaInicial.addEventListener('input', () => {
+        const fechaInicialDate = new Date(fechaInicial.value);
+        console.log("Dia : "+(fechaInicialDate.getDate()))
+        // Extraemos el formato AAAA-MM-DD
+        const year = fechaInicialDate.getFullYear();
+        const day = fechaInicialDate.getDate()+1;
+        const mounth = fechaInicialDate.getMonth()+1;
+
+        let formato;
+        if (day < 10 && mounth < 10) {
+            formato = `${year}-0${mounth}-0${day}`
+        }else if (day < 10) {
+            formato = `${year}-${mounth}-0${day}`
+        }else{
+            formato = `${year}-0${mounth}-${day}`
+        }
+
+        /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
+        fechaFinal.min = formato;
+        console.log(formato)
+    });
+
+    fechaFinal.addEventListener('input', () => {
+        const fechaFinalInput = new Date(fechaFinal.value);
+        console.log("Dia : "+(fechaFinalInput.getDate()))
+        // Extraemos el formato AAAA-MM-DD
+        const year = fechaFinalInput.getFullYear();
+        const day = fechaFinalInput.getDate()+1;
+        const mounth = fechaFinalInput.getMonth()+1;
+
+        let formato;
+        if (day < 10 && mounth < 10) {
+            formato = `${year}-0${mounth}-0${day}`
+        }else if (day < 10) {
+            formato = `${year}-${mounth}-0${day}`
+        }else{
+            formato = `${year}-0${mounth}-${day}`
+        }
+
+        /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
+        fechaInicial.max = formato;
+        console.log(formato)
+    });
+
 }
 
 

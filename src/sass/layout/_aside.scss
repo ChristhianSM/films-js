@@ -35,7 +35,6 @@
                 }
             }
         }
-
     }
 
     .annos-lanzamiento , 
@@ -50,29 +49,29 @@
             letter-spacing: 1px;
         }
 
-        .enlace-annos{
+        .fechas {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            grid-template-columns: 1fr 2fr;
+            margin-bottom: 1rem;
+            align-items: center;
 
-            @include tablet {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            a{
-                background-color: #0d0d0d;
-                display: inline-block;
+            label {
                 color: $blanco;
                 font-size: 1.5rem;
-                text-align: center;
-                padding: 5px 10px;
+            }
 
-                &:hover {
-                    background-color: red;
-                    cursor: pointer;
-                }
+            input {
+                background-color: #ffffff14;
+                font-size: 1.3rem;
+                padding: 5px;
+                color: $blanco;
+                border: none;
+                outline: none;
+                text-align: center;
+                border-radius: 5px;
             }
         }
+
 
         .contenedor-ultimas {
             display: grid;

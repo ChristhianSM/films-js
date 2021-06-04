@@ -78,28 +78,6 @@ async function filtrarPelicula(filtro){
     crearPaginacionFiltro(total_pages, filtro);
 }
 
-/* Funcion que realiza el recorrido de un arreglo de peliculas y genera un nuevo objeto */
-export function recorrerArreglo(datos, arregloNuevo){
-
-    const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
-    datos.forEach( pelicula => {
-        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
-
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-        arregloNuevo.push(newPelicula);
-        
-        const resultadoFiltro = document.querySelector('.resultadoFiltro');
-        resultadoFiltro.classList.add('display-block');
-        
-        const bloquePeliculas = document.querySelector('.peliculas');
-        bloquePeliculas.classList.add('display-none')
-        
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
-    })
-}
-
 export async function filtrarPorBusqueda(termino){
     /* Arreglo que contendra las peliculas filtradas */
     const peliculasPorBusqueda = [];
@@ -129,6 +107,28 @@ export async function filtrarPorBusqueda(termino){
         const resultadoFiltro = document.querySelector('.resultadoFiltro');
         ui.mostrarMensajes('Pelicula no encontrada, ingrese otro termino de busqueda', 'error' , resultadoFiltro);
     }
+}
+
+/* Funcion que realiza el recorrido de un arreglo de peliculas y genera un nuevo objeto */
+export function recorrerArreglo(datos, arregloNuevo){
+
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+    datos.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        arregloNuevo.push(newPelicula);
+        
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        resultadoFiltro.classList.add('display-block');
+        
+        const bloquePeliculas = document.querySelector('.peliculas');
+        bloquePeliculas.classList.add('display-none')
+        
+        ui.limpiarHTML(contenedorFiltros);
+        ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
+    })
 }
 
 export async function crearPaginacion(total_pages){
@@ -185,7 +185,6 @@ export async function crearPaginacionBusqueda(query, total_pages){
 }
 
 export async function crearPaginacionFiltro(total_pages, filtro){
-
     const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
     contenedorPaginacion.innerHTML = "";
 
@@ -210,3 +209,30 @@ export async function crearPaginacionFiltro(total_pages, filtro){
         contenedorPaginacion.appendChild(boton);  
     }
 }
+
+export async function crearPaginacionFecha(fechaInicial, fechaFinal,total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+        
+        boton.onclick = async()=> {
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+
+            let peliculasPorPagina = [];
+            const peliculas = await obtenerPeliculasPorFechas(fechaInicial, fechaFinal, i);
+            recorrerArreglo(peliculas.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
+

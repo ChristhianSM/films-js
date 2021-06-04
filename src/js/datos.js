@@ -1,4 +1,3 @@
-
 const listaPeliculas = [];
 
 class Pelicula{
@@ -34,17 +33,27 @@ class Pelicula{
     } 
 }
 
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
 class UI {
+
     mostrarPeliculasHTML(peliculas, localizacion){
         peliculas.forEach( pelicula => {
             const {nombre, genero, year, descripcion, img,puntuacion} = pelicula
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
+
+            /* Scripting */
+            const a = document.createElement('A');
+
             cardPelicula.innerHTML = 
-            `   <a href = "#">
-                    <figure>
-                        <img src = ${img} alt= ${nombre}>
-                    </figure>
+            `<a href = "#" data-bs-toggle="tooltip" data-bs-html="true" 
+                    title="<img src = ${img} >"
+                >
+                    <img src = ${img} alt= ${nombre}>
                     <p class = "puntuacion"><span class="material-icons md-18">star</span>
                     ${puntuacion}</p> 
                     <div class = "informacion-pelicula">
