@@ -38,6 +38,7 @@
     }
 
     .annos-lanzamiento , 
+    .idioma,
     .ultimas-actualizaciones{
 
         margin-top: $separacion/2 + 1rem;
@@ -69,6 +70,22 @@
                 outline: none;
                 text-align: center;
                 border-radius: 5px;
+            }
+        }
+
+        #idiomas {
+            background-color: #ffffff14;
+            color: $blanco;
+            width: 100%;
+            padding: 5px ;
+            font-size: 1.4rem;
+            // border: none;
+            outline: none;
+            border-radius: 5px;
+
+            option{
+                color: black;
+                background: #ffffff14;
             }
         }
 

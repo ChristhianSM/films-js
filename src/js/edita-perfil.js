@@ -1,3 +1,4 @@
+import {cerrarSesion, mostrarUsuarioLogueado} from './helpers/helpers.js'
 let usuarios, usuarioActual;
 
 /* Variables */
@@ -119,3 +120,9 @@ function actualizarContrasenna(){
 //         window.location = "./index.html"
 //     }, 1000);
 // }
+
+
+// const inputFoto = document.querySelector('#inputGroupFile02');
+// inputFoto.addEventListener('change', (e) => {
+//     console.log(e.target.value)
+// })

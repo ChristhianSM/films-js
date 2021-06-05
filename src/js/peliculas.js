@@ -1,4 +1,4 @@
-import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml,recorrerArreglo, crearPaginacion, crearPaginacionFiltro, crearPaginacionFecha} from "./helpers/helpers.js";
+import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml,recorrerArreglo, crearPaginacion, crearPaginacionFiltro, crearPaginacionFecha, crearPaginacionIdiomas} from "./helpers/helpers.js";
 
 // Variables
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
@@ -24,6 +24,10 @@ function eventosListener(){
     })
 
     btnBuscarFecha.addEventListener('click', () => {
+        const activo = document.querySelector('.activo');
+        if (activo) {
+            activo.classList.remove('activo')
+        }
         const fechaInicial = document.querySelector('#fecha-inicial').value;
         const fechaFinal = document.querySelector('#fecha-final').value;
         filtrarPorFecha(fechaInicial, fechaFinal)
@@ -39,10 +43,15 @@ function eventosListener(){
 document.addEventListener('DOMContentLoaded',  () => {
     mostrarUsuarioLogueado();
     mostrarGeneros();
+    obtenerFechasEnTiempoReal();
+
+    /* Idiomas */
+    mostrarIdiomas();
+    obtenerIdiomas();
+
     ultimasPeliculasActualizadas();
     paginacion();
 
-    obtenerFechasEnTiempoReal();
 })
 
 function mostrarPeliculasActualizadas(){
@@ -57,26 +66,11 @@ async function mostrarGeneros() {
     mostrarGenerosHtml(generos, contenedorGenero); /* Mando los generos y mando la ubicacion donde se mostraran */
 
     mostrarGenerosHtml(generos, menuGenero); /* Mando los generos y mando la ubicacion donde se mostraran */
-}
 
-function ultimasPeliculasActualizadas(){
-    const contenedorUltimas = document.querySelector('.contenedor-ultimas');
-    listaPeliculas.forEach( pelicula => {
-        if (pelicula.estreno) {
-            const contenedorImagen = document.createElement('A');
-            contenedorImagen.href = "#"
-            const img = document.createElement('IMG');
-            img.classList.add('imagen')
-            img.src = `${pelicula.img}`
-            contenedorImagen.appendChild(img);
-            contenedorUltimas.appendChild(contenedorImagen);
-        }
-    })
 }
 
 async function filtrarPorFecha( fechaInicial, fechaFinal ){
     const alertaPrevia = document.querySelector('.alerta');
-    console.log(alertaPrevia)
     if (alertaPrevia) {
         alertaPrevia.remove();
     }
@@ -106,6 +100,65 @@ async function filtrarPorFecha( fechaInicial, fechaFinal ){
     recorrerArreglo(results, peliculasPorFechas);
     crearPaginacionFecha(fechaInicial, fechaInicial, total_pages);
 }
+
+async function mostrarIdiomas(){
+    let listadoIdiomas = [];
+    const idiomas = await obtenerIdiomasAPI();
+    
+    // Verificar los idiomas que tienen nombre
+    idiomas.forEach( idioma => {
+        const {iso_639_1, name, english_name} = idioma;
+        if (name !== "") {
+            const objetoIdioma = {
+                name,
+                iso_639_1,
+                english_name
+            }
+            listadoIdiomas = [...listadoIdiomas, objetoIdioma]
+        }
+    })
+
+    const idiomaInput = document.querySelector('#idiomas');
+    
+    listadoIdiomas.forEach( idioma => {
+        const {iso_639_1, name, english_name} = idioma;
+        const option = document.createElement('option');
+        option.textContent = name;
+        option.value = iso_639_1;
+        idiomaInput.appendChild(option)
+    })
+}
+
+function obtenerIdiomas(){
+
+    idiomas.addEventListener('change', async (e)=> {
+        const peliculasPorIdiomas = [];
+        const idiomaSeleccionado = e.target.value;
+        console.log(idiomaSeleccionado)
+        const peliculas = await obtenerPeliculasPorIdioma(idiomaSeleccionado);
+        const {results, total_pages} = peliculas
+        console.log(results)
+
+        recorrerArreglo(results ,peliculasPorIdiomas);
+        crearPaginacionIdiomas( results, total_pages);
+    })
+}
+
+function ultimasPeliculasActualizadas(){
+    const contenedorUltimas = document.querySelector('.contenedor-ultimas');
+    listaPeliculas.forEach( pelicula => {
+        if (pelicula.estreno) {
+            const contenedorImagen = document.createElement('A');
+            contenedorImagen.href = "#"
+            const img = document.createElement('IMG');
+            img.classList.add('imagen')
+            img.src = `${pelicula.img}`
+            contenedorImagen.appendChild(img);
+            contenedorUltimas.appendChild(contenedorImagen);
+        }
+    })
+}
+
 
 async function paginacion() {
     const datos = await obtenerPeliculasPaginacion();

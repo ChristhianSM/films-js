@@ -735,25 +735,30 @@ img {
           color: red;
           cursor: pointer; }
   .aside .annos-lanzamiento,
+  .aside .idioma,
   .aside .ultimas-actualizaciones {
     margin-top: 3.5rem; }
     .aside .annos-lanzamiento h2,
+    .aside .idioma h2,
     .aside .ultimas-actualizaciones h2 {
       font-size: 1.6rem;
       font-weight: 500;
       margin-bottom: 1.25rem;
       letter-spacing: 1px; }
     .aside .annos-lanzamiento .fechas,
+    .aside .idioma .fechas,
     .aside .ultimas-actualizaciones .fechas {
       display: grid;
       grid-template-columns: 1fr 2fr;
       margin-bottom: 1rem;
       align-items: center; }
       .aside .annos-lanzamiento .fechas label,
+      .aside .idioma .fechas label,
       .aside .ultimas-actualizaciones .fechas label {
         color: #ffffff;
         font-size: 1.5rem; }
       .aside .annos-lanzamiento .fechas input,
+      .aside .idioma .fechas input,
       .aside .ultimas-actualizaciones .fechas input {
         background-color: #ffffff14;
         font-size: 1.3rem;
@@ -763,12 +768,29 @@ img {
         outline: none;
         text-align: center;
         border-radius: 5px; }
+    .aside .annos-lanzamiento #idiomas,
+    .aside .idioma #idiomas,
+    .aside .ultimas-actualizaciones #idiomas {
+      background-color: #ffffff14;
+      color: #ffffff;
+      width: 100%;
+      padding: 5px;
+      font-size: 1.4rem;
+      outline: none;
+      border-radius: 5px; }
+      .aside .annos-lanzamiento #idiomas option,
+      .aside .idioma #idiomas option,
+      .aside .ultimas-actualizaciones #idiomas option {
+        color: black;
+        background: ffffff14; }
     .aside .annos-lanzamiento .contenedor-ultimas,
+    .aside .idioma .contenedor-ultimas,
     .aside .ultimas-actualizaciones .contenedor-ultimas {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem; }
       .aside .annos-lanzamiento .contenedor-ultimas .imagen,
+      .aside .idioma .contenedor-ultimas .imagen,
       .aside .ultimas-actualizaciones .contenedor-ultimas .imagen {
         height: 120px;
         object-fit: cover; }

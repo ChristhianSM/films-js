@@ -45,3 +45,16 @@ async function obtenerPeliculasPorFechas(fechaInicial, fechaFinal, page = 1){
     const datos = await respuesta.json();
     return datos
 }
+
+async function obtenerIdiomasAPI(){
+    const respuesta = await fetch(`${URL_BASE}/configuration/languages?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+async function obtenerPeliculasPorIdioma(idioma, page=1){
+    const respuesta = await fetch(`${URL_BASE}/discover/movie?api_key=${API_KEY}&language=${idioma}&page=${page}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
