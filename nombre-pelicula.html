@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmsChris </title>
+    <!-- Animaciones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Estilos css -->
+    <link rel="stylesheet" href="/build/css/app.css">
+  </head>
+  
+  <body>
+
+    <header class="header">
+        <div class="contenedor contenedor-navegacion">
+            <div class="navegacion">
+                <h1><span class="material-icons">
+                    theaters
+                    </span>FilmsChris</h1>
+                <div class="navegacionPrincipal">
+                    <a href="./index.html">Inicio</a>
+                    <a href="">Series</a>
+                    <a href="">En estreno</a>
+                    <a href="">Peliculas 2021</a>
+                </div>
+            </div>
+    
+            <div class="form-login">
+                <input type="text" placeholder="Nombre Pelicula" class="buscarPelicula display-none">
+                <a href="./login.html" class="btn-ingresar">Ingresar</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="nombre-pelicula">
+        <div class="contenedor-2 contenedor-pelicula">
+            <img src="" alt="" class="imagen-pelicula">
+            <div class="informacion">
+                <h2 class="titulo-pelicula"> <span class="year"></span></h2>
+                <div class="subtitulo-informacion">
+                    <p class="fecha-pelicula"></p>
+                    <p class="generos"></p>
+                    <p class="duracion"></p>
+                </div>
+                <div class="vista-general">
+                    <h3> Vista General</h3>
+                    <p class="tagline"></p>
+                    <p class="descripcion"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer footer-login">
+      <div class="contenedor">
+          <div class="redes">
+              <div>
+                  <h3>Mantente conectado</h3>
+                  <p>síganos en los sitios de redes sociales para obtener las últimas actualizaciones de películas, series de televisión y noticias</p>
+              </div>
+              <div class="contenedor-redes">
+                  <a href="#">
+                      <i class='bx bxl-facebook facebook'></i>
+                  </a>
+                  <a href="">
+                      <i class='bx bxl-twitter twitter' ></i>
+                  </a>
+                  <a href="">
+                      <i class='bx bxl-instagram instagram' ></i>
+                  </a>
+                  <a href="">
+                      <i class='bx bxl-youtube youtube' ></i>
+                  </a>
+                  <a href="">
+                      <i class='bx bxl-google-plus-circle google'></i>
+                  </a>
+              </div>
+          </div>
+          <div class="logo">
+              <a><span class="material-icons">
+                  theaters
+                  </span>FilmsChris
+              </a>
+          </div>
+      </div>
+    </footer>
+
+    <!-- Alertas -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./src/js/components/sweetAlert.js"></script>
+
+    <script src="/src/js/api.js"></script>
+    <script src="./src/js/nombre-pelicula.js" type="module"></script>
+
+  </body>
+</html>

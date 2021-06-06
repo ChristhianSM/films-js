@@ -42,7 +42,7 @@ class UI {
 
     mostrarPeliculasHTML(peliculas, localizacion){
         peliculas.forEach( pelicula => {
-            const {nombre, genero, year, descripcion, img,puntuacion} = pelicula
+            const {id, nombre, genero, year, descripcion, img,puntuacion} = pelicula
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
 
@@ -50,7 +50,7 @@ class UI {
             const a = document.createElement('A');
 
             cardPelicula.innerHTML = 
-            `<a href = "#" data-bs-toggle="tooltip" data-bs-html="true" 
+            `<a href = "./nombre-pelicula.html?id=${id}" data-bs-toggle="tooltip" data-bs-html="true" 
                     title="<img src = ${img} >"
                 >
                     <img src = ${img} alt= ${nombre}>

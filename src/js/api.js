@@ -58,3 +58,11 @@ async function obtenerPeliculasPorIdioma(idioma, page=1){
     return datos
 }
 
+
+
+/* Obtenemos datos de la pelicula */
+async function obtenerDatosPelicula(id){
+    const respuesta = await fetch(`${URL_BASE}/movie/${id}?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}

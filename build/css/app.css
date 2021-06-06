@@ -782,7 +782,7 @@ img {
       .aside .idioma #idiomas option,
       .aside .ultimas-actualizaciones #idiomas option {
         color: black;
-        background: ffffff14; }
+        background: #ffffff14; }
     .aside .annos-lanzamiento .contenedor-ultimas,
     .aside .idioma .contenedor-ultimas,
     .aside .ultimas-actualizaciones .contenedor-ultimas {
@@ -1009,6 +1009,27 @@ img {
     font-weight: 300; }
   .cambio-contrasenna input {
     height: 40px; }
+
+.nombre-pelicula {
+  padding: 8rem 0; }
+  .nombre-pelicula .contenedor-pelicula {
+    display: flex;
+    align-items: center;
+    gap: 2rem; }
+  .nombre-pelicula img {
+    width: 350px;
+    height: 500px;
+    border-radius: 5px;
+    object-fit: cover; }
+  .nombre-pelicula .informacion .titulo-pelicula {
+    font-size: 4rem;
+    margin-bottom: 1rem; }
+  .nombre-pelicula .informacion .subtitulo-informacion {
+    display: flex;
+    gap: 1rem; }
+    .nombre-pelicula .informacion .subtitulo-informacion p {
+      font-size: 1.6rem;
+      margin-bottom: 1.3rem; }
 
 .footer {
   background-color: #0f0f0f;

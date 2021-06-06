@@ -1,0 +1,34 @@
+.nombre-pelicula{
+    padding: 8rem 0;
+
+    .contenedor-pelicula {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    img {
+        width: 350px;
+        height: 500px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    .informacion{
+
+        .titulo-pelicula {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitulo-informacion{
+            display: flex;
+            gap: 1rem;
+
+            p{
+                font-size: 1.6rem;
+                margin-bottom: 1.3rem;
+            }
+        }
+    }
+}
