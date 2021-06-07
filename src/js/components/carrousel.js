@@ -1,4 +1,6 @@
 
+import { obtenerPeliculas} from '../api.js'
+
   document.addEventListener( 'DOMContentLoaded', function () {
     iniciarCarrouselConImagenes();
     new Splide( '#secondary-slider', {
@@ -31,10 +33,22 @@
     
   } );
 
-  function iniciarCarrouselConImagenes() {
+  async function iniciarCarrouselConImagenes() {
 
       const splideList = document.querySelector('.splide__list');
-      listaPeliculas.forEach(peli => {
+
+      const listadoPeliculas = [];
+      const peliculas = await obtenerPeliculas();
+    
+      peliculas.forEach( pelicula => {
+          const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+          const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+          listadoPeliculas.push(newPelicula);
+      })
+
+      
+      listadoPeliculas.forEach(peli => {
           const {img}  = peli;
 
           const li = document.createElement('li');

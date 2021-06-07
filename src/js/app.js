@@ -1,4 +1,14 @@
-import {mostrarUsuarioLogueado,cerrarSesion, filtrarPorBusqueda,mostrarGenerosHtml, crearPaginacion} from "./helpers/helpers.js";
+import {
+    mostrarUsuarioLogueado,
+    cerrarSesion, 
+    filtrarPorBusqueda,
+    mostrarGenerosHtml, 
+    crearPaginacion} from "./helpers/helpers.js";
+
+import {
+    consultandoGeneros, 
+    obtenerPeliculasPaginacion, 
+    obtenerPeliculas} from './api.js'
 
 // Variables de html
 const resultadoEstrenos = document.querySelector('.contenedor-estrenos');
@@ -17,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarPeliculasActualizadas();
     mostrarUsuarioLogueado();
 
-    
     /* Trae los generos */
     mostrarGeneros();
     
@@ -40,16 +49,36 @@ function eventosListener(){
 // Instanciamos el objeto UI
 const ui = new UI();
 
-function mostrarEstrenos(){
-    const estreno = listaPeliculas.filter( pelicula => {
+async function mostrarEstrenos(){
+    const listadoEstrenos = [];
+    const estrenos = await obtenerPeliculas();
+    
+    estrenos.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoEstrenos.push(newPelicula);
+    })
+
+    const estreno = listadoEstrenos.filter( pelicula => {
         return pelicula.estreno === true;
     })
 
     ui.mostrarPeliculasHTML(estreno, resultadoEstrenos);
 }
 
-function mostrarPeliculasActualizadas(){
-    ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
+async function mostrarPeliculasActualizadas(){
+    const listadoPeliculas = [];
+    const peliculas = await obtenerPeliculas();
+    
+    peliculas.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoPeliculas.push(newPelicula);
+    })
+
+    ui.mostrarPeliculasHTML(listadoPeliculas, resultadoPeliculasActualizadas);
 }
 
 async function mostrarGeneros(){

@@ -2,31 +2,35 @@ import {cerrarSesion, mostrarUsuarioLogueado} from './helpers/helpers.js'
 let usuarios, usuarioActual;
 
 /* Variables */
-const nombreInput = document.querySelector('#nombre');
-const paisInput = document.querySelector('#pais');
-const fechaInput = document.querySelector('#fechaNacimiento');
-const descripcionInput = document.querySelector('#descripcion');
+const nombreInput = $('#nombre');
+const paisInput = $('#pais');
+console.log(paisInput)
+const fechaInput = $('#fechaNacimiento');
+const descripcionInput = $('#descripcion');
 
-const btnGuardar = document.querySelector('.btn-guardar');
-const btnActualizar = document.querySelector('.btn-actualizar');
+const btnGuardar = $('.btn-guardar');
+const btnActualizar = $('.btn-actualizar');
+const btnCerrarSesion = $('.cerrar-sesion');
 
-document.addEventListener('DOMContentLoaded', () => {
+$(document).ready(function () {
     usuarios = JSON.parse(localStorage.getItem('Usuarios'));
     usuarioActual = JSON.parse(localStorage.getItem('UsuarioActual'));
+    // console.log(usuarioActual)
 
     cargarDatosUsuario();
 
     mostrarUsuarioLogueado();
+
+    $(btnCerrarSesion).click(cerrarSesion);
 })
 
-btnGuardar.addEventListener('click', () => {
+$(btnGuardar).click(function (e) { 
     guardarEdicion();
 })
 
-btnActualizar.addEventListener('click', () => {
+$(btnActualizar).click(function () { 
     actualizarContrasenna();
-})
-
+});
 
 function cargarDatosUsuario() {
     const usuario = usuarios.filter(user => {
@@ -35,17 +39,17 @@ function cargarDatosUsuario() {
         }
     });
     
-    nombreInput.value = usuario[0].nombre;
-    descripcionInput.value = usuario[0].descripcion;
-    paisInput.value = usuario[0].pais;
-    fechaInput.value = usuario[0].fecha;
+    nombreInput.val(usuario[0].nombre);
+    descripcionInput.val(usuario[0].descripcion);
+    paisInput.val(usuario[0].pais) ;
+    fechaInput.val(usuario[0].fecha); 
 }
 
 function guardarEdicion(){
-    usuarioActual.descripcion = descripcionInput.value;
-    usuarioActual.nombre = nombreInput.value;
-    usuarioActual.pais = paisInput.value;
-    usuarioActual.fecha = fechaInput.value;
+    usuarioActual.descripcion = descripcionInput.val();
+    usuarioActual.nombre = nombreInput.val();
+    usuarioActual.pais = paisInput.val();
+    usuarioActual.fecha = fechaInput.val();
 
     const usuariosNuevos = usuarios.map( user => {
         if (user.idUser === usuarioActual.idUser) {
@@ -60,15 +64,19 @@ function guardarEdicion(){
 }
 
 function actualizarContrasenna(){
-    const contrasennaActual = document.querySelector('#contrasenna-actual').value;
-    const nuevaContrasenna = document.querySelector('#nueva-contrasenna').value;
+    const contrasennaActual = $('#contrasenna-actual').val();
+    const nuevaContrasenna = $('#nueva-contrasenna').val();
+
     const usuario = usuarios.filter(user => {
         if (user.idUser === usuarioActual.idUser) {
             return user;
         }
     });
+
+    console.log(usuario)
     if (contrasennaActual === usuario[0].password) {
         usuario[0].password = nuevaContrasenna;
+
         usuarios = usuarios.map( user => {
             if (user.idUser === usuarioActual.idUser) {
                 return usuario[0];
@@ -76,53 +84,11 @@ function actualizarContrasenna(){
                 return user;
             }
         })
-    
+
+        localStorage.setItem('Usuarios', JSON.stringify(usuarios));
         mostrarAlertaExito('Contraseña cambiada satisfactoriamente :D')
     }else{
         mostrarAlerta('Contraseña Actual incorrecta', 'error', 'bottom-end');
         return;
     }
 }
-
-// // Funcion que muestra Si hay usuario logueado
-// function mostrarUsuarioLogueado(){
-//     const usuarioLogueado = JSON.parse(localStorage.getItem('UsuarioActual'))|| null;
-
-//     if (usuarioLogueado !== null) {
-//         const btnIngresar = document.querySelector('.btn-ingresar');
-//         btnIngresar.classList.add('display-none');
-        
-//         const usuario = document.querySelector('.usuario');
-//         const menuSesion = document.querySelector('.menu-sesion');
-//         menuSesion.classList.remove('display-none');
-//         menuSesion.classList.add('display-block');
-    
-//         usuario.innerHTML = 
-//         `
-//         <span class="material-icons">
-//             account_circle
-//         </span>
-//         ${usuarioLogueado.username}
-//         `
-//     }
-// }
-
-// function cerrarSesion() {
-//     localStorage.removeItem('UsuarioActual');
-//     const menuSesion = document.querySelector('.menu-sesion');
-//     menuSesion.classList.remove('display-block');
-//     menuSesion.classList.add('display-none');
-
-//     const btnIngresar = document.querySelector('.btn-ingresar');
-//     btnIngresar.classList.remove('display-none');
-
-//     setTimeout(() => {
-//         window.location = "./index.html"
-//     }, 1000);
-// }
-
-
-// const inputFoto = document.querySelector('#inputGroupFile02');
-// inputFoto.addEventListener('change', (e) => {
-//     console.log(e.target.value)
-// })

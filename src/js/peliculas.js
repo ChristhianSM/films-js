@@ -1,4 +1,21 @@
-import {cerrarSesion, filtrarPorBusqueda, mostrarUsuarioLogueado, mostrarGenerosHtml,recorrerArreglo, crearPaginacion, crearPaginacionFiltro, crearPaginacionFecha, crearPaginacionIdiomas} from "./helpers/helpers.js";
+import {cerrarSesion, 
+    filtrarPorBusqueda, 
+    mostrarUsuarioLogueado, 
+    mostrarGenerosHtml,
+    recorrerArreglo, 
+    crearPaginacion, 
+    crearPaginacionFiltro, 
+    crearPaginacionFecha, 
+    crearPaginacionIdiomas} from "./helpers/helpers.js";
+
+import {
+    obtenerPeliculas,
+    consultandoGeneros,
+    obtenerPeliculasPorFechas,
+    obtenerIdiomasAPI,
+    obtenerPeliculasPorIdioma,
+    obtenerPeliculasPaginacion,
+} from './api.js'
 
 // Variables
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
@@ -54,8 +71,18 @@ document.addEventListener('DOMContentLoaded',  () => {
 
 })
 
-function mostrarPeliculasActualizadas(){
-    ui.mostrarPeliculasHTML(listaPeliculas, resultadoPeliculasActualizadas);
+async function mostrarPeliculasActualizadas(){
+    const listadoPeliculas = [];
+    const peliculas = await obtenerPeliculas();
+    
+    peliculas.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoPeliculas.push(newPelicula);
+    })
+
+    ui.mostrarPeliculasHTML(listadoPeliculas, resultadoPeliculasActualizadas);
 }
 
 async function mostrarGeneros() {
@@ -77,8 +104,10 @@ async function filtrarPorFecha( fechaInicial, fechaFinal ){
 
     const fechaInicialInput = document.querySelector('#fecha-inicial');
 
-    if (fechaInicial > fechaFinal) {
-        fechaInicialInput.style.background = "red";
+    if (fechaFinal !== "") {
+        if (fechaInicial > fechaFinal) {
+            fechaInicialInput.style.background = "red";
+        }
     }
 
     const peliculas = await obtenerPeliculasPorFechas(fechaInicial, fechaFinal);
@@ -159,7 +188,6 @@ function ultimasPeliculasActualizadas(){
     })
 }
 
-
 async function paginacion() {
     const datos = await obtenerPeliculasPaginacion();
     const {results, total_pages} = datos;
@@ -172,9 +200,9 @@ function obtenerFechasEnTiempoReal(){
     const fechaFinal = document.querySelector('#fecha-final');
 
     // const fechaActual = new Date();
-    // const diaActual = fechaActual.getDate();
-    // const mesActual = fechaActual.getMonth()+1;
     // const yearActual = fechaActual.getFullYear();
+    // const mesActual = fechaActual.getMonth()+1;
+    // const diaActual = fechaActual.getDate();
 
     // let formatoActual;
     // if (diaActual < 10 && mesActual < 10) {
@@ -185,16 +213,16 @@ function obtenerFechasEnTiempoReal(){
     //     formatoActual = `${yearActual}-0${mesActual}-${diaActual}`
     // }
 
-    /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
-    // fechaFinal.value = formatoActual;
+    // /* Seteamos la fecha actual en el input*/
+    // fechaFinal = formatoActual;
     
     fechaInicial.addEventListener('input', () => {
         const fechaInicialDate = new Date(fechaInicial.value);
         console.log("Dia : "+(fechaInicialDate.getDate()))
         // Extraemos el formato AAAA-MM-DD
         const year = fechaInicialDate.getFullYear();
-        const day = fechaInicialDate.getDate()+1;
         const mounth = fechaInicialDate.getMonth()+1;
+        const day = fechaInicialDate.getDate()+1;
 
         let formato;
         if (day < 10 && mounth < 10) {

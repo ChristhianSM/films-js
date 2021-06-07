@@ -27,8 +27,8 @@ pagRegistro.addEventListener('click', () => {
 
 pagIniciarSesion.addEventListener('click', () => {
     register.classList.remove('display-block')
-    pagIniciarSesion.classList.remove('display-none')
-    pagIniciarSesion.classList.add('display-block');
+    // pagIniciarSesion.classList.remove('display-none')
+    // pagIniciarSesion.classList.add('display-block');
     login.classList.remove('display-none')
 })
 
@@ -59,16 +59,6 @@ function validarFormularioRegistro(e){
         mostrarAlerta("Contraseñas diferentes", 'error', 'bottom-end');
         return
     }
-
-    // const persona = {
-    //     correoRegistro : correoRegistro.value,
-    //     usernameRegistro : usernameRegistro.value,
-    //     passwordRegistro : passwordRegistro.value,
-    //     nombre: '',
-    //     pais: '',
-    //     fechaNacimiento: '',
-    //     descripcion : ''
-    // }
 
     /* Creamos una instancia de Usuarios */
     const newUsuario = new Usuario(idUser, usernameRegistro.value, correoRegistro.value, passwordRegistro.value);

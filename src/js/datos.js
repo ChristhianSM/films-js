@@ -102,18 +102,6 @@ class Usuario{
     }
 }
 
-traerPeliculas();
-async function traerPeliculas() {
-    const peliculas = await obtenerPeliculas();
-
-    peliculas.forEach(pelicula => {
-        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language } = pelicula;
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-        listaPeliculas.push(newPelicula);
-    })
-
-    // console.log(listaPeliculas)
-}
 
     
 

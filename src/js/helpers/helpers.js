@@ -1,3 +1,11 @@
+import {consultandoBusquedaPorPalabra,
+    consultandoPeliculasPorGeneros,
+    obtenerPeliculasPaginacion,
+    obtenerPeliculasPaginacionFiltro,
+    obtenerPeliculasPorFechas,
+    obtenerPeliculasPorIdioma
+} from '../api.js'
+
 const ui = new UI();
 
 // Funcion que muestra Si hay usuario logueado
@@ -75,8 +83,20 @@ export async function filtrarPorBusqueda(termino){
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
     
     if (termino === "") {
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        const resultadoPeliculas = document.querySelector('.peliculas');
+
+        resultadoFiltro.classList.remove('display-block');
+        resultadoPeliculas.classList.remove('display-none');
+
+        const datos = await obtenerPeliculasPaginacion();
+        const {total_pages} = datos;
+
+        crearPaginacion( total_pages);
+
         return;
     }
+
     const texto = termino.toLowerCase();
     const datos = await consultandoBusquedaPorPalabra(texto)|| [];
 
