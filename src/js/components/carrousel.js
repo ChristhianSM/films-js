@@ -1,8 +1,23 @@
 
 import { obtenerPeliculas} from '../api.js'
 
-  document.addEventListener( 'DOMContentLoaded', function () {
-    iniciarCarrouselConImagenes();
+
+
+
+  document.addEventListener( 'DOMContentLoaded', async function () {
+
+    const listadoPeliculas = [];
+      const peliculas = await obtenerPeliculas();
+    
+      peliculas.forEach( pelicula => {
+          const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+          const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+          listadoPeliculas.push(newPelicula);
+      })
+
+
+    iniciarCarrouselConImagenes(listadoPeliculas);
     new Splide( '#secondary-slider', {
       fixedWidth : 230,
       height     : 250,
@@ -33,21 +48,10 @@ import { obtenerPeliculas} from '../api.js'
     
   } );
 
-  async function iniciarCarrouselConImagenes() {
+  async function iniciarCarrouselConImagenes(listadoPeliculas) {
 
       const splideList = document.querySelector('.splide__list');
 
-      const listadoPeliculas = [];
-      const peliculas = await obtenerPeliculas();
-    
-      peliculas.forEach( pelicula => {
-          const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
-
-          const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-          listadoPeliculas.push(newPelicula);
-      })
-
-      
       listadoPeliculas.forEach(peli => {
           const {img}  = peli;
 
