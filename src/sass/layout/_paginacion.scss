@@ -26,5 +26,13 @@
                 background-color: #000000;
             }
         }
+
+        @include tablet {
+            display: none;
+        }
+
+        @include desktop {
+            grid-template-columns: repeat(15, 1fr);
+        }
     }
 }

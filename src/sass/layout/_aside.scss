@@ -3,6 +3,10 @@
     padding-left: 10px;
     border-left: 1px solid #ffffff14;
 
+    @include telefono {
+        display: none;
+    }
+
     .generos{
         h2{
             font-size: 1.6rem;

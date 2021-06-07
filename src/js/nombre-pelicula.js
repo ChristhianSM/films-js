@@ -1,4 +1,4 @@
-
+import {obtenerDatosPelicula} from './api.js'
 
 document.addEventListener('DOMContentLoaded', ()=> {
     const parametrosURL = new URLSearchParams(document.location.search);

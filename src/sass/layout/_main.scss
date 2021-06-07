@@ -11,6 +11,10 @@
         grid-template-columns: 4fr 1fr;
         gap: 1rem;
         width: 95%;
+
+        @include telefono{
+            grid-template-columns:1fr;
+        }
     }
 
     .resultadoFiltro{

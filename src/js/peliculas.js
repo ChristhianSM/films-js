@@ -86,6 +86,7 @@ async function mostrarPeliculasActualizadas(){
 }
 
 async function mostrarGeneros() {
+
     const menuGenero = document.querySelector('.menu-genero');
     const contenedorGenero = document.querySelector('.contenedor-generos');
     
@@ -173,9 +174,20 @@ function obtenerIdiomas(){
     })
 }
 
-function ultimasPeliculasActualizadas(){
+async function ultimasPeliculasActualizadas(){
     const contenedorUltimas = document.querySelector('.contenedor-ultimas');
-    listaPeliculas.forEach( pelicula => {
+
+    const listadoPeliculas = [];
+    const peliculas = await obtenerPeliculas();
+    
+    peliculas.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoPeliculas.push(newPelicula);
+    })
+
+    listadoPeliculas.forEach( pelicula => {
         if (pelicula.estreno) {
             const contenedorImagen = document.createElement('A');
             contenedorImagen.href = "#"
@@ -198,23 +210,6 @@ async function paginacion() {
 function obtenerFechasEnTiempoReal(){
     const fechaInicial = document.querySelector('#fecha-inicial');
     const fechaFinal = document.querySelector('#fecha-final');
-
-    // const fechaActual = new Date();
-    // const yearActual = fechaActual.getFullYear();
-    // const mesActual = fechaActual.getMonth()+1;
-    // const diaActual = fechaActual.getDate();
-
-    // let formatoActual;
-    // if (diaActual < 10 && mesActual < 10) {
-    //     formatoActual = `${yearActual}-0${mesActual}-0${diaActual}`
-    // }else if (day < 10) {
-    //     formatoActual = `${yearActual}-${mesActual}-0${diaActual}`
-    // }else{
-    //     formatoActual = `${yearActual}-0${mesActual}-${diaActual}`
-    // }
-
-    // /* Seteamos la fecha actual en el input*/
-    // fechaFinal = formatoActual;
     
     fechaInicial.addEventListener('input', () => {
         const fechaInicialDate = new Date(fechaInicial.value);

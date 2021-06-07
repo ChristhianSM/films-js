@@ -57,7 +57,10 @@ export async function mostrarGenerosHtml(generos, localizacion) {
             <span class="total${generos[i].name}"></span>
             `
         a.onclick = (e) => {
-            
+            /* Seteamos la fecha para solo filtrar por genero */
+            document.querySelector('#fecha-inicial').value = "";
+            document.querySelector('#fecha-final').value = "";
+
             /* Agregar activo al link que se apreto click */
             const claseActivo = document.querySelector('.activo');
             const claseActivoYear = document.querySelector('.activo-year');

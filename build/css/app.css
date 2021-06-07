@@ -647,6 +647,9 @@ img {
     grid-template-columns: 4fr 1fr;
     gap: 1rem;
     width: 95%; }
+    @media (max-width: 488px) {
+      #main.main .contenedor-principal {
+        grid-template-columns: 1fr; } }
   #main.main .resultadoFiltro h2 {
     font-size: 2.5rem;
     margin: 4rem 0 2rem 0; }
@@ -707,11 +710,20 @@ img {
         background-color: #000000; }
       .paginacion .contenedor-paginacion a.activo {
         background-color: #000000; }
+    @media (max-width: 768px) {
+      .paginacion .contenedor-paginacion {
+        display: none; } }
+    @media (max-width: 1024px) {
+      .paginacion .contenedor-paginacion {
+        grid-template-columns: repeat(15, 1fr); } }
 
 .aside {
   padding-top: 5rem;
   padding-left: 10px;
   border-left: 1px solid #ffffff14; }
+  @media (max-width: 488px) {
+    .aside {
+      display: none; } }
   .aside .generos h2 {
     font-size: 1.6rem;
     font-weight: 500;
@@ -825,7 +837,7 @@ img {
             grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 488px) {
           #main .peliculas .contenedor-peliculas .peliculas-actualizadas .contenedor-peliculas-actualizadas {
-            grid-template-columns: 1fr; } }
+            grid-template-columns: repeat(2, 1fr); } }
 
 #main .resultadoFiltro .alerta {
   padding: 1.25rem 0;
