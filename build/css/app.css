@@ -1023,11 +1023,13 @@ img {
     height: 40px; }
 
 .nombre-pelicula {
-  padding: 8rem 0; }
+  padding: 8rem 0;
+  background-color: #353535; }
   .nombre-pelicula .contenedor-pelicula {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
     align-items: center;
-    gap: 2rem; }
+    gap: 1rem; }
   .nombre-pelicula img {
     width: 350px;
     height: 500px;
@@ -1042,6 +1044,53 @@ img {
     .nombre-pelicula .informacion .subtitulo-informacion p {
       font-size: 1.6rem;
       margin-bottom: 1.3rem; }
+  .nombre-pelicula .informacion .vista-general {
+    margin-top: 2rem; }
+    .nombre-pelicula .informacion .vista-general h3 {
+      font-size: 1.9rem;
+      margin-bottom: 1rem; }
+    .nombre-pelicula .informacion .vista-general p {
+      font-size: 1.6rem;
+      margin-bottom: 1rem; }
+  .nombre-pelicula .informacion .ficha-tecnica {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin: 2rem 0; }
+
+.reparto {
+  margin: 2rem 0; }
+  .reparto h2 {
+    text-align: center;
+    margin: 2rem 0 0 0;
+    font-size: 2.5rem; }
+
+.reparto {
+  margin: 0 auto !important; }
+  .reparto .swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 3rem;
+    height: 450px; }
+  .reparto .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px; }
+  .reparto .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px; }
+  .reparto .swiper-slide p {
+    font-size: 1.8rem;
+    margin: 1rem 0;
+    text-align: center; }
+  .reparto .swiper-pagination {
+    bottom: 0px; }
 
 .footer {
   background-color: #0f0f0f;

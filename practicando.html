@@ -1,101 +1,107 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Demo paginacion</title>
-    <script src="jquery-2.0.2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            var $first = $(".first");
-            // var $first = document.querySelector(".first")
-            var i = 0;
-            $(".prev").click(function () {
-                ++i;
-                if ($('#outer div').length / 2 < i) {
-                    i = 0;
-                    $('#outer .first').css('background', 'blue');
-                    $first = $(".first");                   
-                } else {
-                    $first = $first.prev();
-                    $("#outer div").css("background", "green");
-                    $first.css("background", "blue");
-                }
-            });
-            $(".next").click(function () {
-                ++i;
-                if ($('#outer div').length / 2 < i) {
-                    i = 0;
-                    $('#outer .first').css('background', 'blue');
-                    $first = $(".first");
-                } else {
-                    $first = $first.next();
-                    $("#outer div").css("background", "green");
-                    $first.css("background", "blue");
-                }
-            });
-        });
-    </script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+
+    <!-- Demo styles -->
     <style>
-        #outer div {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            box-shadow: 1px 1px 1px #999;
-            font-style: oblique;
-            text-align: center;
-            float: left;
-            background: green;
-        }
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
 
-        #outer .first {
-            background: blue;
-        }
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
 
-        .prev, .next {
-            font-weight: bold;
-            font-size:30px;
-            padding:10px;
-            cursor:pointer;
-        }
+      .swiper-container {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
 
-        #container {
-            text-align: center;
-            width: 50%;
-            margin-left: 25%;
-        }
+      .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+      }
     </style>
-</head>
-<body>
-    <div id="container">
-        <div id="outer">
-            <div>-6</div>
-            <div>-5</div>
-            <div>-4</div>
-            <div>-3</div>
-            <div>-2</div>
-            <div>-1</div>
-            <div class="first">0</div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-            <div>7</div>
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
         </div>
-        <div>
-            <table>
-                <tr>
-                    <td class="prev" title="Previous"><<<</td>
-                    <td class="next" title="Next">>>></td>
-                </tr>
-            </table>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
         </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
 
-    
-</body>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+      });
+    </script>
+  </body>
 </html>

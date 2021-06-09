@@ -1,12 +1,9 @@
 
 import { obtenerPeliculas} from '../api.js'
 
-
-
-
   document.addEventListener( 'DOMContentLoaded', async function () {
 
-    const listadoPeliculas = [];
+      const listadoPeliculas = [];
       const peliculas = await obtenerPeliculas();
     
       peliculas.forEach( pelicula => {
@@ -48,7 +45,7 @@ import { obtenerPeliculas} from '../api.js'
     
   } );
 
-  async function iniciarCarrouselConImagenes(listadoPeliculas) {
+   function iniciarCarrouselConImagenes(listadoPeliculas) {
 
       const splideList = document.querySelector('.splide__list');
 

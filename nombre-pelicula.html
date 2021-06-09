@@ -8,6 +8,11 @@
     <!-- Animaciones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -43,22 +48,17 @@
 
     <main class="nombre-pelicula">
         <div class="contenedor-2 contenedor-pelicula">
-            <img src="" alt="" class="imagen-pelicula">
-            <div class="informacion">
-                <h2 class="titulo-pelicula"> <span class="year"></span></h2>
-                <div class="subtitulo-informacion">
-                    <p class="fecha-pelicula"></p>
-                    <p class="generos"></p>
-                    <p class="duracion"></p>
-                </div>
-                <div class="vista-general">
-                    <h3> Vista General</h3>
-                    <p class="tagline"></p>
-                    <p class="descripcion"></p>
-                </div>
-            </div>
         </div>
     </main>
+
+    <div class="contenedor reparto display-none">
+        <h2> Reparto Principal</h2>
+        <div class=" swiper-container mySwiper">
+            <div class="swiper-wrapper">
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
 
     <footer class="footer footer-login">
       <div class="contenedor">
@@ -94,11 +94,17 @@
       </div>
     </footer>
 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Carrousel -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!-- Alertas -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./src/js/components/sweetAlert.js"></script>
 
-    <!-- <script src="/src/js/api.js"></script> -->
+    <script src="./src/js/components/carrousel-pagina-pelicula.js" type="module"></script>
     <script src="./src/js/nombre-pelicula.js" type="module"></script>
 
   </body>

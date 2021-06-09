@@ -65,3 +65,9 @@ export async function obtenerDatosPelicula(id){
     const datos = await respuesta.json();
     return datos
 }
+
+export async function obtenerRepartoPelicula(id){
+    const respuesta = await fetch(`${URL_BASE}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
+    const datos = await respuesta.json();
+    return datos
+}

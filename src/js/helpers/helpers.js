@@ -150,9 +150,23 @@ export function recorrerArreglo(datos, arregloNuevo){
         const bloquePeliculas = document.querySelector('.peliculas');
         bloquePeliculas.classList.add('display-none')
         
-        ui.limpiarHTML(contenedorFiltros);
-        ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
     })
+
+    arregloNuevo.sort( function (a, b) {
+        if (a.puntuacion < b.puntuacion) {
+            return 1;
+          }
+          if (a.puntuacion > b.puntuacion) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+    })
+
+    console.log(arregloNuevo)
+
+    ui.limpiarHTML(contenedorFiltros);
+    ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
 }
 
 export async function crearPaginacion(total_pages){
