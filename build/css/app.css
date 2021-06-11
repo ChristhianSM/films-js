@@ -1065,32 +1065,97 @@ img {
     margin: 2rem 0 0 0;
     font-size: 2.5rem; }
 
-.reparto {
+.linea {
+  height: 2px;
+  background-color: #353535; }
+
+.posters .paginas {
+  display: flex;
+  gap: 3rem; }
+  .posters .paginas h2 {
+    margin-top: 3rem;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.5s; }
+    .posters .paginas h2:hover {
+      transform: scale(1.1); }
+
+.recomendaciones {
+  margin-top: 2rem;
+  margin-bottom: 4rem; }
+  .recomendaciones h2 {
+    margin: 2rem 0 0 0;
+    font-size: 3rem; }
+  .recomendaciones .informacion-recomendacion {
+    display: flex;
+    justify-content: space-between; }
+    .recomendaciones .informacion-recomendacion p {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: inherit;
+      margin-left: 10px; }
+    .recomendaciones .informacion-recomendacion .titulo {
+      width: 50%; }
+
+.reparto, .posters {
   margin: 0 auto !important; }
-  .reparto .swiper-container {
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin-bottom: 3rem;
-    height: 450px; }
-  .reparto .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 300px;
-    height: 300px; }
-  .reparto .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 5px; }
-  .reparto .swiper-slide p {
-    font-size: 1.8rem;
-    margin: 1rem 0;
-    text-align: center; }
-  .reparto .swiper-pagination {
-    bottom: 0px; }
+
+.reparto .swiper-container {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  margin-bottom: 3rem;
+  height: 450px; }
+
+.card-reparto {
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 375px; }
+
+.posters .swiper-container {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  margin-bottom: 3rem; }
+
+.card-poster {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 375px; }
+
+.recomendaciones .swiper-container {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  margin-bottom: 3rem;
+  height: 300px; }
+
+.recomendaciones .swiper-slide img {
+  height: 200px; }
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px; }
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px; }
+
+.swiper-slide p {
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  text-align: center; }
+
+.swiper-pagination {
+  bottom: 0px; }
 
 .footer {
   background-color: #0f0f0f;

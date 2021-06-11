@@ -1,6 +1,19 @@
 import {obtenerDatosPelicula, obtenerRepartoPelicula} from './api.js'
+import { mostrarUsuarioLogueado } from './helpers/helpers.js';
+
+/* Eventos */
+const fondos = document.querySelector('.pagina-fondos');
+const poster = document.querySelector('.pagina-posters');
+
+eventosListener();
+function eventosListener() {
+    fondos.addEventListener('click', cambiarPagina);
+    poster.addEventListener('click', cambiarPagina);
+}
 
 document.addEventListener('DOMContentLoaded', async ()=> {
+    mostrarUsuarioLogueado();
+
     const parametrosURL = new URLSearchParams(document.location.search);
     const idPelicula = (parametrosURL.get('id'));
 
@@ -13,7 +26,6 @@ document.addEventListener('DOMContentLoaded', async ()=> {
 })
 
 function mostrarInformacionPelicula(pelicula,reparto){
-    console.log(pelicula)
     const {genres, homepage, original_language, original_title, overview,poster_path,release_date,vote_average, vote_count, tagline} = pelicula;
 
     const yearPelicula = new Date(release_date);
@@ -41,13 +53,13 @@ function mostrarInformacionPelicula(pelicula,reparto){
             case "Production":
                 productores += `- ${persona.name} \n\n` 
                 break;
-        
             default:
                 break;
         }
     })
 
-    return ` <img src = "https://image.tmdb.org/t/p/w500/${poster_path}">
+    return `
+            <img src = "https://image.tmdb.org/t/p/w500/${poster_path}">
             <div class="informacion">
                 <h2 class="titulo-pelicula">${original_title} <span class="year">(${yearPelicula.getFullYear()})</span></h2>
                 <div class="subtitulo-informacion">
@@ -82,11 +94,21 @@ function mostrarInformacionPelicula(pelicula,reparto){
                         <p>${maquillaje}</p>
                     </div>
                 </div>
-                <button class= "mostrar-reparto">Mostrar Reparto</button>
             </div> 
     `
 }
 
+function cambiarPagina(e){
+    if (e.target.classList.contains('pagina-fondos')) {
+        document.querySelector('.swiper-posters').classList.add('display-none');
+        document.querySelector('.swipper-backdrops').classList.remove('display-none');
+        document.querySelector('.swipper-backdrops').classList.add('display-block');
+    }else{ 
+        document.querySelector('.swiper-posters').classList.remove('display-none');
+        document.querySelector('.swipper-backdrops').classList.add('display-none');
+        document.querySelector('.swipper-backdrops').classList.remove('display-block');
+    }
+}
 
 function animaciones() {
 

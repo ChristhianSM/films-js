@@ -64,3 +64,57 @@
         font-size: 2.5rem;
     }
 }
+
+.linea {
+    height: 2px;
+    background-color: #353535;
+}
+
+.posters {
+
+    .paginas {
+        display: flex;
+        gap: 3rem;
+
+        h2 {
+            margin-top: 3rem;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.5s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    
+}
+
+.recomendaciones {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+
+    h2 {
+        margin: 2rem 0 0 0;
+        font-size: 3rem;
+    }
+
+    .informacion-recomendacion {
+        display: flex;
+        justify-content: space-between;
+        
+        p{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: inherit;
+            margin-left: 10px;
+        }
+
+        .titulo {
+            width: 50%;
+        }
+
+    }
+}

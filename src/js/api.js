@@ -71,3 +71,15 @@ export async function obtenerRepartoPelicula(id){
     const datos = await respuesta.json();
     return datos
 }
+
+export async function obtenerPostersPelicula(id){
+    const respuesta = await fetch(`${URL_BASE}/movie/${id}/images?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerRecomendacionesPelicula(id){
+    const respuesta = await fetch(`${URL_BASE}/movie/${id}/recommendations?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
