@@ -3,17 +3,27 @@ import {
     cerrarSesion, 
     filtrarPorBusqueda,
     mostrarGenerosHtml, 
-    crearPaginacion} from "./helpers/helpers.js";
+    crearPaginacion,
+    crearPaginacionSeries,
+    buscarSeries,
+    buscarPeliculasYearActual,
+    buscarPeliculasEstreno} from "./helpers/helpers.js";
 
 import {
     consultandoGeneros, 
     obtenerPeliculasPaginacion, 
-    obtenerPeliculas} from './api.js'
+    obtenerPeliculas,
+    obtenerSeries} from './api.js'
 
 // Variables de html
 const resultadoEstrenos = document.querySelector('.contenedor-estrenos');
 const resultadoPeliculasActualizadas = document.querySelector('.contenedor-peliculas-actualizadas');
 const buscarPelicula = document.querySelector('.buscarPelicula');
+
+/* Variables header */
+const series = document.querySelector('.series');
+const estrenos = document.querySelector('.estrenos');
+const peliculas2021 = document.querySelector('.peliculas-2021');
 
 // Boton Cerrar sesion
 const btnCerrarSesion = document.querySelector('.cerrar-sesion');
@@ -41,6 +51,34 @@ function eventosListener(){
     buscarPelicula.addEventListener('keyup', (e) => {
         filtrarPorBusqueda(e.target.value)
     })
+
+    /* Eventos del header */
+    series.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        console.log(activo)
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        series.classList.add('activo')
+        buscarSeries();
+    });
+    estrenos.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        estrenos.classList.add('activo')
+        buscarPeliculasEstreno();
+    });
+    peliculas2021.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        console.log(activo)
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        peliculas2021.classList.add('activo')
+        buscarPeliculasYearActual();
+    });
 
     // Evento Cerrar Sesion
     btnCerrarSesion.addEventListener('click', cerrarSesion);
@@ -90,7 +128,6 @@ async function mostrarGeneros(){
 async function paginacion() {
     const datos = await obtenerPeliculasPaginacion();
     const {results, total_pages} = datos;
-    console.log(datos)
 
     crearPaginacion(total_pages);
 }

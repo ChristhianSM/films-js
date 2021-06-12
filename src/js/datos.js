@@ -50,7 +50,34 @@ class UI {
             const a = document.createElement('A');
 
             cardPelicula.innerHTML = 
-            `<a href = "./nombre-pelicula.html?id=${id}" data-bs-toggle="tooltip" data-bs-html="true" 
+            `<a href = "./nombre-pelicula.html?id=${id}&nombrePelicula=${nombre}" data-bs-toggle="tooltip" data-bs-html="true" 
+                    title="<img src = ${img} >"
+                >
+                    <img src = ${img} alt= ${nombre}>
+                    <p class = "puntuacion"><span class="material-icons md-18">star</span>
+                    ${puntuacion}</p> 
+                    <div class = "informacion-pelicula">
+                        <p class = "titulo-pelicula">${nombre}</p>
+                        <p class = "year-pelicula">${year} </p>
+                    </div>
+                </a>
+                
+            `
+            localizacion.appendChild(cardPelicula);
+        })
+    }
+    
+    mostrarSeriesHtml(series, localizacion){
+        series.forEach( pelicula => {
+            const {id, nombre, genero, year, descripcion, img,puntuacion} = pelicula
+            const cardPelicula = document.createElement('DIV');
+            cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
+
+            /* Scripting */
+            const a = document.createElement('A');
+
+            cardPelicula.innerHTML = 
+            `<a href = "./nombre-serie.html?id=${id}&nombrePelicula=${nombre}" data-bs-toggle="tooltip" data-bs-html="true" 
                     title="<img src = ${img} >"
                 >
                     <img src = ${img} alt= ${nombre}>

@@ -6,7 +6,11 @@ import {cerrarSesion,
     crearPaginacion, 
     crearPaginacionFiltro, 
     crearPaginacionFecha, 
-    crearPaginacionIdiomas} from "./helpers/helpers.js";
+    crearPaginacionIdiomas,
+    buscarSeries,
+    crearPaginacionSeries,
+    buscarPeliculasYearActual,
+    buscarPeliculasEstreno} from "./helpers/helpers.js";
 
 import {
     obtenerPeliculas,
@@ -15,6 +19,7 @@ import {
     obtenerIdiomasAPI,
     obtenerPeliculasPorIdioma,
     obtenerPeliculasPaginacion,
+
 } from './api.js'
 
 // Variables
@@ -24,8 +29,10 @@ const buscarPelicula = document.querySelector('.buscarPelicula');
 // Boton Cerrar sesion
 const btnCerrarSesion = document.querySelector('.cerrar-sesion');
 
-// selector para la paginacion
-const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+/* Variables header */
+const series = document.querySelector('.series');
+const estrenos = document.querySelector('.estrenos');
+const peliculas2021 = document.querySelector('.peliculas-2021');
 
 // Seleccionar los button de busqueda de fechas
 const btnBuscarFecha = document.querySelector('.btn-buscar-fecha');
@@ -51,6 +58,35 @@ function eventosListener(){
     } )
 
     mostrarPeliculasActualizadas();
+
+    /* Eventos del header */
+    series.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        console.log(activo)
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        series.classList.add('activo')
+        buscarSeries();
+    });
+    estrenos.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        console.log(activo)
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        estrenos.classList.add('activo')
+        buscarPeliculasEstreno();
+    });
+    peliculas2021.addEventListener('click', ()=> {
+        const activo = document.querySelector('.activo');
+        console.log(activo)
+        if (activo) {
+            activo.classList.remove('activo');
+        }
+        peliculas2021.classList.add('activo')
+        buscarPeliculasYearActual();
+    });
 
     // Evento Cerrar Sesion
     btnCerrarSesion.addEventListener('click', cerrarSesion);

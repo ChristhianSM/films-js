@@ -2,8 +2,7 @@ const API_KEY = "7e608905ab2997944f984ad29bcc298e";
 const URL_BASE = "https://api.themoviedb.org/3";
 
 export async function obtenerPeliculas(){
-
-    const respuesta = await fetch(`${URL_BASE}/movie/now_playing?api_key=${API_KEY}&page=2`);
+    const respuesta = await fetch(`${URL_BASE}/movie/now_playing?api_key=${API_KEY}&page=1`);
     const datos = await respuesta.json();
     return datos.results
 }
@@ -21,7 +20,6 @@ export async function obtenerPeliculasPaginacionFiltro(pagina, query){
 }
 
 export async function consultandoGeneros(){
-
     const respuesta = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=7e608905ab2997944f984ad29bcc298e`);
     const datos = await respuesta.json();
     return datos.genres
@@ -57,11 +55,58 @@ export async function obtenerPeliculasPorIdioma(idioma, page=1){
     return datos
 }
 
+/* ---------------------------Links Headers-------------------------------- */
+/* Obtenemos series */
+export async function obtenerSeries(page = 1){
+    const respuesta = await fetch(`${URL_BASE}/discover/tv?api_key=${API_KEY}&page=${page}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerDatosSerie(id){
+    const respuesta = await fetch(`${URL_BASE}/tv/${id}?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerRepartoSerie(id){
+    const respuesta = await fetch(`${URL_BASE}/tv/${id}/credits?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerRecomendacionesSerie(id){
+    const respuesta = await fetch(`${URL_BASE}/tv/${id}/recommendations?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerPostersSerie(id){
+    const respuesta = await fetch(`${URL_BASE}/tv/${id}/images?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+/* Obtenemos peliculas del año actual */
+export async function obtenerPeliculasYearActual(year, page=1) {
+    const respuesta = await fetch(`${URL_BASE}/discover/movie?api_key=${API_KEY}&primary_release_year=${year}&page=${page}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerPeliculasEstrenos(fechaEstreno, fechaActual, page=1) {
+    console.log(fechaEstreno, fechaActual)
+    const respuesta = await fetch(`${URL_BASE}/discover/movie?api_key=${API_KEY}&primary_release_date.gte=${fechaEstreno}&primary_release_date.lte=${fechaActual}&page=${page}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+
 
 
 /* Obtenemos datos de la pelicula */
-export async function obtenerDatosPelicula(id){
-    const respuesta = await fetch(`${URL_BASE}/movie/${id}?api_key=${API_KEY}`);
+export async function obtenerDatosPelicula(id, nombrePelicula){
+    const respuesta = await fetch(`${URL_BASE}/movie/${id}?api_key=${API_KEY}&query=${nombrePelicula}`);
     const datos = await respuesta.json();
     return datos
 }

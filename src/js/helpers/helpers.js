@@ -1,9 +1,13 @@
 import {consultandoBusquedaPorPalabra,
     consultandoPeliculasPorGeneros,
+    obtenerPeliculas,
+    obtenerPeliculasEstrenos,
     obtenerPeliculasPaginacion,
     obtenerPeliculasPaginacionFiltro,
     obtenerPeliculasPorFechas,
-    obtenerPeliculasPorIdioma
+    obtenerPeliculasPorIdioma,
+    obtenerPeliculasYearActual,
+    obtenerSeries
 } from '../api.js'
 
 const ui = new UI();
@@ -133,7 +137,95 @@ async function filtrarPelicula(filtro){
     crearPaginacionFiltro(total_pages, filtro);
 }
 
-/* Funcion que realiza el recorrido de un arreglo de peliculas y genera un nuevo objeto */
+/* ------------------Series, Estrenos, peliculas 2021 ------------------------*/
+export async function buscarSeries(){
+    const listadoSeries = [];
+    const series = await obtenerSeries();
+
+    const {total_pages, results} = series
+
+    results.forEach( serie => {
+        const {id, genre_ids, first_air_date, original_name,  overview, poster_path,vote_average, original_language} = serie;
+
+        const newPelicula = new Pelicula(id, original_name, genre_ids, first_air_date, overview, poster_path,vote_average, original_language);
+        listadoSeries.push(newPelicula);
+    });
+
+    const resultadoFiltro = document.querySelector('.resultadoFiltro');
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+    resultadoFiltro.classList.remove('display-none');
+    resultadoFiltro.classList.add('display-block');
+    
+    const bloquePeliculas = document.querySelector('.peliculas');
+    bloquePeliculas.classList.add('display-none')
+
+    ui.limpiarHTML(contenedorFiltros);
+    ui.mostrarSeriesHtml(listadoSeries, contenedorFiltros);
+    crearPaginacionSeries(total_pages)
+}
+
+export async function buscarPeliculasYearActual(){
+    const listadoPeliculas2021 = [];
+    const yearActual = new Date().getFullYear();
+    
+    const peliculas2021 = await obtenerPeliculasYearActual(yearActual);
+    console.log(peliculas2021)
+
+    const {total_pages, results} = peliculas2021
+
+    results.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoPeliculas2021.push(newPelicula);
+    });
+
+    const resultadoFiltro = document.querySelector('.resultadoFiltro');
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+    resultadoFiltro.classList.remove('display-none');
+    resultadoFiltro.classList.add('display-block');
+    
+    const bloquePeliculas = document.querySelector('.peliculas');
+    bloquePeliculas.classList.add('display-none')
+
+    ui.limpiarHTML(contenedorFiltros);
+    ui.mostrarPeliculasHTML(listadoPeliculas2021, contenedorFiltros);
+    crearPaginacionPeliculas2021(yearActual,total_pages)
+}
+
+export async function buscarPeliculasEstreno(){
+    const listadoPeliculasEstreno = [];
+    const fecha = dayjs().format('YYYY-MM-DD')
+    const fechaEstreno = dayjs(fecha).subtract(30, 'day').format('YYYY-MM-DD');
+
+    const fechaActual = dayjs().format('YYYY-MM-DD');
+    
+    const buscarPeliculasEstreno = await obtenerPeliculasEstrenos(fechaEstreno, fechaActual);
+    console.log(buscarPeliculasEstreno)
+
+    const {total_pages, results} = buscarPeliculasEstreno
+
+    results.forEach( pelicula => {
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        listadoPeliculasEstreno.push(newPelicula);
+    });
+
+    const resultadoFiltro = document.querySelector('.resultadoFiltro');
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+    resultadoFiltro.classList.remove('display-none');
+    resultadoFiltro.classList.add('display-block');
+    
+    const bloquePeliculas = document.querySelector('.peliculas');
+    bloquePeliculas.classList.add('display-none')
+
+    ui.limpiarHTML(contenedorFiltros);
+    ui.mostrarPeliculasHTML(listadoPeliculasEstreno, contenedorFiltros);
+    crearPaginacionPeliculasEstreno(fechaEstreno, fechaActual,total_pages)
+}
+
+/* Funcion que realiza el recorrido de un arreglo de peliculas y las series y genera un nuevo objeto */
 export function recorrerArreglo(datos, arregloNuevo){
 
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
@@ -142,6 +234,41 @@ export function recorrerArreglo(datos, arregloNuevo){
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
 
         const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        arregloNuevo.push(newPelicula);
+        
+        const resultadoFiltro = document.querySelector('.resultadoFiltro');
+        resultadoFiltro.classList.add('display-block');
+        
+        const bloquePeliculas = document.querySelector('.peliculas');
+        bloquePeliculas.classList.add('display-none')
+        
+    })
+
+    arregloNuevo.sort( function (a, b) {
+        if (a.puntuacion < b.puntuacion) {
+            return 1;
+          }
+          if (a.puntuacion > b.puntuacion) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+    })
+
+    console.log(arregloNuevo)
+
+    ui.limpiarHTML(contenedorFiltros);
+    ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
+}
+
+export function recorrerArregloSeries(datos, arregloNuevo){
+
+    const contenedorFiltros = document.querySelector('.contenedor-filtros');
+
+    datos.forEach( pelicula => {
+        const {id, original_name, genre_ids, first_air_date, overview, poster_path,vote_average, original_language} = pelicula;
+
+        const newPelicula = new Pelicula(id, original_name, genre_ids, first_air_date, overview, poster_path,vote_average, original_language);
         arregloNuevo.push(newPelicula);
         
         const resultadoFiltro = document.querySelector('.resultadoFiltro');
@@ -295,6 +422,91 @@ export async function crearPaginacionIdiomas(idioma ,total_pages){
             let peliculasPorPagina = [];
             const peliculas = await obtenerPeliculasPorIdioma(idioma,i);
             recorrerArreglo(peliculas.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
+
+export async function crearPaginacionSeries(total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+    console.log(total_pages)
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+
+        boton.onclick = async()=> {
+            /* Mostrar en que pagina esta el usuario */
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+
+            let peliculasPorPagina = [];
+            const series = await obtenerSeries(i);
+            console.log(series)
+            recorrerArregloSeries(series.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
+
+export async function crearPaginacionPeliculasEstreno(fechaEstreno, fechaActual, total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+    console.log(total_pages)
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+
+        boton.onclick = async()=> {
+            /* Mostrar en que pagina esta el usuario */
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+
+            let peliculasPorPagina = [];
+            const peliculasEstreno = await obtenerPeliculasEstrenos(fechaEstreno,fechaActual,i);
+            recorrerArreglo(peliculasEstreno.results, peliculasPorPagina);
+        }
+        contenedorPaginacion.appendChild(boton);  
+    }
+}
+export async function crearPaginacionPeliculas2021(yearActual, total_pages){
+    const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
+    contenedorPaginacion.innerHTML = "";
+    console.log(total_pages)
+
+    for (let i = 1; i <= total_pages; i++) {
+        const boton = document.createElement('a');
+        boton.href = "#"
+        boton.dataset.pagina = i;
+        boton.textContent = i;
+        boton.classList.add('boton-paginador');
+
+        boton.onclick = async()=> {
+            /* Mostrar en que pagina esta el usuario */
+            const activo = document.querySelector('.boton-paginador.activo');
+            if (activo) {
+                activo.classList.remove('activo');
+            }
+            boton.classList.add('activo')
+
+            let peliculasPorPagina = [];
+            const peliculas2021 = await obtenerPeliculasYearActual(yearActual,i);
+            console.log(yearActual)
+            recorrerArreglo(peliculas2021.results, peliculasPorPagina);
         }
         contenedorPaginacion.appendChild(boton);  
     }
