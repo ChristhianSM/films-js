@@ -1,0 +1,78 @@
+.modal-backdrop.show{
+    z-index: inherit;
+}
+
+.modal-title-actor{
+    font-size: 3rem;
+    text-align: center;
+}
+
+.modal-actor {
+    padding: 2rem ;
+    display: flex;
+    // flex-wrap: wrap;
+    gap: 2rem;
+    background-color: #353535;
+
+    .datos-personales{
+        width: 40%;
+
+        img{
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .datos {
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 2rem;
+            }
+
+            .grupo {
+                margin: 2rem 0;
+                
+                h3 {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+
+    .biografia {
+        width: 55%;
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            font-size: 1.7rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .mostrar-mas {
+            color: aqua;
+            font-size: 1.7rem;
+            display: flex;
+            justify-content: flex-end;
+            
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .peliculas-donde-actua {
+
+            margin: 2rem 0;
+        }
+    }
+}

@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', async ()=> {
 
     const pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula);
     const reparto = await obtenerRepartoPelicula(idPelicula);
+    console.log(reparto)
 
     $('.contenedor-pelicula').prepend( mostrarInformacionPelicula(pelicula,reparto)); 
     animaciones();

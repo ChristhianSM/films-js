@@ -8,7 +8,6 @@ import {cerrarSesion,
     crearPaginacionFecha, 
     crearPaginacionIdiomas,
     buscarSeries,
-    crearPaginacionSeries,
     buscarPeliculasYearActual,
     buscarPeliculasEstreno} from "./helpers/helpers.js";
 
@@ -67,15 +66,24 @@ function eventosListener(){
             activo.classList.remove('activo');
         }
         series.classList.add('activo')
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-resultado');
+        tituloFiltro.textContent = "Series:"
+
         buscarSeries();
     });
     estrenos.addEventListener('click', ()=> {
         const activo = document.querySelector('.activo');
-        console.log(activo)
         if (activo) {
             activo.classList.remove('activo');
         }
-        estrenos.classList.add('activo')
+        estrenos.classList.add('activo');
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-resultado');
+        tituloFiltro.textContent = "Estrenos:"
+
         buscarPeliculasEstreno();
     });
     peliculas2021.addEventListener('click', ()=> {
@@ -84,7 +92,12 @@ function eventosListener(){
         if (activo) {
             activo.classList.remove('activo');
         }
-        peliculas2021.classList.add('activo')
+        peliculas2021.classList.add('activo');
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-resultado');
+        tituloFiltro.textContent = "Peliculas Estrenadas en el 2021:"
+
         buscarPeliculasYearActual();
     });
 

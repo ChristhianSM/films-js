@@ -128,3 +128,17 @@ export async function obtenerRecomendacionesPelicula(id){
     const datos = await respuesta.json();
     return datos
 }
+
+
+// Obtenemos informacion del actor
+export async function obtenerInformacionActor(id){
+    const respuesta = await fetch(`${URL_BASE}/person/${id}?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}
+
+export async function obtenerPeliculasDondeActuo(id){
+    const respuesta = await fetch(`${URL_BASE}/person/${id}/movie_credits?api_key=${API_KEY}`);
+    const datos = await respuesta.json();
+    return datos
+}

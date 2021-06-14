@@ -406,10 +406,10 @@ img {
     padding: 0 8px; }
 
 .display-none {
-  display: none; }
+  display: none !important; }
 
 .display-block {
-  display: block; }
+  display: block !important; }
 
 .rojo {
   color: red; }
@@ -1156,6 +1156,55 @@ img {
 
 .swiper-pagination {
   bottom: 0px; }
+
+.modal-backdrop.show {
+  z-index: inherit; }
+
+.modal-title-actor {
+  font-size: 3rem;
+  text-align: center; }
+
+.modal-actor {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  background-color: #353535; }
+  .modal-actor .datos-personales {
+    width: 40%; }
+    .modal-actor .datos-personales img {
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      width: 400px;
+      height: 400px;
+      object-fit: cover; }
+    .modal-actor .datos-personales .datos h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem; }
+    .modal-actor .datos-personales .datos .grupo {
+      margin: 2rem 0; }
+      .modal-actor .datos-personales .datos .grupo h3 {
+        font-size: 1.8rem; }
+  .modal-actor .biografia {
+    width: 55%; }
+    .modal-actor .biografia h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem; }
+    .modal-actor .biografia p {
+      font-size: 1.7rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 300px; }
+    .modal-actor .biografia .mostrar-mas {
+      color: aqua;
+      font-size: 1.7rem;
+      display: flex;
+      justify-content: flex-end; }
+      .modal-actor .biografia .mostrar-mas:hover {
+        cursor: pointer; }
+    .modal-actor .biografia .peliculas-donde-actua {
+      margin: 2rem 0; }
 
 .footer {
   background-color: #0f0f0f;

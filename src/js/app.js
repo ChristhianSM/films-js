@@ -60,6 +60,12 @@ function eventosListener(){
             activo.classList.remove('activo');
         }
         series.classList.add('activo')
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-filtro');
+        tituloFiltro.innerHTML = `Series :
+            <a href="./peliculas.html">Ver todo</a> `
+
         buscarSeries();
     });
     estrenos.addEventListener('click', ()=> {
@@ -67,7 +73,13 @@ function eventosListener(){
         if (activo) {
             activo.classList.remove('activo');
         }
-        estrenos.classList.add('activo')
+        estrenos.classList.add('activo');
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-filtro');
+        tituloFiltro.innerHTML = `Estrenos :
+            <a href="./peliculas.html">Ver todo</a> `
+
         buscarPeliculasEstreno();
     });
     peliculas2021.addEventListener('click', ()=> {
@@ -76,7 +88,13 @@ function eventosListener(){
         if (activo) {
             activo.classList.remove('activo');
         }
-        peliculas2021.classList.add('activo')
+        peliculas2021.classList.add('activo');
+
+        /* Mostramos lo que estamos filtrando */
+        const tituloFiltro = document.querySelector('.titulo-filtro');
+        tituloFiltro.innerHTML = `Peliculas estrenadas este año :
+        <a href="./peliculas.html">Ver todo</a> `
+
         buscarPeliculasYearActual();
     });
 
