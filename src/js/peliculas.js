@@ -209,14 +209,13 @@ async function mostrarIdiomas(){
 }
 
 function obtenerIdiomas(){
-
+    
     idiomas.addEventListener('change', async (e)=> {
         const peliculasPorIdiomas = [];
         const idiomaSeleccionado = e.target.value;
         console.log(idiomaSeleccionado)
         const peliculas = await obtenerPeliculasPorIdioma(idiomaSeleccionado);
         const {results, total_pages} = peliculas
-        console.log(results)
 
         recorrerArreglo(results ,peliculasPorIdiomas);
         crearPaginacionIdiomas( results, total_pages);

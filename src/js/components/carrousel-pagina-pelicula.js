@@ -233,7 +233,9 @@ function mostrarMasDescripcionActor(biografia){
         mostrarMas.textContent = "";
       })
     }else if (biografia.length === 0) {
-        
+      const palabrasBiografia = document.querySelector('.palabras-biografia');
+      // palabrasBiografia.style.height = "auto";
+      palabrasBiografia.textContent = "No hay biografia para mostrar"
     }else{
       const mostrarMas = document.querySelector('.mostrar-mas');
       mostrarMas.classList.add('display-none')
