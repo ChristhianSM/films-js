@@ -14,7 +14,7 @@ export async function obtenerPeliculasPaginacion(pagina = 1){
 }
 
 export async function obtenerPeliculasPaginacionFiltro(pagina, query){
-    const respuesta = await fetch(`http://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&page=${pagina}&query= ${query}`);
+    const respuesta = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&page=${pagina}&query= ${query}`);
     const datos = await respuesta.json();
     return datos
 }
@@ -26,7 +26,7 @@ export async function consultandoGeneros(){
 }
 
 export async function consultandoBusquedaPorPalabra(terminoBusqueda) {
-    const respuesta = await fetch(`http://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query= ${terminoBusqueda}`);
+    const respuesta = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query= ${terminoBusqueda}`);
     const datos = await respuesta.json();
     return datos
 }
