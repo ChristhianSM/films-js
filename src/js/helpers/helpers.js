@@ -143,11 +143,12 @@ export async function buscarSeries(){
     const series = await obtenerSeries();
 
     const {total_pages, results} = series
+    console.log(results)
 
     results.forEach( serie => {
-        const {id, genre_ids, first_air_date, original_name,  overview, poster_path,vote_average, original_language} = serie;
+        const {id, genre_ids, original_name,first_air_date,  overview, poster_path,vote_average, original_language} = serie;
 
-        const newPelicula = new Pelicula(id, original_name, genre_ids, first_air_date, overview, poster_path,vote_average, original_language);
+        const newPelicula = new Pelicula(id, original_name, genre_ids, first_air_date, overview, poster_path,vote_average, original_language, true);
         listadoSeries.push(newPelicula);
     });
 
@@ -169,7 +170,6 @@ export async function buscarPeliculasYearActual(){
     const yearActual = new Date().getFullYear();
     
     const peliculas2021 = await obtenerPeliculasYearActual(yearActual);
-    console.log(peliculas2021)
 
     const {total_pages, results} = peliculas2021
 
@@ -201,8 +201,6 @@ export async function buscarPeliculasEstreno(){
     const fechaActual = dayjs().format('YYYY-MM-DD');
     
     const buscarPeliculasEstreno = await obtenerPeliculasEstrenos(fechaEstreno, fechaActual);
-    console.log(buscarPeliculasEstreno)
-
     const {total_pages, results} = buscarPeliculasEstreno
 
     results.forEach( pelicula => {
@@ -255,8 +253,6 @@ export function recorrerArreglo(datos, arregloNuevo){
           return 0;
     })
 
-    console.log(arregloNuevo)
-
     ui.limpiarHTML(contenedorFiltros);
     ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
 }
@@ -289,8 +285,6 @@ export function recorrerArregloSeries(datos, arregloNuevo){
           // a must be equal to b
           return 0;
     })
-
-    console.log(arregloNuevo)
 
     ui.limpiarHTML(contenedorFiltros);
     ui.mostrarPeliculasHTML(arregloNuevo,contenedorFiltros);
@@ -342,7 +336,6 @@ export async function crearPaginacionBusqueda(query, total_pages){
             
             let peliculasPorPagina = [];
             const peliculas = await obtenerPeliculasPaginacionFiltro(i,query);
-            console.log(peliculas)
             recorrerArreglo(peliculas.results, peliculasPorPagina);
         }
         contenedorPaginacion.appendChild(boton);  
@@ -430,7 +423,6 @@ export async function crearPaginacionIdiomas(idioma ,total_pages){
 export async function crearPaginacionSeries(total_pages){
     const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
     contenedorPaginacion.innerHTML = "";
-    console.log(total_pages)
 
     for (let i = 1; i <= total_pages; i++) {
         const boton = document.createElement('a');
@@ -449,7 +441,6 @@ export async function crearPaginacionSeries(total_pages){
 
             let peliculasPorPagina = [];
             const series = await obtenerSeries(i);
-            console.log(series)
             recorrerArregloSeries(series.results, peliculasPorPagina);
         }
         contenedorPaginacion.appendChild(boton);  
@@ -459,7 +450,6 @@ export async function crearPaginacionSeries(total_pages){
 export async function crearPaginacionPeliculasEstreno(fechaEstreno, fechaActual, total_pages){
     const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
     contenedorPaginacion.innerHTML = "";
-    console.log(total_pages)
 
     for (let i = 1; i <= total_pages; i++) {
         const boton = document.createElement('a');
@@ -483,10 +473,10 @@ export async function crearPaginacionPeliculasEstreno(fechaEstreno, fechaActual,
         contenedorPaginacion.appendChild(boton);  
     }
 }
+
 export async function crearPaginacionPeliculas2021(yearActual, total_pages){
     const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
     contenedorPaginacion.innerHTML = "";
-    console.log(total_pages)
 
     for (let i = 1; i <= total_pages; i++) {
         const boton = document.createElement('a');
@@ -505,7 +495,6 @@ export async function crearPaginacionPeliculas2021(yearActual, total_pages){
 
             let peliculasPorPagina = [];
             const peliculas2021 = await obtenerPeliculasYearActual(yearActual,i);
-            console.log(yearActual)
             recorrerArreglo(peliculas2021.results, peliculasPorPagina);
         }
         contenedorPaginacion.appendChild(boton);  

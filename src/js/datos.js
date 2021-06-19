@@ -1,7 +1,7 @@
 const listaPeliculas = [];
 
 class Pelicula{
-    constructor(id, nombre,genero, year, descripcion, img, puntuacion, idioma ){
+    constructor(id, nombre,genero, year, descripcion, img, puntuacion, idioma, esSerie ){
         this.id = id;
         this.nombre= nombre;
         this.genero = genero;
@@ -11,6 +11,7 @@ class Pelicula{
         this.img = this.obtenerImagen(img);
         this.puntuacion = parseFloat(puntuacion);
         this.idioma = idioma;
+        this.esSerie = esSerie;
     }
 
     obtenerImagen(img){
@@ -41,8 +42,13 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 class UI {
 
     mostrarPeliculasHTML(peliculas, localizacion){
+        console.log(peliculas)
         peliculas.forEach( pelicula => {
-            const {id, nombre, genero, year, descripcion, img,puntuacion} = pelicula
+            const {id, nombre, year, img,puntuacion, esSerie} = pelicula
+
+            if (esSerie) {
+                console.log(esSerie)
+            }
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
 
@@ -50,7 +56,7 @@ class UI {
             const a = document.createElement('A');
 
             cardPelicula.innerHTML = 
-            `<a href = "./nombre-pelicula.html?id=${id}&nombrePelicula=${nombre}" data-bs-toggle="tooltip" data-bs-html="true" 
+            `<a href = "./nombre-pelicula.html?id=${id}&nombrePelicula=${nombre}&pelicula=${!esSerie}" data-bs-toggle="tooltip" data-bs-html="true" 
                     title="<img src = ${img} >"
                 >
                     <img src = ${img} alt= ${nombre}>
@@ -68,8 +74,12 @@ class UI {
     }
     
     mostrarSeriesHtml(series, localizacion){
+        console.log(series)
         series.forEach( pelicula => {
-            const {id, nombre, genero, year, descripcion, img,puntuacion} = pelicula
+            const {id, nombre, year, img,puntuacion, esSerie} = pelicula;
+            if (esSerie) {
+                console.log("Hola")
+            }
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
 
@@ -77,7 +87,7 @@ class UI {
             const a = document.createElement('A');
 
             cardPelicula.innerHTML = 
-            `<a href = "./nombre-serie.html?id=${id}&nombrePelicula=${nombre}" data-bs-toggle="tooltip" data-bs-html="true" 
+            `<a href = "./nombre-pelicula.html?id=${id}&nombrePelicula=${nombre}&pelicula=${!esSerie}" data-bs-toggle="tooltip" data-bs-html="true" 
                     title="<img src = ${img} >"
                 >
                     <img src = ${img} alt= ${nombre}>

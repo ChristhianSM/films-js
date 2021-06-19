@@ -2,8 +2,6 @@
     padding: 8rem 0;
     background-color: #353535;
     
-    
-
     .contenedor-pelicula {
         display: grid;
         grid-template-columns: 2fr 5fr;
@@ -16,7 +14,7 @@
         }
 
         @include telefono{
-            padding: 1rem 0!important;
+            padding: 3rem 0!important;
         }
 
     }

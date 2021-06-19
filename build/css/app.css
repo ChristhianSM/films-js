@@ -1044,7 +1044,7 @@ img {
         margin-top: 2rem; } }
     @media (max-width: 488px) {
       .nombre-pelicula .contenedor-pelicula {
-        padding: 1rem 0 !important; } }
+        padding: 3rem 0 !important; } }
   .nombre-pelicula img {
     width: 350px;
     height: 500px;

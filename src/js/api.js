@@ -87,6 +87,8 @@ export async function obtenerPostersSerie(id){
     return datos
 }
 
+
+
 /* Obtenemos peliculas del año actual */
 export async function obtenerPeliculasYearActual(year, page=1) {
     const respuesta = await fetch(`${URL_BASE}/discover/movie?api_key=${API_KEY}&primary_release_year=${year}&page=${page}`);
@@ -105,26 +107,26 @@ export async function obtenerPeliculasEstrenos(fechaEstreno, fechaActual, page=1
 
 
 /* Obtenemos datos de la pelicula */
-export async function obtenerDatosPelicula(id, nombrePelicula){
-    const respuesta = await fetch(`${URL_BASE}/movie/${id}?api_key=${API_KEY}&query=${nombrePelicula}`);
+export async function obtenerDatosPelicula(id, nombrePelicula, esPelicula){
+    const respuesta = await fetch(`${URL_BASE}/${esPelicula}/${id}?api_key=${API_KEY}&query=${nombrePelicula}`);
     const datos = await respuesta.json();
     return datos
 }
 
-export async function obtenerRepartoPelicula(id){
-    const respuesta = await fetch(`${URL_BASE}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
+export async function obtenerRepartoPelicula(id, movie){
+    const respuesta = await fetch(`${URL_BASE}/${movie}/${id}/credits?api_key=${API_KEY}`);
     const datos = await respuesta.json();
     return datos
 }
 
-export async function obtenerPostersPelicula(id){
-    const respuesta = await fetch(`${URL_BASE}/movie/${id}/images?api_key=${API_KEY}`);
+export async function obtenerPostersPelicula(id, movie){
+    const respuesta = await fetch(`${URL_BASE}/${movie}/${id}/images?api_key=${API_KEY}`);
     const datos = await respuesta.json();
     return datos
 }
 
-export async function obtenerRecomendacionesPelicula(id){
-    const respuesta = await fetch(`${URL_BASE}/movie/${id}/recommendations?api_key=${API_KEY}`);
+export async function obtenerRecomendacionesPelicula(id, movie){
+    const respuesta = await fetch(`${URL_BASE}/${movie}/${id}/recommendations?api_key=${API_KEY}`);
     const datos = await respuesta.json();
     return datos
 }

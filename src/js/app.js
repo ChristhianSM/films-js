@@ -55,7 +55,6 @@ function eventosListener(){
     /* Eventos del header */
     series.addEventListener('click', ()=> {
         const activo = document.querySelector('.activo');
-        console.log(activo)
         if (activo) {
             activo.classList.remove('activo');
         }
@@ -84,7 +83,6 @@ function eventosListener(){
     });
     peliculas2021.addEventListener('click', ()=> {
         const activo = document.querySelector('.activo');
-        console.log(activo)
         if (activo) {
             activo.classList.remove('activo');
         }
@@ -112,7 +110,7 @@ async function mostrarEstrenos(){
     estrenos.forEach( pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
 
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, false);
         listadoEstrenos.push(newPelicula);
     })
 
@@ -130,7 +128,7 @@ async function mostrarPeliculasActualizadas(){
     peliculas.forEach( pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
 
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
+        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, false);
         listadoPeliculas.push(newPelicula);
     })
 

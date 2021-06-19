@@ -17,12 +17,23 @@ document.addEventListener('DOMContentLoaded', async ()=> {
     const parametrosURL = new URLSearchParams(document.location.search);
     const idPelicula = (parametrosURL.get('id'));
     const nombrePelicula	 = (parametrosURL.get('nombrePelicula'));
+    const esPelicula	 = (parametrosURL.get('pelicula'));
 
-    const pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula);
-    const reparto = await obtenerRepartoPelicula(idPelicula);
-    console.log(reparto)
+    let pelicula, reparto;
 
-    $('.contenedor-pelicula').prepend( mostrarInformacionPelicula(pelicula,reparto)); 
+    if (esPelicula === "true") {
+        pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula, "movie");
+        reparto = await obtenerRepartoPelicula(idPelicula, "movie");
+        console.log(pelicula);
+        console.log(reparto)
+        $('.contenedor-pelicula').prepend( mostrarInformacionPelicula(pelicula,reparto)); 
+    }else{
+        console.log(esPelicula)
+        pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula, "tv");
+        const reparto = await obtenerRepartoPelicula(idPelicula, "tv");
+        $('.contenedor-pelicula').prepend( mostrarInformacionSerie(pelicula,reparto)); 
+    }
+
     animaciones();
     
 })
@@ -94,6 +105,45 @@ function mostrarInformacionPelicula(pelicula,reparto){
                     <div>
                         <h3>Maquillaje : </h3>
                         <p>${maquillaje}</p>
+                    </div>
+                </div>
+            </div> 
+    `
+}
+
+function mostrarInformacionSerie(serie,reparto){
+    const {genres, homepage, original_language, original_name, overview,poster_path,first_air_date,vote_average, vote_count, tagline, created_by} = serie;
+
+    const yearPelicula = new Date(first_air_date);
+
+    let listaGenero = "";
+    genres.forEach(genero => {
+        listaGenero += ` - ${genero.name}\n\t`
+    });
+
+    let maquillaje = "", escritores = "", editores = "", directores = "",productores = ""
+    created_by.forEach(persona=> {
+        directores += `-${persona.name}\n` 
+    })
+
+    return `
+            <img src = "https://image.tmdb.org/t/p/w500/${poster_path}">
+            <div class="informacion">
+                <h2 class="titulo-pelicula">${original_name} <span class="year">(${yearPelicula.getFullYear()})</span></h2>
+                <div class="subtitulo-informacion">
+                    <p class="fecha-pelicula">${first_air_date}</p>
+                    <p class="generos">${listaGenero}</p>
+                    <p class="duracion"></p>
+                </div>
+                <div class="vista-general">
+                    <h3> Vista General</h3>
+                    <p class="tagline">${tagline}</p>
+                    <p class="descripcion">${overview}</p>
+                </div>
+                <div class = "ficha-tecnica">
+                    <div>
+                        <h3>Creador : </h3>
+                        <p>${directores}</p>
                     </div>
                 </div>
             </div> 

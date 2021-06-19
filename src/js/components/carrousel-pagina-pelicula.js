@@ -2,17 +2,24 @@ import { obtenerRepartoPelicula,obtenerPostersPelicula, obtenerRecomendacionesPe
 
 let listaReparto = [];
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     const parametrosURL = new URLSearchParams(document.location.search);
     const idPelicula = (parametrosURL.get('id'));
+    const esPelicula	 = (parametrosURL.get('pelicula'));
 
-    const reparto = await obtenerRepartoPelicula(idPelicula);
-    const posters = await obtenerPostersPelicula(idPelicula);
-    const recomendaciones = await obtenerRecomendacionesPelicula(idPelicula);
+    let reparto, posters, recomendaciones;
 
-    console.log(reparto)
+    if (esPelicula === "true") {
+        reparto = await obtenerRepartoPelicula(idPelicula, "movie");
+        posters = await obtenerPostersPelicula(idPelicula, "movie");
+        recomendaciones = await obtenerRecomendacionesPelicula(idPelicula, "movie");
+        console.log(recomendaciones)
+    }else{
+        reparto = await obtenerRepartoPelicula(idPelicula, "tv");
+        posters = await obtenerPostersPelicula(idPelicula, "tv");
+        recomendaciones = await obtenerRecomendacionesPelicula(idPelicula, "tv");
+        console.log(recomendaciones)
+    }
 
     reparto.cast.forEach( persona => {
         if (persona.profile_path !== null ) {
@@ -200,12 +207,18 @@ function mosstrarSliderRecomendaciones(recomendaciones) {
       const swiperSlide = document.createElement('div');
       swiperSlide.classList.add('swiper-slide');
 
+      let esSerie = false
+      
+      if(recomendacion.title){
+        esSerie = true;
+      }
+
       swiperSlide.innerHTML = `
         <div class = "card-recomendacion">
-          <a href = "./nombre-pelicula.html?id=${recomendacion.id}">
+          <a href = "./nombre-pelicula.html?id=${recomendacion.id}&nombrePelicula=${recomendacion.title}&pelicula=${esSerie}">
             <img src = "https://image.tmdb.org/t/p/w500/${recomendacion.backdrop_path}">
             <div class = "informacion-recomendacion">
-              <p class = "titulo"> ${recomendacion.title}</p>
+              <p class = "titulo"> ${recomendacion.title ? recomendacion.title: recomendacion.original_name}</p>
               <p class = "puntaje"> ${Math.round(recomendacion.vote_average*10)} %</p>
             </div>
           </a>
