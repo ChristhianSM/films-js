@@ -560,6 +560,14 @@ img {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem; }
+    @media (max-width: 768px) {
+      .main#index .resultadoFiltro .contenedor-filtros {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem; } }
+    @media (max-width: 488px) {
+      .main#index .resultadoFiltro .contenedor-filtros {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem; } }
   .main#index .peliculas {
     margin-top: 2.5rem; }
     .main#index .peliculas .contenedor-peliculas .estrenos {
@@ -1030,17 +1038,39 @@ img {
     grid-template-columns: 2fr 5fr;
     align-items: center;
     gap: 1rem; }
+    @media (max-width: 768px) {
+      .nombre-pelicula .contenedor-pelicula {
+        grid-template-columns: 1fr;
+        margin-top: 2rem; } }
+    @media (max-width: 488px) {
+      .nombre-pelicula .contenedor-pelicula {
+        padding: 1rem 0 !important; } }
   .nombre-pelicula img {
     width: 350px;
     height: 500px;
     border-radius: 5px;
     object-fit: cover; }
+    @media (max-width: 768px) {
+      .nombre-pelicula img {
+        width: 350px;
+        height: 500px;
+        margin: 0 auto; } }
+    @media (max-width: 488px) {
+      .nombre-pelicula img {
+        width: 300px;
+        height: 400px; } }
   .nombre-pelicula .informacion .titulo-pelicula {
     font-size: 4rem;
     margin-bottom: 1rem; }
+    @media (max-width: 768px) {
+      .nombre-pelicula .informacion .titulo-pelicula {
+        text-align: center; } }
   .nombre-pelicula .informacion .subtitulo-informacion {
     display: flex;
     gap: 1rem; }
+    @media (max-width: 768px) {
+      .nombre-pelicula .informacion .subtitulo-informacion {
+        justify-content: center; } }
     .nombre-pelicula .informacion .subtitulo-informacion p {
       font-size: 1.6rem;
       margin-bottom: 1.3rem; }
@@ -1057,6 +1087,10 @@ img {
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
     margin: 2rem 0; }
+    @media (max-width: 488px) {
+      .nombre-pelicula .informacion .ficha-tecnica {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem; } }
 
 .reparto {
   margin: 2rem 0; }
@@ -1163,20 +1197,43 @@ img {
 .modal-title-actor {
   font-size: 3rem;
   text-align: center; }
+  @media (max-width: 768px) {
+    .modal-title-actor {
+      font-size: 2rem; } }
 
 .modal-actor {
   padding: 2rem;
   display: flex;
   gap: 2rem;
   background-color: #353535; }
+  @media (max-width: 1024px) {
+    .modal-actor {
+      display: flex;
+      gap: 2rem; } }
+  @media (max-width: 768px) {
+    .modal-actor {
+      display: block;
+      gap: 2rem; } }
+  @media (max-width: 488px) {
+    .modal-actor {
+      padding: 1rem; } }
   .modal-actor .datos-personales {
     width: 40%; }
+    @media (max-width: 768px) {
+      .modal-actor .datos-personales {
+        width: 100%;
+        display: flex;
+        gap: 1rem; } }
     .modal-actor .datos-personales img {
       border-radius: 5px;
       margin-bottom: 2rem;
       width: 400px;
       height: 400px;
       object-fit: cover; }
+      @media (max-width: 1024px) {
+        .modal-actor .datos-personales img {
+          width: 300px;
+          height: 300px; } }
     .modal-actor .datos-personales .datos h2 {
       font-size: 2rem;
       font-weight: 700;
@@ -1187,6 +1244,9 @@ img {
         font-size: 1.8rem; }
   .modal-actor .biografia {
     width: 55%; }
+    @media (max-width: 768px) {
+      .modal-actor .biografia {
+        width: 100%; } }
     .modal-actor .biografia h2 {
       font-size: 2rem;
       font-weight: 700;

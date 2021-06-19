@@ -33,6 +33,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         el: ".swiper-pagination",
         clickable: true,
       },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        425: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        },
+      },
       });
 
     var swiper = new Swiper(".swiper-posters", {
@@ -42,6 +64,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        425: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        },
       },
       });
 
@@ -53,6 +97,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         el: ".swiper-pagination",
         clickable: true,
       },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        425: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        },
+      },
       });
       
     var swiper = new Swiper(".swiper-recomendaciones", {
@@ -62,6 +128,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        425: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        },
       },
       });
 })

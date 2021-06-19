@@ -1,12 +1,24 @@
 .nombre-pelicula{
     padding: 8rem 0;
     background-color: #353535;
+    
+    
 
     .contenedor-pelicula {
         display: grid;
         grid-template-columns: 2fr 5fr;
         align-items: center;
         gap: 1rem;
+
+        @include tablet{
+            grid-template-columns: 1fr;
+            margin-top: 2rem;
+        }
+
+        @include telefono{
+            padding: 1rem 0!important;
+        }
+
     }
 
     img {
@@ -14,6 +26,17 @@
         height: 500px;
         border-radius: 5px;
         object-fit: cover;
+
+        @include tablet{
+            width: 350px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        @include telefono{
+            width: 300px;
+            height: 400px;
+        }
     }
 
     .informacion{
@@ -21,15 +44,24 @@
         .titulo-pelicula {
             font-size: 4rem;
             margin-bottom: 1rem;
+
+            @include tablet{
+                text-align: center;
+            }
         }
 
         .subtitulo-informacion{
             display: flex;
             gap: 1rem;
 
+            @include tablet{
+                justify-content: center;
+            }
+
             p{
                 font-size: 1.6rem;
                 margin-bottom: 1.3rem;
+
             }
         }
 
@@ -51,6 +83,11 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             margin: 2rem 0;
+
+            @include telefono{
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
         }
     }
 
