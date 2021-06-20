@@ -13,12 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         reparto = await obtenerRepartoPelicula(idPelicula, "movie");
         posters = await obtenerPostersPelicula(idPelicula, "movie");
         recomendaciones = await obtenerRecomendacionesPelicula(idPelicula, "movie");
-        console.log(recomendaciones)
     }else{
         reparto = await obtenerRepartoPelicula(idPelicula, "tv");
         posters = await obtenerPostersPelicula(idPelicula, "tv");
         recomendaciones = await obtenerRecomendacionesPelicula(idPelicula, "tv");
-        console.log(recomendaciones)
     }
 
     reparto.cast.forEach( persona => {
@@ -250,10 +248,8 @@ function actorSeleccionado() {
       let idActorSeleccionado
       if (e.target.src) {
         idActorSeleccionado = parseInt(e.target.parentElement.parentElement.dataset.id);
-        console.log(idActorSeleccionado)
       }else{
         idActorSeleccionado = parseInt(e.target.parentElement.parentElement.parentElement.dataset.id);
-        console.log(idActorSeleccionado)
       }
       mostrarInformacionActor(idActorSeleccionado)
     })
@@ -344,7 +340,6 @@ function mostrarMasDescripcionActor(biografia){
 }
 
 function mostrarPeliculasConocidasPorActor(listaPeliculasMasVotadas){
-  console.log(listaPeliculasMasVotadas);
   
   const swipperContainer = document.createElement('div');
   swipperContainer.classList.add('swiper-container', 'swipper-peliculas-conocidas')
@@ -358,7 +353,6 @@ function mostrarPeliculasConocidasPorActor(listaPeliculasMasVotadas){
   swipperContainer.appendChild(swiperWrapper);
   swipperContainer.appendChild(swiperPagination);
 
-  console.log(swipperContainer)
 
   listaPeliculasMasVotadas.forEach( pelicula => {
       const swiperSlide = document.createElement('div');

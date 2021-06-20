@@ -1,6 +1,5 @@
 import {consultandoBusquedaPorPalabra,
     consultandoPeliculasPorGeneros,
-    obtenerPeliculas,
     obtenerPeliculasEstrenos,
     obtenerPeliculasPaginacion,
     obtenerPeliculasPaginacionFiltro,
@@ -47,6 +46,27 @@ export function cerrarSesion() {
     setTimeout(() => {
         window.location = "./index.html"
     }, 1000);
+}
+
+export function spinner(){
+    const divSpinner = document.createElement('div');
+    divSpinner.classList.add('sk-circle');
+    divSpinner.innerHTML = 
+    `
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    `
+    return divSpinner;
 }
 
 export async function mostrarGenerosHtml(generos, localizacion) {
@@ -225,15 +245,27 @@ export async function buscarPeliculasEstreno(){
 
 /* Funcion que realiza el recorrido de un arreglo de peliculas y las series y genera un nuevo objeto */
 export function recorrerArreglo(datos, arregloNuevo){
-
     const contenedorFiltros = document.querySelector('.contenedor-filtros');
-
     datos.forEach( pelicula => {
-        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
+        const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, media_type, original_name} = pelicula;
 
-        const newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language);
-        arregloNuevo.push(newPelicula);
-        
+        let esSerie =  false, newPelicula;
+        if (media_type === "tv" && poster_path !== null) {
+            console.log("Es serie")
+            esSerie = true;
+            newPelicula = new Pelicula(id, original_name, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
+            arregloNuevo.push(newPelicula);
+        }else if(media_type === "movie" && poster_path !== null){
+            console.log("Es pelicula")
+            newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
+            arregloNuevo.push(newPelicula);
+        }else if(media_type === undefined && poster_path !== null){
+            newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
+            arregloNuevo.push(newPelicula);
+        }
+
+        console.log(arregloNuevo)
+
         const resultadoFiltro = document.querySelector('.resultadoFiltro');
         resultadoFiltro.classList.add('display-block');
         

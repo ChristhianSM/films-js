@@ -24,11 +24,8 @@ document.addEventListener('DOMContentLoaded', async ()=> {
     if (esPelicula === "true") {
         pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula, "movie");
         reparto = await obtenerRepartoPelicula(idPelicula, "movie");
-        console.log(pelicula);
-        console.log(reparto)
         $('.contenedor-pelicula').prepend( mostrarInformacionPelicula(pelicula,reparto)); 
     }else{
-        console.log(esPelicula)
         pelicula = await obtenerDatosPelicula(idPelicula, nombrePelicula, "tv");
         const reparto = await obtenerRepartoPelicula(idPelicula, "tv");
         $('.contenedor-pelicula').prepend( mostrarInformacionSerie(pelicula,reparto)); 

@@ -61,7 +61,6 @@ function eventosListener(){
     /* Eventos del header */
     series.addEventListener('click', ()=> {
         const activo = document.querySelector('.activo');
-        console.log(activo)
         if (activo) {
             activo.classList.remove('activo');
         }
@@ -88,7 +87,6 @@ function eventosListener(){
     });
     peliculas2021.addEventListener('click', ()=> {
         const activo = document.querySelector('.activo');
-        console.log(activo)
         if (activo) {
             activo.classList.remove('activo');
         }
@@ -162,12 +160,10 @@ async function filtrarPorFecha( fechaInicial, fechaFinal ){
 
     const peliculas = await obtenerPeliculasPorFechas(fechaInicial, fechaFinal);
     const {results, total_pages} = peliculas;
-    console.log(results.length)
     
     const resultadoFiltro = document.querySelector('.resultadoFiltro');
 
     if (results.length === 0) {
-        console.log(resultadoFiltro)
         const contenedorFiltros = document.querySelector('.contenedor-filtros')
         ui.limpiarHTML(contenedorFiltros);
         ui.limpiarHTML(document.querySelector('.contenedor-paginacion'));
@@ -213,7 +209,6 @@ function obtenerIdiomas(){
     idiomas.addEventListener('change', async (e)=> {
         const peliculasPorIdiomas = [];
         const idiomaSeleccionado = e.target.value;
-        console.log(idiomaSeleccionado)
         const peliculas = await obtenerPeliculasPorIdioma(idiomaSeleccionado);
         const {results, total_pages} = peliculas
 
@@ -261,7 +256,7 @@ function obtenerFechasEnTiempoReal(){
     
     fechaInicial.addEventListener('input', () => {
         const fechaInicialDate = new Date(fechaInicial.value);
-        console.log("Dia : "+(fechaInicialDate.getDate()))
+
         // Extraemos el formato AAAA-MM-DD
         const year = fechaInicialDate.getFullYear();
         const mounth = fechaInicialDate.getMonth()+1;
@@ -278,12 +273,11 @@ function obtenerFechasEnTiempoReal(){
 
         /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
         fechaFinal.min = formato;
-        console.log(formato)
     });
 
     fechaFinal.addEventListener('input', () => {
         const fechaFinalInput = new Date(fechaFinal.value);
-        console.log("Dia : "+(fechaFinalInput.getDate()))
+
         // Extraemos el formato AAAA-MM-DD
         const year = fechaFinalInput.getFullYear();
         const day = fechaFinalInput.getDate()+1;
@@ -300,7 +294,6 @@ function obtenerFechasEnTiempoReal(){
 
         /* Bloqueamos fechas anteriores a la que el usuario ingreso en la fecha inicial */
         fechaInicial.max = formato;
-        console.log(formato)
     });
 
 }

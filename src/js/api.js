@@ -26,7 +26,7 @@ export async function consultandoGeneros(){
 }
 
 export async function consultandoBusquedaPorPalabra(terminoBusqueda) {
-    const respuesta = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query= ${terminoBusqueda}`);
+    const respuesta = await fetch(`${URL_BASE}/search/multi?api_key=${API_KEY}&query= ${terminoBusqueda}`);
     const datos = await respuesta.json();
     return datos
 }
@@ -62,31 +62,6 @@ export async function obtenerSeries(page = 1){
     const datos = await respuesta.json();
     return datos
 }
-
-export async function obtenerDatosSerie(id){
-    const respuesta = await fetch(`${URL_BASE}/tv/${id}?api_key=${API_KEY}`);
-    const datos = await respuesta.json();
-    return datos
-}
-
-export async function obtenerRepartoSerie(id){
-    const respuesta = await fetch(`${URL_BASE}/tv/${id}/credits?api_key=${API_KEY}`);
-    const datos = await respuesta.json();
-    return datos
-}
-
-export async function obtenerRecomendacionesSerie(id){
-    const respuesta = await fetch(`${URL_BASE}/tv/${id}/recommendations?api_key=${API_KEY}`);
-    const datos = await respuesta.json();
-    return datos
-}
-
-export async function obtenerPostersSerie(id){
-    const respuesta = await fetch(`${URL_BASE}/tv/${id}/images?api_key=${API_KEY}`);
-    const datos = await respuesta.json();
-    return datos
-}
-
 
 
 /* Obtenemos peliculas del año actual */

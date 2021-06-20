@@ -42,13 +42,9 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 class UI {
 
     mostrarPeliculasHTML(peliculas, localizacion){
-        console.log(peliculas)
         peliculas.forEach( pelicula => {
             const {id, nombre, year, img,puntuacion, esSerie} = pelicula
 
-            if (esSerie) {
-                console.log(esSerie)
-            }
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
 
@@ -74,12 +70,9 @@ class UI {
     }
     
     mostrarSeriesHtml(series, localizacion){
-        console.log(series)
         series.forEach( pelicula => {
             const {id, nombre, year, img,puntuacion, esSerie} = pelicula;
-            if (esSerie) {
-                console.log("Hola")
-            }
+
             const cardPelicula = document.createElement('DIV');
             cardPelicula.classList.add('card-pelicula', 'animate__animated','animate__fadeIn')
 

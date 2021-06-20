@@ -4,16 +4,16 @@ import {
     filtrarPorBusqueda,
     mostrarGenerosHtml, 
     crearPaginacion,
-    crearPaginacionSeries,
     buscarSeries,
     buscarPeliculasYearActual,
-    buscarPeliculasEstreno} from "./helpers/helpers.js";
+    buscarPeliculasEstreno,
+    spinner} from "./helpers/helpers.js";
 
 import {
     consultandoGeneros, 
     obtenerPeliculasPaginacion, 
     obtenerPeliculas,
-    obtenerSeries} from './api.js'
+} from './api.js'
 
 // Variables de html
 const resultadoEstrenos = document.querySelector('.contenedor-estrenos');
@@ -27,9 +27,6 @@ const peliculas2021 = document.querySelector('.peliculas-2021');
 
 // Boton Cerrar sesion
 const btnCerrarSesion = document.querySelector('.cerrar-sesion');
-
-// selector para la paginacion
-const contenedorPaginacion = document.querySelector('.contenedor-paginacion');
 
 // Eventos cuando la pagina carda
 document.addEventListener('DOMContentLoaded', () => {
@@ -107,6 +104,11 @@ async function mostrarEstrenos(){
     const listadoEstrenos = [];
     const estrenos = await obtenerPeliculas();
     
+    const spinner1 = spinner();
+
+    ui.limpiarHTML(resultadoEstrenos);
+    resultadoEstrenos.appendChild(spinner1);
+
     estrenos.forEach( pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
 
@@ -118,13 +120,19 @@ async function mostrarEstrenos(){
         return pelicula.estreno === true;
     })
 
+    ui.limpiarHTML(resultadoEstrenos)
     ui.mostrarPeliculasHTML(estreno, resultadoEstrenos);
 }
 
 async function mostrarPeliculasActualizadas(){
     const listadoPeliculas = [];
     const peliculas = await obtenerPeliculas();
-    
+
+    const spinner1 = spinner();
+
+    ui.limpiarHTML(resultadoPeliculasActualizadas);
+    resultadoPeliculasActualizadas.appendChild(spinner1);
+
     peliculas.forEach( pelicula => {
         const {id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language} = pelicula;
 
@@ -132,6 +140,7 @@ async function mostrarPeliculasActualizadas(){
         listadoPeliculas.push(newPelicula);
     })
 
+    ui.limpiarHTML(resultadoPeliculasActualizadas)
     ui.mostrarPeliculasHTML(listadoPeliculas, resultadoPeliculasActualizadas);
 }
 
