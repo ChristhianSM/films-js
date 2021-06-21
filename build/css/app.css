@@ -655,6 +655,73 @@ img {
 .dropdown-item {
   font-size: 1.5rem !important; }
 
+/* Sub Menu */
+.navegacionPrincipal .nav-bar {
+  background-color: #272727;
+  padding: 20px;
+  display: block;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  width: 100%; }
+  @media (min-width: 1024px) {
+    .navegacionPrincipal .nav-bar {
+      display: none; } }
+
+.navegacionPrincipal .menu, .navegacionPrincipal .submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.navegacionPrincipal .menu {
+  background-color: #191919;
+  width: 100%;
+  margin-top: -10000px; }
+  @media (min-width: 1024px) {
+    .navegacionPrincipal .menu {
+      margin-top: 0px;
+      display: flex; } }
+
+.navegacionPrincipal .menu-link {
+  display: block;
+  padding: 10px;
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none; }
+  .navegacionPrincipal .menu-link:hover {
+    background-color: red; }
+
+@media (min-width: 1024px) {
+  .navegacionPrincipal .container-submenu {
+    position: relative; } }
+
+.navegacionPrincipal .container-submenu:hover .submenu {
+  opacity: 1;
+  visibility: visible; }
+
+.navegacionPrincipal .submenu {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s; }
+  @media (min-width: 1024px) {
+    .navegacionPrincipal .submenu {
+      position: absolute;
+      overflow: visible;
+      width: 200px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden; } }
+
+.navegacionPrincipal .submenu .menu-link:hover {
+  background-color: red; }
+
+.navegacionPrincipal .submenu .menu-link {
+  background-color: #19191969;
+  padding-left: 20px; }
+
+.navegacionPrincipal .mostrar {
+  margin-top: 0; }
+
 #secondary-slider {
   margin-top: 7rem; }
   #secondary-slider .splide__arrows button {
@@ -667,6 +734,10 @@ img {
     text-align: center;
     background-color: #191919;
     padding: 2rem 8rem; }
+    @media (max-width: 488px) {
+      .main#index .informacion {
+        padding-left: 2rem;
+        padding-right: 2rem; } }
     .main#index .informacion h3 {
       font-size: 3rem;
       font-weight: 900;
@@ -808,10 +879,6 @@ img {
     @media (max-width: 768px) {
       #main.main .resultadoFiltro .contenedor-filtros {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem; } }
-    @media (max-width: 488px) {
-      #main.main .resultadoFiltro .contenedor-filtros {
-        grid-template-columns: 1fr;
         gap: 1.25rem; } }
   #main.main .peliculas {
     margin-top: 0; }
@@ -1183,7 +1250,7 @@ img {
         margin-top: 2rem; } }
     @media (max-width: 488px) {
       .nombre-pelicula .contenedor-pelicula {
-        padding: 3rem 0 !important; } }
+        padding: 8rem 0 !important; } }
   .nombre-pelicula img {
     width: 350px;
     height: 500px;

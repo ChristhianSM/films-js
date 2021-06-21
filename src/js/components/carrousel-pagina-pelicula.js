@@ -340,7 +340,7 @@ function mostrarMasDescripcionActor(biografia){
 }
 
 function mostrarPeliculasConocidasPorActor(listaPeliculasMasVotadas){
-  
+  console.log(listaPeliculasMasVotadas)
   const swipperContainer = document.createElement('div');
   swipperContainer.classList.add('swiper-container', 'swipper-peliculas-conocidas')
 
@@ -360,7 +360,7 @@ function mostrarPeliculasConocidasPorActor(listaPeliculasMasVotadas){
 
       swiperSlide.innerHTML = `
         <div class = "card-pelicula-conocida">
-          <a href = "./nombre-pelicula.html?id=${pelicula.id}">
+          <a href = "./nombre-pelicula.html?id=${pelicula.id}&nombrePelicula=${pelicula.title}&pelicula=${true}">
             <img src = "https://image.tmdb.org/t/p/w500/${pelicula.poster_path}">
               <p>${pelicula.title}</p>
           </a> 

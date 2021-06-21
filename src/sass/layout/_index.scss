@@ -5,6 +5,11 @@
             text-align: center;
             background-color: $bg-negro-claro;
             padding: 2rem 8rem;
+
+            @include telefono{
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
     
             h3{
                 font-size: 3rem;

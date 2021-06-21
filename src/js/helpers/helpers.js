@@ -163,7 +163,6 @@ export async function buscarSeries(){
     const series = await obtenerSeries();
 
     const {total_pages, results} = series
-    console.log(results)
 
     results.forEach( serie => {
         const {id, genre_ids, original_name,first_air_date,  overview, poster_path,vote_average, original_language} = serie;
@@ -251,20 +250,16 @@ export function recorrerArreglo(datos, arregloNuevo){
 
         let esSerie =  false, newPelicula;
         if (media_type === "tv" && poster_path !== null) {
-            console.log("Es serie")
             esSerie = true;
             newPelicula = new Pelicula(id, original_name, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
             arregloNuevo.push(newPelicula);
         }else if(media_type === "movie" && poster_path !== null){
-            console.log("Es pelicula")
             newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
             arregloNuevo.push(newPelicula);
         }else if(media_type === undefined && poster_path !== null){
             newPelicula = new Pelicula(id, title, genre_ids, release_date, overview, poster_path,vote_average, original_language, esSerie);
             arregloNuevo.push(newPelicula);
         }
-
-        console.log(arregloNuevo)
 
         const resultadoFiltro = document.querySelector('.resultadoFiltro');
         resultadoFiltro.classList.add('display-block');
